@@ -49,7 +49,8 @@ scan with {:
 :}
 
 
-terminal String IDENT, CHAR;
+terminal String IDENT;
+terminal Character CHAR;
 terminal Integer NUM, BOOL;
 terminal PROG, LBRACE, RBRACE, CONST, SEMI, ASSIGN, COMMA, LBRACKET, RBRACKET;
 terminal VOID, LPAREN, RPAREN, MAP, NEW, OR, AND, INC, DEC;
@@ -59,11 +60,11 @@ terminal EQ, NEQ, GT, GTE, LT, LTE;
 terminal UNION;
 
 
-nonterminal Program, ConstVarDeclList, Type;
+nonterminal Program, ProgName, ConstVarDeclList, Type;
 nonterminal ConstDeclList, ConstDecl, Constant, ConstDeclListMore;
 nonterminal VarDeclList, VarDecl, VarDeclListMore;
 nonterminal MethodDeclList, MethodDecl, MethodSignature, MethodSignatureList, VarDeclEmpty;
-nonterminal FormParsList, FormParsListMore;
+nonterminal FormParsList, FormParsListMore, FormParsListZero, FormPar;
 nonterminal StatementList, Statement, StatementElse;
 nonterminal DesignatorStatementList, DesignatorStatement, ConditionDesignator;
 nonterminal ActParsList, ActPars, ActParsZero;
@@ -76,7 +77,9 @@ nonterminal Assignop, Addop, Mulop, Relop, Setop;
 
 precedence left ELSE;
 
-Program ::= (Program) PROG IDENT ConstVarDeclList LBRACE MethodDeclList RBRACE;
+Program ::= (Program) PROG ProgName ConstVarDeclList LBRACE MethodDeclList RBRACE;
+
+ProgName ::= (ProgName) IDENT;
 
 ConstVarDeclList ::= (CConstVarDeclList) ConstVarDeclList ConstDeclList 
 					 | 
@@ -117,20 +120,21 @@ VarDeclListMore ::= (MoreVarDeclList) COMMA VarDecl VarDeclListMore
                     (NoMoreVarDeclList) /* epsilon */
                     ;
 
+Type ::= (Type) IDENT;
 
 
-MethodDeclList ::= (ListMethodDecl) MethodDecl MethodDeclList
+MethodDeclList ::= (ListMethodDecl) MethodDeclList MethodDecl
                    |
                    (NoMethodDeclList) /* epsilon */
                    ;
                     
 MethodDecl ::= (MethodDecl) MethodSignatureList VarDeclEmpty LBRACE StatementList RBRACE;
 
-MethodSignatureList ::= (MethodSignatureList) MethodSignature IDENT LPAREN FormParsList RPAREN;
+MethodSignatureList ::= (MethodSignatureList) MethodSignature LPAREN FormParsListZero RPAREN;
 
-MethodSignature ::= (TypeSignature) Type
+MethodSignature ::= (TypeSignature) Type IDENT
 					|
-					(VoidSignature) VOID
+					(VoidSignature) VOID IDENT
 					;
 
 VarDeclEmpty ::= (EmptyVarDecl) VarDeclEmpty VarDeclList
@@ -138,17 +142,26 @@ VarDeclEmpty ::= (EmptyVarDecl) VarDeclEmpty VarDeclList
 				 (NoEmptyVarDecl) /* epsilon */
 				 ;
 				 
-Type ::= (Type) IDENT;
 
 
 
-FormParsList ::= (FormParsList) Type VarDecl FormParsListMore;
 
-FormParsListMore ::= (MoreFormParsList) COMMA Type VarDecl VarDeclListMore
+FormParsListZero ::= (ZeroFormParsList) FormParsList
+                     |
+                     (NoFormParsListZero) /* epsilon */
+                     ;
+
+FormParsList ::= (FormParsList) FormPar FormParsListMore;
+
+FormParsListMore ::= (MoreFormParsList) COMMA FormPar VarDeclListMore
                      |
                      (NoMoreFormParsList) /* epsilon */
                      ;
                      
+FormPar ::= (FormParVar) Type IDENT  
+			|
+			(FormParArray) Type IDENT LBRACKET RBRACKET
+			; 
 
 
 StatementList ::= (ListStatement) StatementList Statement

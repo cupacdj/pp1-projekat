@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 4/0/2025 14:38:3
+// 4/0/2025 23:33:36
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -9,33 +9,22 @@ public class FormParsList implements SyntaxNode {
 
     private SyntaxNode parent;
     private int line;
-    private Type Type;
-    private VarDecl VarDecl;
+    private FormPar FormPar;
     private FormParsListMore FormParsListMore;
 
-    public FormParsList (Type Type, VarDecl VarDecl, FormParsListMore FormParsListMore) {
-        this.Type=Type;
-        if(Type!=null) Type.setParent(this);
-        this.VarDecl=VarDecl;
-        if(VarDecl!=null) VarDecl.setParent(this);
+    public FormParsList (FormPar FormPar, FormParsListMore FormParsListMore) {
+        this.FormPar=FormPar;
+        if(FormPar!=null) FormPar.setParent(this);
         this.FormParsListMore=FormParsListMore;
         if(FormParsListMore!=null) FormParsListMore.setParent(this);
     }
 
-    public Type getType() {
-        return Type;
+    public FormPar getFormPar() {
+        return FormPar;
     }
 
-    public void setType(Type Type) {
-        this.Type=Type;
-    }
-
-    public VarDecl getVarDecl() {
-        return VarDecl;
-    }
-
-    public void setVarDecl(VarDecl VarDecl) {
-        this.VarDecl=VarDecl;
+    public void setFormPar(FormPar FormPar) {
+        this.FormPar=FormPar;
     }
 
     public FormParsListMore getFormParsListMore() {
@@ -67,21 +56,18 @@ public class FormParsList implements SyntaxNode {
     }
 
     public void childrenAccept(Visitor visitor) {
-        if(Type!=null) Type.accept(visitor);
-        if(VarDecl!=null) VarDecl.accept(visitor);
+        if(FormPar!=null) FormPar.accept(visitor);
         if(FormParsListMore!=null) FormParsListMore.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
-        if(Type!=null) Type.traverseTopDown(visitor);
-        if(VarDecl!=null) VarDecl.traverseTopDown(visitor);
+        if(FormPar!=null) FormPar.traverseTopDown(visitor);
         if(FormParsListMore!=null) FormParsListMore.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
-        if(Type!=null) Type.traverseBottomUp(visitor);
-        if(VarDecl!=null) VarDecl.traverseBottomUp(visitor);
+        if(FormPar!=null) FormPar.traverseBottomUp(visitor);
         if(FormParsListMore!=null) FormParsListMore.traverseBottomUp(visitor);
         accept(visitor);
     }
@@ -91,14 +77,8 @@ public class FormParsList implements SyntaxNode {
         buffer.append(tab);
         buffer.append("FormParsList(\n");
 
-        if(Type!=null)
-            buffer.append(Type.toString("  "+tab));
-        else
-            buffer.append(tab+"  null");
-        buffer.append("\n");
-
-        if(VarDecl!=null)
-            buffer.append(VarDecl.toString("  "+tab));
+        if(FormPar!=null)
+            buffer.append(FormPar.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

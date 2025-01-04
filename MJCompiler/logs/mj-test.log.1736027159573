@@ -1,0 +1,35 @@
+INFO  21:36:49,483 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  21:36:49,536 - #6 program
+INFO  21:36:49,536 - #2 Cupac
+INFO  21:36:49,537 - #7 {
+INFO  21:36:49,537 - #15 void
+INFO  21:36:49,538 - #2 main
+INFO  21:36:49,538 - #16 (
+INFO  21:36:49,538 - #17 )
+INFO  21:36:49,539 - #7 {
+INFO  21:36:49,540 - #8 }
+INFO  21:36:49,541 - #8 }
+INFO  21:36:49,544 - Program(
+ Cupac
+  NoConstVarDeclList(
+  ) [NoConstVarDeclList]
+  ListMethodDecl(
+    MethodDecl(
+      MethodSignatureList(
+        VoidSignature(
+         main
+        ) [VoidSignature]
+        NoFormParsListZero(
+        ) [NoFormParsListZero]
+      ) [MethodSignatureList]
+      NoEmptyVarDecl(
+      ) [NoEmptyVarDecl]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+  ) [ListMethodDecl]
+) [Program]
+INFO  21:36:49,544 - =====================================================================
+INFO  21:36:49,544 - Parsiranje uspesno zavrseno!

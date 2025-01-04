@@ -1,6 +1,13 @@
-program Test {
-	a=b;
-	
-	//aslkdfj;alksdjf
-	
+program Cupac
+
+const int pi = 3;
+const char c = 'c';
+const bool b = true;
+int a;  // Declare variable 'a'
+{
+
+    
+
+   b++;
+
 }

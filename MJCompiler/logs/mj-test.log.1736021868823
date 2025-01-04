@@ -1,0 +1,17 @@
+INFO  21:16:00,157 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  21:16:00,204 - #6 program
+INFO  21:16:00,205 - #2 Cupac
+INFO  21:16:00,205 - #9 const
+INFO  21:16:00,205 - #2 int
+INFO  21:16:00,205 - #2 pi
+INFO  21:16:00,207 - #11 =
+INFO  21:16:00,207 - #4 3
+INFO  21:16:00,208 - #10 ;
+INFO  21:16:00,209 - #7 {
+INFO  21:16:00,210 - #15 void
+INFO  21:16:00,210 - #2 main
+INFO  21:16:00,211 - #16 (
+INFO  21:16:00,211 - #17 )
+ERROR 21:16:00,211 - 
+Sintaksna greska na liniji 7
+ERROR 21:16:00,211 - Fatalna greska, parsiranje se ne moze nastaviti na liniji 7

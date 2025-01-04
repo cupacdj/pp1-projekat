@@ -49,7 +49,8 @@ scan with {:
 :}
 
 
-terminal String IDENT, CHAR;
+terminal String IDENT;
+terminal Character CHAR;
 terminal Integer NUM, BOOL;
 terminal PROG, LBRACE, RBRACE, CONST, SEMI, ASSIGN, COMMA, LBRACKET, RBRACKET;
 terminal VOID, LPAREN, RPAREN, MAP, NEW, OR, AND, INC, DEC;
@@ -60,6 +61,7 @@ terminal UNION;
 
 
 nonterminal Program Program;
+nonterminal ProgName ProgName;
 nonterminal ConstVarDeclList ConstVarDeclList;
 nonterminal Type Type;
 nonterminal ConstDeclList ConstDeclList;
@@ -76,6 +78,8 @@ nonterminal MethodSignatureList MethodSignatureList;
 nonterminal VarDeclEmpty VarDeclEmpty;
 nonterminal FormParsList FormParsList;
 nonterminal FormParsListMore FormParsListMore;
+nonterminal FormParsListZero FormParsListZero;
+nonterminal FormPar FormPar;
 nonterminal StatementList StatementList;
 nonterminal Statement Statement;
 nonterminal StatementElse StatementElse;
@@ -109,7 +113,9 @@ nonterminal Setop Setop;
 
 precedence left ELSE;
 
-Program ::= (Program) PROG IDENT:I1 ConstVarDeclList:C2 LBRACE MethodDeclList:M3 RBRACE {: RESULT=new Program(I1, C2, M3); RESULT.setLine(I1left); :};
+Program ::= (Program) PROG ProgName:P1 ConstVarDeclList:C2 LBRACE MethodDeclList:M3 RBRACE {: RESULT=new Program(P1, C2, M3); RESULT.setLine(P1left); :};
+
+ProgName ::= (ProgName) IDENT:I1 {: RESULT=new ProgName(I1); RESULT.setLine(I1left); :};
 
 ConstVarDeclList ::= (CConstVarDeclList) ConstVarDeclList:C1 ConstDeclList:C2 {: RESULT=new CConstVarDeclList(C1, C2); RESULT.setLine(C1left); :} 
 					 | 
@@ -150,20 +156,21 @@ VarDeclListMore ::= (MoreVarDeclList) COMMA VarDecl:V1 VarDeclListMore:V2 {: RES
                     (NoMoreVarDeclList) {: RESULT=new NoMoreVarDeclList(); :} /* epsilon */
                     ;
 
+Type ::= (Type) IDENT:I1 {: RESULT=new Type(I1); RESULT.setLine(I1left); :};
 
 
-MethodDeclList ::= (ListMethodDecl) MethodDecl:M1 MethodDeclList:M2 {: RESULT=new ListMethodDecl(M1, M2); RESULT.setLine(M1left); :}
+MethodDeclList ::= (ListMethodDecl) MethodDeclList:M1 MethodDecl:M2 {: RESULT=new ListMethodDecl(M1, M2); RESULT.setLine(M1left); :}
                    |
                    (NoMethodDeclList) {: RESULT=new NoMethodDeclList(); :} /* epsilon */
                    ;
                     
 MethodDecl ::= (MethodDecl) MethodSignatureList:M1 VarDeclEmpty:V2 LBRACE StatementList:S3 RBRACE {: RESULT=new MethodDecl(M1, V2, S3); RESULT.setLine(M1left); :};
 
-MethodSignatureList ::= (MethodSignatureList) MethodSignature:M1 IDENT:I2 LPAREN FormParsList:F3 RPAREN {: RESULT=new MethodSignatureList(M1, I2, F3); RESULT.setLine(M1left); :};
+MethodSignatureList ::= (MethodSignatureList) MethodSignature:M1 LPAREN FormParsListZero:F2 RPAREN {: RESULT=new MethodSignatureList(M1, F2); RESULT.setLine(M1left); :};
 
-MethodSignature ::= (TypeSignature) Type:T1 {: RESULT=new TypeSignature(T1); RESULT.setLine(T1left); :}
+MethodSignature ::= (TypeSignature) Type:T1 IDENT:I2 {: RESULT=new TypeSignature(T1, I2); RESULT.setLine(T1left); :}
 					|
-					(VoidSignature) VOID {: RESULT=new VoidSignature(); :}
+					(VoidSignature) VOID IDENT:I1 {: RESULT=new VoidSignature(I1); RESULT.setLine(I1left); :}
 					;
 
 VarDeclEmpty ::= (EmptyVarDecl) VarDeclEmpty:V1 VarDeclList:V2 {: RESULT=new EmptyVarDecl(V1, V2); RESULT.setLine(V1left); :}
@@ -171,17 +178,26 @@ VarDeclEmpty ::= (EmptyVarDecl) VarDeclEmpty:V1 VarDeclList:V2 {: RESULT=new Emp
 				 (NoEmptyVarDecl) {: RESULT=new NoEmptyVarDecl(); :} /* epsilon */
 				 ;
 				 
-Type ::= (Type) IDENT:I1 {: RESULT=new Type(I1); RESULT.setLine(I1left); :};
 
 
 
-FormParsList ::= (FormParsList) Type:T1 VarDecl:V2 FormParsListMore:F3 {: RESULT=new FormParsList(T1, V2, F3); RESULT.setLine(T1left); :};
 
-FormParsListMore ::= (MoreFormParsList) COMMA Type:T1 VarDecl:V2 VarDeclListMore:V3 {: RESULT=new MoreFormParsList(T1, V2, V3); RESULT.setLine(T1left); :}
+FormParsListZero ::= (ZeroFormParsList) FormParsList:F1 {: RESULT=new ZeroFormParsList(F1); RESULT.setLine(F1left); :}
+                     |
+                     (NoFormParsListZero) {: RESULT=new NoFormParsListZero(); :} /* epsilon */
+                     ;
+
+FormParsList ::= (FormParsList) FormPar:F1 FormParsListMore:F2 {: RESULT=new FormParsList(F1, F2); RESULT.setLine(F1left); :};
+
+FormParsListMore ::= (MoreFormParsList) COMMA FormPar:F1 VarDeclListMore:V2 {: RESULT=new MoreFormParsList(F1, V2); RESULT.setLine(F1left); :}
                      |
                      (NoMoreFormParsList) {: RESULT=new NoMoreFormParsList(); :} /* epsilon */
                      ;
                      
+FormPar ::= (FormParVar) Type:T1 IDENT:I2 {: RESULT=new FormParVar(T1, I2); RESULT.setLine(T1left); :}  
+			|
+			(FormParArray) Type:T1 IDENT:I2 LBRACKET RBRACKET {: RESULT=new FormParArray(T1, I2); RESULT.setLine(T1left); :}
+			; 
 
 
 StatementList ::= (ListStatement) StatementList:S1 Statement:S2 {: RESULT=new ListStatement(S1, S2); RESULT.setLine(S1left); :}

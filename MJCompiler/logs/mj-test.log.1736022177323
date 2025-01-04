@@ -1,0 +1,15 @@
+INFO  21:17:48,861 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  21:17:48,910 - #6 program
+INFO  21:17:48,911 - #2 Cupac
+INFO  21:17:48,911 - #9 const
+INFO  21:17:48,911 - #2 int
+INFO  21:17:48,912 - #2 pi
+INFO  21:17:48,913 - #11 =
+INFO  21:17:48,913 - #4 3
+INFO  21:17:48,914 - #10 ;
+INFO  21:17:48,915 - #9 const
+INFO  21:17:48,916 - #2 char
+INFO  21:17:48,916 - #2 c
+INFO  21:17:48,916 - #11 =
+INFO  21:17:48,916 - #3 c
+INFO  21:17:48,916 - #10 ;

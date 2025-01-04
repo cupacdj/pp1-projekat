@@ -1,0 +1,28 @@
+INFO  23:10:52,748 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  23:10:52,799 - #6 program
+INFO  23:10:52,800 - #2 Cupac
+INFO  23:10:52,800 - #9 const
+INFO  23:10:52,801 - #2 int
+INFO  23:10:52,801 - #2 pi
+INFO  23:10:52,801 - #11 =
+INFO  23:10:52,802 - #4 3
+INFO  23:10:52,802 - #10 ;
+INFO  23:10:52,804 - #9 const
+INFO  23:10:52,804 - #2 char
+INFO  23:10:52,804 - #2 c
+INFO  23:10:52,805 - #11 =
+INFO  23:10:52,805 - #3 c
+INFO  23:10:52,805 - #10 ;
+INFO  23:10:52,805 - #9 const
+INFO  23:10:52,805 - #2 bool
+INFO  23:10:52,805 - #2 b
+INFO  23:10:52,805 - #11 =
+INFO  23:10:52,806 - #5 1
+INFO  23:10:52,806 - #10 ;
+INFO  23:10:52,806 - #7 {
+INFO  23:10:52,806 - #2 int
+INFO  23:10:52,807 - #2 a
+INFO  23:10:52,807 - #10 ;
+ERROR 23:10:52,807 - 
+Sintaksna greska na liniji 9
+ERROR 23:10:52,807 - Fatalna greska, parsiranje se ne moze nastaviti na liniji 9

@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 4/0/2025 14:38:3
+// 4/0/2025 23:33:36
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -26,6 +26,7 @@ public interface Visitor {
     public void visit(CondFactList CondFactList);
     public void visit(Designator Designator);
     public void visit(ExprAddopTerm ExprAddopTerm);
+    public void visit(FormParsListZero FormParsListZero);
     public void visit(DesignatorStatementList DesignatorStatementList);
     public void visit(FactorActPars FactorActPars);
     public void visit(ConstDeclListMore ConstDeclListMore);
@@ -37,6 +38,7 @@ public interface Visitor {
     public void visit(VarDecl VarDecl);
     public void visit(VarDeclListMore VarDeclListMore);
     public void visit(CondFact CondFact);
+    public void visit(FormPar FormPar);
     public void visit(MethodDeclList MethodDeclList);
     public void visit(VarDeclEmpty VarDeclEmpty);
     public void visit(Setop Setop);
@@ -112,10 +114,13 @@ public interface Visitor {
     public void visit(SingleStatementDsg SingleStatementDsg);
     public void visit(NoStatementList NoStatementList);
     public void visit(ListStatement ListStatement);
+    public void visit(FormParArray FormParArray);
+    public void visit(FormParVar FormParVar);
     public void visit(NoMoreFormParsList NoMoreFormParsList);
     public void visit(MoreFormParsList MoreFormParsList);
     public void visit(FormParsList FormParsList);
-    public void visit(Type Type);
+    public void visit(NoFormParsListZero NoFormParsListZero);
+    public void visit(ZeroFormParsList ZeroFormParsList);
     public void visit(NoEmptyVarDecl NoEmptyVarDecl);
     public void visit(EmptyVarDecl EmptyVarDecl);
     public void visit(VoidSignature VoidSignature);
@@ -124,6 +129,7 @@ public interface Visitor {
     public void visit(MethodDecl MethodDecl);
     public void visit(NoMethodDeclList NoMethodDeclList);
     public void visit(ListMethodDecl ListMethodDecl);
+    public void visit(Type Type);
     public void visit(NoMoreVarDeclList NoMoreVarDeclList);
     public void visit(MoreVarDeclList MoreVarDeclList);
     public void visit(BracketVarDecl BracketVarDecl);
@@ -139,6 +145,7 @@ public interface Visitor {
     public void visit(NoConstVarDeclList NoConstVarDeclList);
     public void visit(VConstVarDeclList VConstVarDeclList);
     public void visit(CConstVarDeclList CConstVarDeclList);
+    public void visit(ProgName ProgName);
     public void visit(Program Program);
 
 }

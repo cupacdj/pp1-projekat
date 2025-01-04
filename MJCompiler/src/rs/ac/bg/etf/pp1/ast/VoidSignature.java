@@ -1,13 +1,24 @@
 // generated with ast extension for cup
 // version 0.8
-// 4/0/2025 14:38:3
+// 4/0/2025 23:33:36
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class VoidSignature extends MethodSignature {
 
-    public VoidSignature () {
+    private String I1;
+
+    public VoidSignature (String I1) {
+        this.I1=I1;
+    }
+
+    public String getI1() {
+        return I1;
+    }
+
+    public void setI1(String I1) {
+        this.I1=I1;
     }
 
     public void accept(Visitor visitor) {
@@ -29,6 +40,9 @@ public class VoidSignature extends MethodSignature {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
         buffer.append("VoidSignature(\n");
+
+        buffer.append(" "+tab+I1);
+        buffer.append("\n");
 
         buffer.append(tab);
         buffer.append(") [VoidSignature]");

@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 4/0/2025 14:38:3
+// 4/0/2025 23:33:36
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -10,15 +10,13 @@ public class MethodSignatureList implements SyntaxNode {
     private SyntaxNode parent;
     private int line;
     private MethodSignature MethodSignature;
-    private String I2;
-    private FormParsList FormParsList;
+    private FormParsListZero FormParsListZero;
 
-    public MethodSignatureList (MethodSignature MethodSignature, String I2, FormParsList FormParsList) {
+    public MethodSignatureList (MethodSignature MethodSignature, FormParsListZero FormParsListZero) {
         this.MethodSignature=MethodSignature;
         if(MethodSignature!=null) MethodSignature.setParent(this);
-        this.I2=I2;
-        this.FormParsList=FormParsList;
-        if(FormParsList!=null) FormParsList.setParent(this);
+        this.FormParsListZero=FormParsListZero;
+        if(FormParsListZero!=null) FormParsListZero.setParent(this);
     }
 
     public MethodSignature getMethodSignature() {
@@ -29,20 +27,12 @@ public class MethodSignatureList implements SyntaxNode {
         this.MethodSignature=MethodSignature;
     }
 
-    public String getI2() {
-        return I2;
+    public FormParsListZero getFormParsListZero() {
+        return FormParsListZero;
     }
 
-    public void setI2(String I2) {
-        this.I2=I2;
-    }
-
-    public FormParsList getFormParsList() {
-        return FormParsList;
-    }
-
-    public void setFormParsList(FormParsList FormParsList) {
-        this.FormParsList=FormParsList;
+    public void setFormParsListZero(FormParsListZero FormParsListZero) {
+        this.FormParsListZero=FormParsListZero;
     }
 
     public SyntaxNode getParent() {
@@ -67,18 +57,18 @@ public class MethodSignatureList implements SyntaxNode {
 
     public void childrenAccept(Visitor visitor) {
         if(MethodSignature!=null) MethodSignature.accept(visitor);
-        if(FormParsList!=null) FormParsList.accept(visitor);
+        if(FormParsListZero!=null) FormParsListZero.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
         if(MethodSignature!=null) MethodSignature.traverseTopDown(visitor);
-        if(FormParsList!=null) FormParsList.traverseTopDown(visitor);
+        if(FormParsListZero!=null) FormParsListZero.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
         if(MethodSignature!=null) MethodSignature.traverseBottomUp(visitor);
-        if(FormParsList!=null) FormParsList.traverseBottomUp(visitor);
+        if(FormParsListZero!=null) FormParsListZero.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -93,11 +83,8 @@ public class MethodSignatureList implements SyntaxNode {
             buffer.append(tab+"  null");
         buffer.append("\n");
 
-        buffer.append(" "+tab+I2);
-        buffer.append("\n");
-
-        if(FormParsList!=null)
-            buffer.append(FormParsList.toString("  "+tab));
+        if(FormParsListZero!=null)
+            buffer.append(FormParsListZero.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

@@ -1,0 +1,98 @@
+INFO  21:34:45,717 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  21:34:45,766 - #6 program
+INFO  21:34:45,766 - #2 Cupac
+INFO  21:34:45,766 - #9 const
+INFO  21:34:45,767 - #2 int
+INFO  21:34:45,767 - #2 pi
+INFO  21:34:45,768 - #11 =
+INFO  21:34:45,768 - #4 3
+INFO  21:34:45,769 - #10 ;
+INFO  21:34:45,770 - #9 const
+INFO  21:34:45,770 - #2 char
+INFO  21:34:45,771 - #2 c
+INFO  21:34:45,771 - #11 =
+INFO  21:34:45,771 - #3 c
+INFO  21:34:45,771 - #10 ;
+INFO  21:34:45,771 - #9 const
+INFO  21:34:45,771 - #2 bool
+INFO  21:34:45,771 - #2 b
+INFO  21:34:45,771 - #11 =
+INFO  21:34:45,772 - #5 1
+INFO  21:34:45,772 - #10 ;
+INFO  21:34:45,772 - #7 {
+INFO  21:34:45,772 - #15 void
+INFO  21:34:45,773 - #2 main
+INFO  21:34:45,773 - #16 (
+INFO  21:34:45,773 - #17 )
+INFO  21:34:45,773 - #7 {
+INFO  21:34:45,774 - #8 }
+INFO  21:34:45,775 - #8 }
+INFO  21:34:45,780 - Program(
+ Cupac
+  CConstVarDeclList(
+    CConstVarDeclList(
+      CConstVarDeclList(
+        NoConstVarDeclList(
+        ) [NoConstVarDeclList]
+        ConstDeclList(
+          Type(
+           int
+          ) [Type]
+          ConstDecl(
+           pi
+            NumConst(
+             3
+            ) [NumConst]
+          ) [ConstDecl]
+          NoMoreConstDeclList(
+          ) [NoMoreConstDeclList]
+        ) [ConstDeclList]
+      ) [CConstVarDeclList]
+      ConstDeclList(
+        Type(
+         char
+        ) [Type]
+        ConstDecl(
+         c
+          CharConst(
+           c
+          ) [CharConst]
+        ) [ConstDecl]
+        NoMoreConstDeclList(
+        ) [NoMoreConstDeclList]
+      ) [ConstDeclList]
+    ) [CConstVarDeclList]
+    ConstDeclList(
+      Type(
+       bool
+      ) [Type]
+      ConstDecl(
+       b
+        BoolConst(
+         1
+        ) [BoolConst]
+      ) [ConstDecl]
+      NoMoreConstDeclList(
+      ) [NoMoreConstDeclList]
+    ) [ConstDeclList]
+  ) [CConstVarDeclList]
+  ListMethodDecl(
+    MethodDecl(
+      MethodSignatureList(
+        VoidSignature(
+         main
+        ) [VoidSignature]
+        NoFormParsListZero(
+        ) [NoFormParsListZero]
+      ) [MethodSignatureList]
+      NoEmptyVarDecl(
+      ) [NoEmptyVarDecl]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+  ) [ListMethodDecl]
+) [Program]
+INFO  21:34:45,780 - =====================================================================
+INFO  21:34:45,780 - Parsiranje uspesno zavrseno!
