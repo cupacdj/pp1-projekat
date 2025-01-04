@@ -1,24 +1,13 @@
 // generated with ast extension for cup
 // version 0.8
-// 3/0/2025 23:21:27
+// 4/0/2025 14:38:3
 
 
-package src.rs.ac.bg.etf.pp1.ast;
+package rs.ac.bg.etf.pp1.ast;
 
-public class DotDesignator extends DesignatorDot {
+public class NoActParsFactor extends FactorActPars {
 
-    private String I1;
-
-    public DotDesignator (String I1) {
-        this.I1=I1;
-    }
-
-    public String getI1() {
-        return I1;
-    }
-
-    public void setI1(String I1) {
-        this.I1=I1;
+    public NoActParsFactor () {
     }
 
     public void accept(Visitor visitor) {
@@ -39,13 +28,10 @@ public class DotDesignator extends DesignatorDot {
     public String toString(String tab) {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
-        buffer.append("DotDesignator(\n");
-
-        buffer.append(" "+tab+I1);
-        buffer.append("\n");
+        buffer.append("NoActParsFactor(\n");
 
         buffer.append(tab);
-        buffer.append(") [DotDesignator]");
+        buffer.append(") [NoActParsFactor]");
         return buffer.toString();
     }
 }

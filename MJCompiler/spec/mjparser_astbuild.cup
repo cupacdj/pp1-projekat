@@ -52,7 +52,7 @@ scan with {:
 terminal String IDENT, CHAR;
 terminal Integer NUM, BOOL;
 terminal PROG, LBRACE, RBRACE, CONST, SEMI, ASSIGN, COMMA, LBRACKET, RBRACKET;
-terminal VOID, LPAREN, RPAREN, DOT, MAP, NEW, OR, AND, INC, DEC;
+terminal VOID, LPAREN, RPAREN, MAP, NEW, OR, AND, INC, DEC;
 terminal IF, ELSE, WHILE, DO, BREAK, CONTINUE, RETURN, READ, PRINT;
 terminal PLUS, MINUS, MUL, DIV, MOD;
 terminal EQ, NEQ, GT, GTE, LT, LTE;
@@ -91,7 +91,6 @@ nonterminal CondTerm CondTerm;
 nonterminal CondFactList CondFactList;
 nonterminal CondFact CondFact;
 nonterminal ExprList ExprList;
-nonterminal ExprTerm ExprTerm;
 nonterminal ExprAddopTerm ExprAddopTerm;
 nonterminal ExprZero ExprZero;
 nonterminal Term Term;
@@ -99,10 +98,9 @@ nonterminal TermMulFactor TermMulFactor;
 nonterminal Factor Factor;
 nonterminal FactorActPars FactorActPars;
 nonterminal FactorExprAct FactorExprAct;
+nonterminal FactorList FactorList;
 nonterminal DesignatorList DesignatorList;
 nonterminal Designator Designator;
-nonterminal DesignatorDot DesignatorDot;
-nonterminal Label Label;
 nonterminal Assignop Assignop;
 nonterminal Addop Addop;
 nonterminal Mulop Mulop;
@@ -226,7 +224,7 @@ ConditionDesignator ::= (CondDesignator) Condition:C1 {: RESULT=new CondDesignat
 
 
 
-DesignatorStatementList ::= (DesignatorList) Designator:D1 DesignatorStatement:D2 {: RESULT=new DesignatorList(D1, D2); RESULT.setLine(D1left); :}
+DesignatorStatementList ::= (ListDesignatorStatement) Designator:D1 DesignatorStatement:D2 {: RESULT=new ListDesignatorStatement(D1, D2); RESULT.setLine(D1left); :}
 							|
 							(DesignatorAssignopSetop) Designator:D1 Assignop:A2 Designator:D3 Setop:S4 Designator:D5 {: RESULT=new DesignatorAssignopSetop(D1, A2, D3, S4, D5); RESULT.setLine(D1left); :}
 							;
@@ -250,9 +248,9 @@ ActPars ::= (ActParsRepeat) COMMA ExprList:E1 ActPars:A2 {: RESULT=new ActParsRe
             ;
 
 ActParsZero ::= (ZeroActPars) ActParsList:A1 {: RESULT=new ZeroActPars(A1); RESULT.setLine(A1left); :}
-               |
-               (NoZeroActPars) {: RESULT=new NoZeroActPars(); :} /* epsilon */
-               ;
+                |
+                (NoZeroActPars) {: RESULT=new NoZeroActPars(); :} /* epsilon */
+                ;
 
 
 
@@ -277,15 +275,11 @@ CondFact ::=  (CondFactExpr) ExprList:E1 {: RESULT=new CondFactExpr(E1); RESULT.
 
 
 
-ExprList ::= (ListExpr) ExprTerm:E1 ExprAddopTerm:E2 {: RESULT=new ListExpr(E1, E2); RESULT.setLine(E1left); :} 
+ExprList ::= (ListExpr) Term:T1 ExprAddopTerm:E2 {: RESULT=new ListExpr(T1, E2); RESULT.setLine(T1left); :} 
 			 |
 			 (ExprMap) DesignatorList:D1 MAP DesignatorList:D2 {: RESULT=new ExprMap(D1, D2); RESULT.setLine(D1left); :}
 			 ;
 
-ExprTerm ::= (TermExpr) Term:T1 {: RESULT=new TermExpr(T1); RESULT.setLine(T1left); :}
-             |
-             (ExprMinus) MINUS Term:T1 {: RESULT=new ExprMinus(T1); RESULT.setLine(T1left); :}
-             ;
 
 ExprAddopTerm ::= (AddopExprTerm) Addop:A1 Term:T2 ExprAddopTerm:E3 {: RESULT=new AddopExprTerm(A1, T2, E3); RESULT.setLine(A1left); :}
                   |
@@ -298,14 +292,18 @@ ExprZero ::= (ZeroExpr) ExprList:E1 {: RESULT=new ZeroExpr(E1); RESULT.setLine(E
              ;
                   
 
-Term ::= (Term) Factor:F1 TermMulFactor:T2 {: RESULT=new Term(F1, T2); RESULT.setLine(F1left); :};
+Term ::= (Term) FactorList:F1 TermMulFactor:T2 {: RESULT=new Term(F1, T2); RESULT.setLine(F1left); :};
 
-TermMulFactor ::= (MulopTerm) Mulop:M1 Factor:F2 TermMulFactor:T3 {: RESULT=new MulopTerm(M1, F2, T3); RESULT.setLine(M1left); :}
+TermMulFactor ::= (MulopTerm) Mulop:M1 FactorList:F2 TermMulFactor:T3 {: RESULT=new MulopTerm(M1, F2, T3); RESULT.setLine(M1left); :}
                   |
                   (NoMulopTerm) {: RESULT=new NoMulopTerm(); :} /* epsilon */
                   ;
                   
-                  
+FactorList ::= (FactorListMinus) MINUS Factor:F1 {: RESULT=new FactorListMinus(F1); RESULT.setLine(F1left); :}
+               |
+               (NoFactorListMinus) Factor:F1 {: RESULT=new NoFactorListMinus(F1); RESULT.setLine(F1left); :}
+               ;
+	
                   
 Factor ::= (FactorDesignator) DesignatorList:D1 FactorActPars:F2 {: RESULT=new FactorDesignator(D1, F2); RESULT.setLine(D1left); :}
            |
@@ -320,9 +318,9 @@ Factor ::= (FactorDesignator) DesignatorList:D1 FactorActPars:F2 {: RESULT=new F
            (FactorExpr) LPAREN ExprList:E1 RPAREN {: RESULT=new FactorExpr(E1); RESULT.setLine(E1left); :}
            ;
 
-FactorActPars ::= (ActPars) LPAREN ActParsZero:A1 RPAREN {: RESULT=new ActPars(A1); RESULT.setLine(A1left); :}
+FactorActPars ::= (ActParsFactor) LPAREN ActParsZero:A1 RPAREN {: RESULT=new ActParsFactor(A1); RESULT.setLine(A1left); :}
                   |
-                  (NoActPars) {: RESULT=new NoActPars(); :} /* epsilon */
+                  (NoActParsFactor) {: RESULT=new NoActParsFactor(); :} /* epsilon */
                   ;
               
 
@@ -332,22 +330,18 @@ FactorExprAct ::= (ExprFact) LBRACKET ExprList:E1 RBRACKET {: RESULT=new ExprFac
                   ;
 
 
+			
+				
 
 DesignatorList ::= (DesignatorList) Designator:D1 {: RESULT=new DesignatorList(D1); RESULT.setLine(D1left); :};
 
 Designator ::= (DesignatorIdent) IDENT:I1 {: RESULT=new DesignatorIdent(I1); RESULT.setLine(I1left); :}
                |
-               (DesignatorDot) DesignatorDot:D1 {: RESULT=new DesignatorDot(D1); RESULT.setLine(D1left); :}
+               (DesignatorExpr) IDENT:I1 LBRACKET ExprList:E2 RBRACKET {: RESULT=new DesignatorExpr(I1, E2); RESULT.setLine(I1left); :}
                ;
 
-DesignatorDot ::= (DotDesignator) DOT IDENT:I1 {: RESULT=new DotDesignator(I1); RESULT.setLine(I1left); :}
-				  | 
-				  (DotDesignatorBrackets) LBRACKET ExprList:E1 RBRACKET {: RESULT=new DotDesignatorBrackets(E1); RESULT.setLine(E1left); :}
-				  ;
 				  
-				  
-
-Label ::= (Label) IDENT:I1 {: RESULT=new Label(I1); RESULT.setLine(I1left); :};
+			  
 
 Assignop ::= (Assignop) ASSIGN {: RESULT=new Assignop(); :};
 

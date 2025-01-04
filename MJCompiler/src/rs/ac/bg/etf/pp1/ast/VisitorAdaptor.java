@@ -1,9 +1,9 @@
 // generated with ast extension for cup
 // version 0.8
-// 3/0/2025 23:21:27
+// 4/0/2025 14:38:3
 
 
-package src.rs.ac.bg.etf.pp1.ast;
+package rs.ac.bg.etf.pp1.ast;
 
 public abstract class VisitorAdaptor implements Visitor { 
 
@@ -18,6 +18,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(ExprZero ExprZero) { }
     public void visit(MethodSignature MethodSignature) { }
     public void visit(StatementList StatementList) { }
+    public void visit(FactorList FactorList) { }
     public void visit(ConstVarDeclList ConstVarDeclList) { }
     public void visit(Addop Addop) { }
     public void visit(TermMulFactor TermMulFactor) { }
@@ -31,9 +32,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(ExprList ExprList) { }
     public void visit(ActPars ActPars) { }
     public void visit(DesignatorStatement DesignatorStatement) { }
-    public void visit(ExprTerm ExprTerm) { }
     public void visit(ConditionDesignator ConditionDesignator) { }
-    public void visit(DesignatorDot DesignatorDot) { }
     public void visit(Statement Statement) { }
     public void visit(VarDecl VarDecl) { }
     public void visit(VarDeclListMore VarDeclListMore) { }
@@ -53,22 +52,21 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(AddopMinus AddopMinus) { visit(); }
     public void visit(AddopPlus AddopPlus) { visit(); }
     public void visit(Assignop Assignop) { visit(); }
-    public void visit(Label Label) { visit(); }
-    public void visit(DotDesignatorBrackets DotDesignatorBrackets) { visit(); }
-    public void visit(DotDesignator DotDesignator) { visit(); }
-    public void visit(DesignatorDot DesignatorDot) { visit(); }
+    public void visit(DesignatorExpr DesignatorExpr) { visit(); }
     public void visit(DesignatorIdent DesignatorIdent) { visit(); }
     public void visit(DesignatorList DesignatorList) { visit(); }
     public void visit(ActFact ActFact) { visit(); }
     public void visit(ExprFact ExprFact) { visit(); }
-    public void visit(NoActPars NoActPars) { visit(); }
-    public void visit(ActPars ActPars) { visit(); }
+    public void visit(NoActParsFactor NoActParsFactor) { visit(); }
+    public void visit(ActParsFactor ActParsFactor) { visit(); }
     public void visit(FactorExpr FactorExpr) { visit(); }
     public void visit(FactorNew FactorNew) { visit(); }
     public void visit(FactorBool FactorBool) { visit(); }
     public void visit(FactorChar FactorChar) { visit(); }
     public void visit(FactorNum FactorNum) { visit(); }
     public void visit(FactorDesignator FactorDesignator) { visit(); }
+    public void visit(NoFactorListMinus NoFactorListMinus) { visit(); }
+    public void visit(FactorListMinus FactorListMinus) { visit(); }
     public void visit(NoMulopTerm NoMulopTerm) { visit(); }
     public void visit(MulopTerm MulopTerm) { visit(); }
     public void visit(Term Term) { visit(); }
@@ -76,8 +74,6 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(ZeroExpr ZeroExpr) { visit(); }
     public void visit(NoAddopExprTerm NoAddopExprTerm) { visit(); }
     public void visit(AddopExprTerm AddopExprTerm) { visit(); }
-    public void visit(ExprMinus ExprMinus) { visit(); }
-    public void visit(TermExpr TermExpr) { visit(); }
     public void visit(ExprMap ExprMap) { visit(); }
     public void visit(ListExpr ListExpr) { visit(); }
     public void visit(CondFactExprRelop CondFactExprRelop) { visit(); }
@@ -98,7 +94,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(DesignatorActPars DesignatorActPars) { visit(); }
     public void visit(DesignatorAssignExpr DesignatorAssignExpr) { visit(); }
     public void visit(DesignatorAssignopSetop DesignatorAssignopSetop) { visit(); }
-    public void visit(DesignatorList DesignatorList) { visit(); }
+    public void visit(ListDesignatorStatement ListDesignatorStatement) { visit(); }
     public void visit(NoCondDesignator NoCondDesignator) { visit(); }
     public void visit(CondDesignatorList CondDesignatorList) { visit(); }
     public void visit(CondDesignator CondDesignator) { visit(); }

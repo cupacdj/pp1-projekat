@@ -1,9 +1,9 @@
 // generated with ast extension for cup
 // version 0.8
-// 3/0/2025 23:21:27
+// 4/0/2025 14:38:3
 
 
-package src.rs.ac.bg.etf.pp1.ast;
+package rs.ac.bg.etf.pp1.ast;
 
 public abstract class DesignatorStatementList implements SyntaxNode {
 

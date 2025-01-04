@@ -1,17 +1,27 @@
 // generated with ast extension for cup
 // version 0.8
-// 3/0/2025 23:21:27
+// 4/0/2025 14:38:3
 
 
-package src.rs.ac.bg.etf.pp1.ast;
+package rs.ac.bg.etf.pp1.ast;
 
-public class DotDesignatorBrackets extends DesignatorDot {
+public class DesignatorExpr extends Designator {
 
+    private String I1;
     private ExprList ExprList;
 
-    public DotDesignatorBrackets (ExprList ExprList) {
+    public DesignatorExpr (String I1, ExprList ExprList) {
+        this.I1=I1;
         this.ExprList=ExprList;
         if(ExprList!=null) ExprList.setParent(this);
+    }
+
+    public String getI1() {
+        return I1;
+    }
+
+    public void setI1(String I1) {
+        this.I1=I1;
     }
 
     public ExprList getExprList() {
@@ -43,7 +53,10 @@ public class DotDesignatorBrackets extends DesignatorDot {
     public String toString(String tab) {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
-        buffer.append("DotDesignatorBrackets(\n");
+        buffer.append("DesignatorExpr(\n");
+
+        buffer.append(" "+tab+I1);
+        buffer.append("\n");
 
         if(ExprList!=null)
             buffer.append(ExprList.toString("  "+tab));
@@ -52,7 +65,7 @@ public class DotDesignatorBrackets extends DesignatorDot {
         buffer.append("\n");
 
         buffer.append(tab);
-        buffer.append(") [DotDesignatorBrackets]");
+        buffer.append(") [DesignatorExpr]");
         return buffer.toString();
     }
 }

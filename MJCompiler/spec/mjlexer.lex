@@ -23,7 +23,7 @@ import java_cup.runtime.Symbol;
 %line
 %column
 
-%state COMMENT
+%xstate COMMENT
 
 %eofval{
     return new_symbol(sym.EOF);
@@ -71,7 +71,6 @@ import java_cup.runtime.Symbol;
 "--"        { return new_symbol(sym.DEC, yytext()); }
 ";"         { return new_symbol(sym.SEMI, yytext()); }
 ","         { return new_symbol(sym.COMMA, yytext()); }
-"."         { return new_symbol(sym.DOT, yytext()); }
 "("         { return new_symbol(sym.LPAREN, yytext()); }
 ")"         { return new_symbol(sym.RPAREN, yytext()); }
 "["         { return new_symbol(sym.LBRACKET, yytext()); }

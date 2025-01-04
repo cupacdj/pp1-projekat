@@ -52,7 +52,7 @@ scan with {:
 terminal String IDENT, CHAR;
 terminal Integer NUM, BOOL;
 terminal PROG, LBRACE, RBRACE, CONST, SEMI, ASSIGN, COMMA, LBRACKET, RBRACKET;
-terminal VOID, LPAREN, RPAREN, DOT, MAP, NEW, OR, AND, INC, DEC;
+terminal VOID, LPAREN, RPAREN, MAP, NEW, OR, AND, INC, DEC;
 terminal IF, ELSE, WHILE, DO, BREAK, CONTINUE, RETURN, READ, PRINT;
 terminal PLUS, MINUS, MUL, DIV, MOD;
 terminal EQ, NEQ, GT, GTE, LT, LTE;
@@ -68,11 +68,11 @@ nonterminal StatementList, Statement, StatementElse;
 nonterminal DesignatorStatementList, DesignatorStatement, ConditionDesignator;
 nonterminal ActParsList, ActPars, ActParsZero;
 nonterminal Condition, CondTermList, CondTerm, CondFactList, CondFact,;
-nonterminal ExprList, ExprTerm, ExprAddopTerm, ExprZero;
+nonterminal ExprList, ExprAddopTerm, ExprZero;
 nonterminal Term, TermMulFactor;
-nonterminal Factor, FactorActPars, FactorExprAct;
-nonterminal DesignatorList, Designator, DesignatorDot;
-nonterminal Label, Assignop, Addop, Mulop, Relop, Setop;
+nonterminal Factor, FactorActPars, FactorExprAct, FactorList;
+nonterminal DesignatorList, Designator;
+nonterminal Assignop, Addop, Mulop, Relop, Setop;
 
 precedence left ELSE;
 
@@ -191,7 +191,7 @@ ConditionDesignator ::= (CondDesignator) Condition
 
 
 
-DesignatorStatementList ::= (DesignatorList) Designator DesignatorStatement
+DesignatorStatementList ::= (ListDesignatorStatement) Designator DesignatorStatement
 							|
 							(DesignatorAssignopSetop) Designator Assignop Designator Setop Designator
 							;
@@ -215,9 +215,9 @@ ActPars ::= (ActParsRepeat) COMMA ExprList ActPars
             ;
 
 ActParsZero ::= (ZeroActPars) ActParsList
-               |
-               (NoZeroActPars) /* epsilon */
-               ;
+                |
+                (NoZeroActPars) /* epsilon */
+                ;
 
 
 
@@ -242,15 +242,11 @@ CondFact ::=  (CondFactExpr) ExprList
 
 
 
-ExprList ::= (ListExpr) ExprTerm ExprAddopTerm 
+ExprList ::= (ListExpr) Term ExprAddopTerm 
 			 |
 			 (ExprMap) DesignatorList MAP DesignatorList
 			 ;
 
-ExprTerm ::= (TermExpr) Term
-             |
-             (ExprMinus) MINUS Term
-             ;
 
 ExprAddopTerm ::= (AddopExprTerm) Addop Term ExprAddopTerm
                   |
@@ -263,14 +259,18 @@ ExprZero ::= (ZeroExpr) ExprList
              ;
                   
 
-Term ::= (Term) Factor TermMulFactor;
+Term ::= (Term) FactorList TermMulFactor;
 
-TermMulFactor ::= (MulopTerm) Mulop Factor TermMulFactor
+TermMulFactor ::= (MulopTerm) Mulop FactorList TermMulFactor
                   |
                   (NoMulopTerm) /* epsilon */
                   ;
                   
-                  
+FactorList ::= (FactorListMinus) MINUS Factor
+               |
+               (NoFactorListMinus) Factor
+               ;
+	
                   
 Factor ::= (FactorDesignator) DesignatorList FactorActPars
            |
@@ -285,9 +285,9 @@ Factor ::= (FactorDesignator) DesignatorList FactorActPars
            (FactorExpr) LPAREN ExprList RPAREN
            ;
 
-FactorActPars ::= (ActPars) LPAREN ActParsZero RPAREN
+FactorActPars ::= (ActParsFactor) LPAREN ActParsZero RPAREN
                   |
-                  (NoActPars) /* epsilon */
+                  (NoActParsFactor) /* epsilon */
                   ;
               
 
@@ -297,22 +297,18 @@ FactorExprAct ::= (ExprFact) LBRACKET ExprList RBRACKET
                   ;
 
 
+			
+				
 
 DesignatorList ::= (DesignatorList) Designator;
 
 Designator ::= (DesignatorIdent) IDENT
                |
-               (DesignatorDot) DesignatorDot
+               (DesignatorExpr) IDENT LBRACKET ExprList RBRACKET
                ;
 
-DesignatorDot ::= (DotDesignator) DOT IDENT
-				  | 
-				  (DotDesignatorBrackets) LBRACKET ExprList RBRACKET
-				  ;
 				  
-				  
-
-Label ::= (Label) IDENT;
+			  
 
 Assignop ::= (Assignop) ASSIGN;
 

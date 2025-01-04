@@ -5,11 +5,11 @@
 
 package rs.ac.bg.etf.pp1.ast;
 
-public class DesignatorActPars extends DesignatorStatement {
+public class ActParsFactor extends FactorActPars {
 
     private ActParsZero ActParsZero;
 
-    public DesignatorActPars (ActParsZero ActParsZero) {
+    public ActParsFactor (ActParsZero ActParsZero) {
         this.ActParsZero=ActParsZero;
         if(ActParsZero!=null) ActParsZero.setParent(this);
     }
@@ -43,7 +43,7 @@ public class DesignatorActPars extends DesignatorStatement {
     public String toString(String tab) {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
-        buffer.append("DesignatorActPars(\n");
+        buffer.append("ActParsFactor(\n");
 
         if(ActParsZero!=null)
             buffer.append(ActParsZero.toString("  "+tab));
@@ -52,7 +52,7 @@ public class DesignatorActPars extends DesignatorStatement {
         buffer.append("\n");
 
         buffer.append(tab);
-        buffer.append(") [DesignatorActPars]");
+        buffer.append(") [ActParsFactor]");
         return buffer.toString();
     }
 }

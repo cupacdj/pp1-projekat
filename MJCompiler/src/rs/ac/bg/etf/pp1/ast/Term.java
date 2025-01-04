@@ -1,30 +1,30 @@
 // generated with ast extension for cup
 // version 0.8
-// 3/0/2025 23:21:27
+// 4/0/2025 14:38:3
 
 
-package src.rs.ac.bg.etf.pp1.ast;
+package rs.ac.bg.etf.pp1.ast;
 
 public class Term implements SyntaxNode {
 
     private SyntaxNode parent;
     private int line;
-    private Factor Factor;
+    private FactorList FactorList;
     private TermMulFactor TermMulFactor;
 
-    public Term (Factor Factor, TermMulFactor TermMulFactor) {
-        this.Factor=Factor;
-        if(Factor!=null) Factor.setParent(this);
+    public Term (FactorList FactorList, TermMulFactor TermMulFactor) {
+        this.FactorList=FactorList;
+        if(FactorList!=null) FactorList.setParent(this);
         this.TermMulFactor=TermMulFactor;
         if(TermMulFactor!=null) TermMulFactor.setParent(this);
     }
 
-    public Factor getFactor() {
-        return Factor;
+    public FactorList getFactorList() {
+        return FactorList;
     }
 
-    public void setFactor(Factor Factor) {
-        this.Factor=Factor;
+    public void setFactorList(FactorList FactorList) {
+        this.FactorList=FactorList;
     }
 
     public TermMulFactor getTermMulFactor() {
@@ -56,18 +56,18 @@ public class Term implements SyntaxNode {
     }
 
     public void childrenAccept(Visitor visitor) {
-        if(Factor!=null) Factor.accept(visitor);
+        if(FactorList!=null) FactorList.accept(visitor);
         if(TermMulFactor!=null) TermMulFactor.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
-        if(Factor!=null) Factor.traverseTopDown(visitor);
+        if(FactorList!=null) FactorList.traverseTopDown(visitor);
         if(TermMulFactor!=null) TermMulFactor.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
-        if(Factor!=null) Factor.traverseBottomUp(visitor);
+        if(FactorList!=null) FactorList.traverseBottomUp(visitor);
         if(TermMulFactor!=null) TermMulFactor.traverseBottomUp(visitor);
         accept(visitor);
     }
@@ -77,8 +77,8 @@ public class Term implements SyntaxNode {
         buffer.append(tab);
         buffer.append("Term(\n");
 
-        if(Factor!=null)
-            buffer.append(Factor.toString("  "+tab));
+        if(FactorList!=null)
+            buffer.append(FactorList.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");
