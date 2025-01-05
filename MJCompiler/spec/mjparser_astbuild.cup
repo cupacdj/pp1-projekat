@@ -71,11 +71,12 @@ nonterminal ConstDeclListMore ConstDeclListMore;
 nonterminal VarDeclList VarDeclList;
 nonterminal VarDecl VarDecl;
 nonterminal VarDeclListMore VarDeclListMore;
+nonterminal VarDeclEmpty VarDeclEmpty;
 nonterminal MethodDeclList MethodDeclList;
 nonterminal MethodDecl MethodDecl;
 nonterminal MethodSignature MethodSignature;
 nonterminal MethodSignatureList MethodSignatureList;
-nonterminal VarDeclEmpty VarDeclEmpty;
+nonterminal MethodName MethodName;
 nonterminal FormParsList FormParsList;
 nonterminal FormParsListMore FormParsListMore;
 nonterminal FormParsListZero FormParsListZero;
@@ -105,6 +106,7 @@ nonterminal FactorExprAct FactorExprAct;
 nonterminal FactorList FactorList;
 nonterminal DesignatorList DesignatorList;
 nonterminal Designator Designator;
+nonterminal DesignatorArray DesignatorArray;
 nonterminal Assignop Assignop;
 nonterminal Addop Addop;
 nonterminal Mulop Mulop;
@@ -128,7 +130,11 @@ ConstVarDeclList ::= (CConstVarDeclList) ConstVarDeclList:C1 ConstDeclList:C2 {:
 
 ConstDeclList ::= (ConstDeclList) CONST Type:T1 ConstDecl:C2 ConstDeclListMore:C3 SEMI {: RESULT=new ConstDeclList(T1, C2, C3); RESULT.setLine(T1left); :};
 
-ConstDecl ::= (ConstDecl) IDENT:I1 ASSIGN Constant:C2 {: RESULT=new ConstDecl(I1, C2); RESULT.setLine(I1left); :};
+ConstDecl ::= (ConstDeclConst) IDENT:I1 ASSIGN Constant:C2 {: RESULT=new ConstDeclConst(I1, C2); RESULT.setLine(I1left); :}
+			  |
+			  (ErrorConstDecl) error:d
+              {: parser.report_error("Oporavak od greske u definiciji globalne promenjive (CONST). Linija: " + dleft, null); :} {: RESULT=new ErrorConstDecl(); :}
+              ;
 
 Constant ::= (NumConst) NUM:N1 {: RESULT=new NumConst(N1); RESULT.setLine(N1left); :} 
 			 | 
@@ -149,6 +155,9 @@ VarDeclList ::= (VarDeclList) Type:T1 VarDecl:V2 VarDeclListMore:V3 SEMI {: RESU
 VarDecl ::= (IdentVarDecl) IDENT:I1 {: RESULT=new IdentVarDecl(I1); RESULT.setLine(I1left); :}
 			| 
 			(BracketVarDecl) IDENT:I1 LBRACKET RBRACKET {: RESULT=new BracketVarDecl(I1); RESULT.setLine(I1left); :}
+			|
+			(ErrorVarDecl) error:l
+            {: parser.report_error("Oporavak od greske u definiciji globalne promenjive (NOCONST). Linija: " + lleft, null); :} {: RESULT=new ErrorVarDecl(); :}
 			;
 
 VarDeclListMore ::= (MoreVarDeclList) COMMA VarDecl:V1 VarDeclListMore:V2 {: RESULT=new MoreVarDeclList(V1, V2); RESULT.setLine(V1left); :}
@@ -168,10 +177,12 @@ MethodDecl ::= (MethodDecl) MethodSignatureList:M1 VarDeclEmpty:V2 LBRACE Statem
 
 MethodSignatureList ::= (MethodSignatureList) MethodSignature:M1 LPAREN FormParsListZero:F2 RPAREN {: RESULT=new MethodSignatureList(M1, F2); RESULT.setLine(M1left); :};
 
-MethodSignature ::= (TypeSignature) Type:T1 IDENT:I2 {: RESULT=new TypeSignature(T1, I2); RESULT.setLine(T1left); :}
+MethodSignature ::= (TypeSignature) Type:T1 MethodName:M2 {: RESULT=new TypeSignature(T1, M2); RESULT.setLine(T1left); :}
 					|
-					(VoidSignature) VOID IDENT:I1 {: RESULT=new VoidSignature(I1); RESULT.setLine(I1left); :}
+					(VoidSignature) VOID MethodName:M1 {: RESULT=new VoidSignature(M1); RESULT.setLine(M1left); :}
 					;
+					
+MethodName ::= (MethodName) IDENT:I1 {: RESULT=new MethodName(I1); RESULT.setLine(I1left); :};
 
 VarDeclEmpty ::= (EmptyVarDecl) VarDeclEmpty:V1 VarDeclList:V2 {: RESULT=new EmptyVarDecl(V1, V2); RESULT.setLine(V1left); :}
 				 |
@@ -197,6 +208,9 @@ FormParsListMore ::= (MoreFormParsList) COMMA FormPar:F1 VarDeclListMore:V2 {: R
 FormPar ::= (FormParVar) Type:T1 IDENT:I2 {: RESULT=new FormParVar(T1, I2); RESULT.setLine(T1left); :}  
 			|
 			(FormParArray) Type:T1 IDENT:I2 LBRACKET RBRACKET {: RESULT=new FormParArray(T1, I2); RESULT.setLine(T1left); :}
+			|
+			(ErrorFormPar) error:f
+            {: parser.report_error("Oporavak od greske u deklaraciji formalnog parametra funkcije. Linija: " + fleft, null); :} {: RESULT=new ErrorFormPar(); :}
 			; 
 
 
@@ -205,7 +219,7 @@ StatementList ::= (ListStatement) StatementList:S1 Statement:S2 {: RESULT=new Li
 				  (NoStatementList) {: RESULT=new NoStatementList(); :} /* epsilon */
 				  ;
 				  
-Statement ::= (SingleStatementDsg) DesignatorStatement:D1 SEMI {: RESULT=new SingleStatementDsg(D1); RESULT.setLine(D1left); :}
+Statement ::= (SingleStatementDsg) DesignatorStatementList:D1 SEMI {: RESULT=new SingleStatementDsg(D1); RESULT.setLine(D1left); :}
 					|
 					(StatementIf) IF LPAREN Condition:C1 RPAREN Statement:S2 StatementElse:S3 {: RESULT=new StatementIf(C1, S2, S3); RESULT.setLine(C1left); :}
 					|
@@ -247,6 +261,9 @@ DesignatorStatementList ::= (ListDesignatorStatement) Designator:D1 DesignatorSt
 
 DesignatorStatement ::= (DesignatorAssignExpr) Assignop:A1 ExprList:E2 {: RESULT=new DesignatorAssignExpr(A1, E2); RESULT.setLine(A1left); :}
                     	|
+                    	(ErrorDesignatorStatement) error:e
+                    	{: parser.report_error("Oporavak od greske u konstrukciji dodele. Linija: " + eleft, null); :} {: RESULT=new ErrorDesignatorStatement(); :}
+                    	|
                     	(DesignatorActPars) LPAREN ActParsZero:A1 RPAREN {: RESULT=new DesignatorActPars(A1); RESULT.setLine(A1left); :}
                      	|
                     	(DesignatorINC) INC {: RESULT=new DesignatorINC(); :}
@@ -270,7 +287,11 @@ ActParsZero ::= (ZeroActPars) ActParsList:A1 {: RESULT=new ZeroActPars(A1); RESU
 
 
 
-Condition ::= (Condition) CondTermList:C1 {: RESULT=new Condition(C1); RESULT.setLine(C1left); :};
+Condition ::= (ConditionC) CondTermList:C1 {: RESULT=new ConditionC(C1); RESULT.setLine(C1left); :}
+	          |
+              (ErrorCondition) error:c
+              {: parser.report_error("Oporavak od greske u logickom izrazu IF-a. Linija: " + cleft, null); :} {: RESULT=new ErrorCondition(); :}	
+              ;
 
 CondTermList ::= (JustCondTermList) CondTerm:C1 {: RESULT=new JustCondTermList(C1); RESULT.setLine(C1left); :}
                  |
@@ -353,11 +374,11 @@ DesignatorList ::= (DesignatorList) Designator:D1 {: RESULT=new DesignatorList(D
 
 Designator ::= (DesignatorIdent) IDENT:I1 {: RESULT=new DesignatorIdent(I1); RESULT.setLine(I1left); :}
                |
-               (DesignatorExpr) IDENT:I1 LBRACKET ExprList:E2 RBRACKET {: RESULT=new DesignatorExpr(I1, E2); RESULT.setLine(I1left); :}
+               (DesignatorExpr) DesignatorArray:D1 LBRACKET ExprList:E2 RBRACKET {: RESULT=new DesignatorExpr(D1, E2); RESULT.setLine(D1left); :}
                ;
 
 				  
-			  
+DesignatorArray ::= (DesignatorArray) IDENT:I1 {: RESULT=new DesignatorArray(I1); RESULT.setLine(I1left); :};		  
 
 Assignop ::= (Assignop) ASSIGN {: RESULT=new Assignop(); :};
 

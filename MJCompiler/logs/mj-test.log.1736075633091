@@ -1,0 +1,193 @@
+INFO  12:13:35,153 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  12:13:35,204 - #6 program
+INFO  12:13:35,205 - #2 MyApp
+INFO  12:13:35,205 - #9 const
+INFO  12:13:35,206 - #2 int
+INFO  12:13:35,206 - #2 pi
+INFO  12:13:35,207 - #11 =
+INFO  12:13:35,207 - #4 3
+INFO  12:13:35,207 - #10 ;
+INFO  12:13:35,208 - #2 int
+INFO  12:13:35,208 - #2 x
+INFO  12:13:35,209 - #10 ;
+INFO  12:13:35,209 - #7 {
+INFO  12:13:35,210 - #15 void
+INFO  12:13:35,210 - #2 main
+INFO  12:13:35,210 - #16 (
+INFO  12:13:35,211 - #17 )
+INFO  12:13:35,211 - #7 {
+INFO  12:13:35,212 - #2 x
+INFO  12:13:35,213 - #11 =
+INFO  12:13:35,213 - #4 5
+INFO  12:13:35,214 - #10 ;
+INFO  12:13:35,215 - #24 if
+INFO  12:13:35,216 - #16 (
+INFO  12:13:35,216 - #2 x
+INFO  12:13:35,216 - #40 >
+INFO  12:13:35,217 - #4 3
+INFO  12:13:35,218 - #17 )
+INFO  12:13:35,220 - #7 {
+INFO  12:13:35,220 - #32 print
+INFO  12:13:35,220 - #16 (
+INFO  12:13:35,220 - #2 x
+INFO  12:13:35,220 - #17 )
+INFO  12:13:35,220 - #10 ;
+INFO  12:13:35,220 - #8 }
+INFO  12:13:35,221 - #8 }
+INFO  12:13:35,221 - #8 }
+INFO  12:13:35,228 - Program(
+  ProgName(
+   MyApp
+  ) [ProgName]
+  VConstVarDeclList(
+    CConstVarDeclList(
+      NoConstVarDeclList(
+      ) [NoConstVarDeclList]
+      ConstDeclList(
+        Type(
+         int
+        ) [Type]
+        ConstDecl(
+         pi
+          NumConst(
+           3
+          ) [NumConst]
+        ) [ConstDecl]
+        NoMoreConstDeclList(
+        ) [NoMoreConstDeclList]
+      ) [ConstDeclList]
+    ) [CConstVarDeclList]
+    VarDeclList(
+      Type(
+       int
+      ) [Type]
+      IdentVarDecl(
+       x
+      ) [IdentVarDecl]
+      NoMoreVarDeclList(
+      ) [NoMoreVarDeclList]
+    ) [VarDeclList]
+  ) [VConstVarDeclList]
+  ListMethodDecl(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      MethodSignatureList(
+        VoidSignature(
+         main
+        ) [VoidSignature]
+        NoFormParsListZero(
+        ) [NoFormParsListZero]
+      ) [MethodSignatureList]
+      NoEmptyVarDecl(
+      ) [NoEmptyVarDecl]
+      ListStatement(
+        ListStatement(
+          NoStatementList(
+          ) [NoStatementList]
+          SingleStatementDsg(
+            ListDesignatorStatement(
+              DesignatorIdent(
+               x
+              ) [DesignatorIdent]
+              DesignatorAssignExpr(
+                Assignop(
+                ) [Assignop]
+                ListExpr(
+                  Term(
+                    NoFactorListMinus(
+                      FactorNum(
+                       5
+                      ) [FactorNum]
+                    ) [NoFactorListMinus]
+                    NoMulopTerm(
+                    ) [NoMulopTerm]
+                  ) [Term]
+                  NoAddopExprTerm(
+                  ) [NoAddopExprTerm]
+                ) [ListExpr]
+              ) [DesignatorAssignExpr]
+            ) [ListDesignatorStatement]
+          ) [SingleStatementDsg]
+        ) [ListStatement]
+        StatementIf(
+          Condition(
+            JustCondTermList(
+              CondTerm(
+                JustCondFactList(
+                  CondFactExprRelop(
+                    ListExpr(
+                      Term(
+                        NoFactorListMinus(
+                          FactorDesignator(
+                            DesignatorList(
+                              DesignatorIdent(
+                               x
+                              ) [DesignatorIdent]
+                            ) [DesignatorList]
+                            NoActParsFactor(
+                            ) [NoActParsFactor]
+                          ) [FactorDesignator]
+                        ) [NoFactorListMinus]
+                        NoMulopTerm(
+                        ) [NoMulopTerm]
+                      ) [Term]
+                      NoAddopExprTerm(
+                      ) [NoAddopExprTerm]
+                    ) [ListExpr]
+                    RelopGt(
+                    ) [RelopGt]
+                    ListExpr(
+                      Term(
+                        NoFactorListMinus(
+                          FactorNum(
+                           3
+                          ) [FactorNum]
+                        ) [NoFactorListMinus]
+                        NoMulopTerm(
+                        ) [NoMulopTerm]
+                      ) [Term]
+                      NoAddopExprTerm(
+                      ) [NoAddopExprTerm]
+                    ) [ListExpr]
+                  ) [CondFactExprRelop]
+                ) [JustCondFactList]
+              ) [CondTerm]
+            ) [JustCondTermList]
+          ) [Condition]
+          StatementRepeat(
+            ListStatement(
+              NoStatementList(
+              ) [NoStatementList]
+              StatementPrint1(
+                ListExpr(
+                  Term(
+                    NoFactorListMinus(
+                      FactorDesignator(
+                        DesignatorList(
+                          DesignatorIdent(
+                           x
+                          ) [DesignatorIdent]
+                        ) [DesignatorList]
+                        NoActParsFactor(
+                        ) [NoActParsFactor]
+                      ) [FactorDesignator]
+                    ) [NoFactorListMinus]
+                    NoMulopTerm(
+                    ) [NoMulopTerm]
+                  ) [Term]
+                  NoAddopExprTerm(
+                  ) [NoAddopExprTerm]
+                ) [ListExpr]
+              ) [StatementPrint1]
+            ) [ListStatement]
+          ) [StatementRepeat]
+          ElseStmtNo(
+          ) [ElseStmtNo]
+        ) [StatementIf]
+      ) [ListStatement]
+    ) [MethodDecl]
+  ) [ListMethodDecl]
+) [Program]
+INFO  12:13:35,229 - =====================================================================
+INFO  12:13:35,229 - Parsiranje uspesno zavrseno!

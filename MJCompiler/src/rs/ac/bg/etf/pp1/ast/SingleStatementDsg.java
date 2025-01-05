@@ -1,25 +1,25 @@
 // generated with ast extension for cup
 // version 0.8
-// 4/0/2025 23:33:36
+// 5/0/2025 13:3:22
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class SingleStatementDsg extends Statement {
 
-    private DesignatorStatement DesignatorStatement;
+    private DesignatorStatementList DesignatorStatementList;
 
-    public SingleStatementDsg (DesignatorStatement DesignatorStatement) {
-        this.DesignatorStatement=DesignatorStatement;
-        if(DesignatorStatement!=null) DesignatorStatement.setParent(this);
+    public SingleStatementDsg (DesignatorStatementList DesignatorStatementList) {
+        this.DesignatorStatementList=DesignatorStatementList;
+        if(DesignatorStatementList!=null) DesignatorStatementList.setParent(this);
     }
 
-    public DesignatorStatement getDesignatorStatement() {
-        return DesignatorStatement;
+    public DesignatorStatementList getDesignatorStatementList() {
+        return DesignatorStatementList;
     }
 
-    public void setDesignatorStatement(DesignatorStatement DesignatorStatement) {
-        this.DesignatorStatement=DesignatorStatement;
+    public void setDesignatorStatementList(DesignatorStatementList DesignatorStatementList) {
+        this.DesignatorStatementList=DesignatorStatementList;
     }
 
     public void accept(Visitor visitor) {
@@ -27,16 +27,16 @@ public class SingleStatementDsg extends Statement {
     }
 
     public void childrenAccept(Visitor visitor) {
-        if(DesignatorStatement!=null) DesignatorStatement.accept(visitor);
+        if(DesignatorStatementList!=null) DesignatorStatementList.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
-        if(DesignatorStatement!=null) DesignatorStatement.traverseTopDown(visitor);
+        if(DesignatorStatementList!=null) DesignatorStatementList.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
-        if(DesignatorStatement!=null) DesignatorStatement.traverseBottomUp(visitor);
+        if(DesignatorStatementList!=null) DesignatorStatementList.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -45,8 +45,8 @@ public class SingleStatementDsg extends Statement {
         buffer.append(tab);
         buffer.append("SingleStatementDsg(\n");
 
-        if(DesignatorStatement!=null)
-            buffer.append(DesignatorStatement.toString("  "+tab));
+        if(DesignatorStatementList!=null)
+            buffer.append(DesignatorStatementList.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

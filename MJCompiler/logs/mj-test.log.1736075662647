@@ -1,0 +1,20 @@
+INFO  12:13:53,126 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  12:13:53,183 - #6 program
+INFO  12:13:53,183 - #2 MyApp
+INFO  12:13:53,183 - #9 const
+INFO  12:13:53,184 - #2 int
+INFO  12:13:53,184 - #2 pi
+INFO  12:13:53,186 - #11 =
+INFO  12:13:53,186 - #4 3
+INFO  12:13:53,186 - #10 ;
+INFO  12:13:53,187 - #7 {
+INFO  12:13:53,187 - #15 void
+INFO  12:13:53,187 - #2 main
+INFO  12:13:53,189 - #16 (
+INFO  12:13:53,189 - #17 )
+INFO  12:13:53,189 - #7 {
+INFO  12:13:53,190 - #2 int
+INFO  12:13:53,190 - #2 x
+ERROR 12:13:53,190 - 
+Sintaksna greska na liniji 8
+ERROR 12:13:53,190 - Fatalna greska, parsiranje se ne moze nastaviti na liniji 8

@@ -1,0 +1,10 @@
+INFO  23:51:04,827 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  23:51:04,878 - #6 program
+INFO  23:51:04,879 - #2 Cupac
+INFO  23:51:04,879 - #7 {
+INFO  23:51:04,880 - #2 int
+INFO  23:51:04,881 - #2 a
+INFO  23:51:04,881 - #10 ;
+ERROR 23:51:04,882 - 
+Sintaksna greska na liniji 4
+ERROR 23:51:04,882 - Fatalna greska, parsiranje se ne moze nastaviti na liniji 4

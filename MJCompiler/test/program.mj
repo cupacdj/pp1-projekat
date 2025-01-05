@@ -1,13 +1,26 @@
-program Cupac
+//Test 302
 
-const int pi = 3;
-const char c = 'c';
-const bool b = true;
-int a;  // Declare variable 'a'
+program test302
+
+int i;
+bool ibool;
+
+int niz2;
+
+int niz[];
+int a;
+
 {
 
-    
+	int inkrement(int a, int inc) 
+		int pom; 
+	{
+		if(inc ,, 1) pom = 1;
+		else if(inc -- 2) pom = a;
 
-   b++;
+		return sum(a,pom);
+	}
 
+	
 }
+

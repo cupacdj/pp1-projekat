@@ -62,8 +62,8 @@ terminal UNION;
 
 nonterminal Program, ProgName, ConstVarDeclList, Type;
 nonterminal ConstDeclList, ConstDecl, Constant, ConstDeclListMore;
-nonterminal VarDeclList, VarDecl, VarDeclListMore;
-nonterminal MethodDeclList, MethodDecl, MethodSignature, MethodSignatureList, VarDeclEmpty;
+nonterminal VarDeclList, VarDecl, VarDeclListMore, VarDeclEmpty;
+nonterminal MethodDeclList, MethodDecl, MethodSignature, MethodSignatureList, MethodName;
 nonterminal FormParsList, FormParsListMore, FormParsListZero, FormPar;
 nonterminal StatementList, Statement, StatementElse;
 nonterminal DesignatorStatementList, DesignatorStatement, ConditionDesignator;
@@ -72,7 +72,7 @@ nonterminal Condition, CondTermList, CondTerm, CondFactList, CondFact,;
 nonterminal ExprList, ExprAddopTerm, ExprZero;
 nonterminal Term, TermMulFactor;
 nonterminal Factor, FactorActPars, FactorExprAct, FactorList;
-nonterminal DesignatorList, Designator;
+nonterminal DesignatorList, Designator, DesignatorArray;
 nonterminal Assignop, Addop, Mulop, Relop, Setop;
 
 precedence left ELSE;
@@ -92,7 +92,11 @@ ConstVarDeclList ::= (CConstVarDeclList) ConstVarDeclList ConstDeclList
 
 ConstDeclList ::= (ConstDeclList) CONST Type ConstDecl ConstDeclListMore SEMI;
 
-ConstDecl ::= (ConstDecl) IDENT ASSIGN Constant;
+ConstDecl ::= (ConstDeclConst) IDENT ASSIGN Constant
+			  |
+			  (ErrorConstDecl) error:d
+              {: parser.report_error("Oporavak od greske u definiciji globalne promenjive (CONST). Linija: " + dleft, null); :}
+              ;
 
 Constant ::= (NumConst) NUM 
 			 | 
@@ -113,6 +117,9 @@ VarDeclList ::= (VarDeclList) Type VarDecl VarDeclListMore SEMI;
 VarDecl ::= (IdentVarDecl) IDENT
 			| 
 			(BracketVarDecl) IDENT LBRACKET RBRACKET
+			|
+			(ErrorVarDecl) error:l
+            {: parser.report_error("Oporavak od greske u definiciji globalne promenjive (NOCONST). Linija: " + lleft, null); :}
 			;
 
 VarDeclListMore ::= (MoreVarDeclList) COMMA VarDecl VarDeclListMore
@@ -132,10 +139,12 @@ MethodDecl ::= (MethodDecl) MethodSignatureList VarDeclEmpty LBRACE StatementLis
 
 MethodSignatureList ::= (MethodSignatureList) MethodSignature LPAREN FormParsListZero RPAREN;
 
-MethodSignature ::= (TypeSignature) Type IDENT
+MethodSignature ::= (TypeSignature) Type MethodName
 					|
-					(VoidSignature) VOID IDENT
+					(VoidSignature) VOID MethodName
 					;
+					
+MethodName ::= (MethodName) IDENT;
 
 VarDeclEmpty ::= (EmptyVarDecl) VarDeclEmpty VarDeclList
 				 |
@@ -161,6 +170,9 @@ FormParsListMore ::= (MoreFormParsList) COMMA FormPar VarDeclListMore
 FormPar ::= (FormParVar) Type IDENT  
 			|
 			(FormParArray) Type IDENT LBRACKET RBRACKET
+			|
+			(ErrorFormPar) error:f
+            {: parser.report_error("Oporavak od greske u deklaraciji formalnog parametra funkcije. Linija: " + fleft, null); :}
 			; 
 
 
@@ -169,7 +181,7 @@ StatementList ::= (ListStatement) StatementList Statement
 				  (NoStatementList) /* epsilon */
 				  ;
 				  
-Statement ::= (SingleStatementDsg) DesignatorStatement SEMI
+Statement ::= (SingleStatementDsg) DesignatorStatementList SEMI
 					|
 					(StatementIf) IF LPAREN Condition RPAREN Statement StatementElse
 					|
@@ -211,6 +223,9 @@ DesignatorStatementList ::= (ListDesignatorStatement) Designator DesignatorState
 
 DesignatorStatement ::= (DesignatorAssignExpr) Assignop ExprList
                     	|
+                    	(ErrorDesignatorStatement) error:e
+                    	{: parser.report_error("Oporavak od greske u konstrukciji dodele. Linija: " + eleft, null); :}
+                    	|
                     	(DesignatorActPars) LPAREN ActParsZero RPAREN
                      	|
                     	(DesignatorINC) INC
@@ -234,7 +249,11 @@ ActParsZero ::= (ZeroActPars) ActParsList
 
 
 
-Condition ::= (Condition) CondTermList;
+Condition ::= (ConditionC) CondTermList
+	          |
+              (ErrorCondition) error:c
+              {: parser.report_error("Oporavak od greske u logickom izrazu IF-a. Linija: " + cleft, null); :}	
+              ;
 
 CondTermList ::= (JustCondTermList) CondTerm
                  |
@@ -317,11 +336,11 @@ DesignatorList ::= (DesignatorList) Designator;
 
 Designator ::= (DesignatorIdent) IDENT
                |
-               (DesignatorExpr) IDENT LBRACKET ExprList RBRACKET
+               (DesignatorExpr) DesignatorArray LBRACKET ExprList RBRACKET
                ;
 
 				  
-			  
+DesignatorArray ::= (DesignatorArray) IDENT;		  
 
 Assignop ::= (Assignop) ASSIGN;
 

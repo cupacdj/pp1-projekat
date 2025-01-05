@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 4/0/2025 23:33:36
+// 5/0/2025 13:3:22
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -26,6 +26,7 @@ public interface Visitor {
     public void visit(CondFactList CondFactList);
     public void visit(Designator Designator);
     public void visit(ExprAddopTerm ExprAddopTerm);
+    public void visit(Condition Condition);
     public void visit(FormParsListZero FormParsListZero);
     public void visit(DesignatorStatementList DesignatorStatementList);
     public void visit(FactorActPars FactorActPars);
@@ -36,8 +37,9 @@ public interface Visitor {
     public void visit(ConditionDesignator ConditionDesignator);
     public void visit(Statement Statement);
     public void visit(VarDecl VarDecl);
-    public void visit(VarDeclListMore VarDeclListMore);
+    public void visit(ConstDecl ConstDecl);
     public void visit(CondFact CondFact);
+    public void visit(VarDeclListMore VarDeclListMore);
     public void visit(FormPar FormPar);
     public void visit(MethodDeclList MethodDeclList);
     public void visit(VarDeclEmpty VarDeclEmpty);
@@ -54,6 +56,7 @@ public interface Visitor {
     public void visit(AddopMinus AddopMinus);
     public void visit(AddopPlus AddopPlus);
     public void visit(Assignop Assignop);
+    public void visit(DesignatorArray DesignatorArray);
     public void visit(DesignatorExpr DesignatorExpr);
     public void visit(DesignatorIdent DesignatorIdent);
     public void visit(DesignatorList DesignatorList);
@@ -85,7 +88,8 @@ public interface Visitor {
     public void visit(CondTerm CondTerm);
     public void visit(CondTermListOr CondTermListOr);
     public void visit(JustCondTermList JustCondTermList);
-    public void visit(Condition Condition);
+    public void visit(ErrorCondition ErrorCondition);
+    public void visit(ConditionC ConditionC);
     public void visit(NoZeroActPars NoZeroActPars);
     public void visit(ZeroActPars ZeroActPars);
     public void visit(NoActPars NoActPars);
@@ -94,6 +98,7 @@ public interface Visitor {
     public void visit(DesignatorDEC DesignatorDEC);
     public void visit(DesignatorINC DesignatorINC);
     public void visit(DesignatorActPars DesignatorActPars);
+    public void visit(ErrorDesignatorStatement ErrorDesignatorStatement);
     public void visit(DesignatorAssignExpr DesignatorAssignExpr);
     public void visit(DesignatorAssignopSetop DesignatorAssignopSetop);
     public void visit(ListDesignatorStatement ListDesignatorStatement);
@@ -114,6 +119,7 @@ public interface Visitor {
     public void visit(SingleStatementDsg SingleStatementDsg);
     public void visit(NoStatementList NoStatementList);
     public void visit(ListStatement ListStatement);
+    public void visit(ErrorFormPar ErrorFormPar);
     public void visit(FormParArray FormParArray);
     public void visit(FormParVar FormParVar);
     public void visit(NoMoreFormParsList NoMoreFormParsList);
@@ -123,6 +129,7 @@ public interface Visitor {
     public void visit(ZeroFormParsList ZeroFormParsList);
     public void visit(NoEmptyVarDecl NoEmptyVarDecl);
     public void visit(EmptyVarDecl EmptyVarDecl);
+    public void visit(MethodName MethodName);
     public void visit(VoidSignature VoidSignature);
     public void visit(TypeSignature TypeSignature);
     public void visit(MethodSignatureList MethodSignatureList);
@@ -132,6 +139,7 @@ public interface Visitor {
     public void visit(Type Type);
     public void visit(NoMoreVarDeclList NoMoreVarDeclList);
     public void visit(MoreVarDeclList MoreVarDeclList);
+    public void visit(ErrorVarDecl ErrorVarDecl);
     public void visit(BracketVarDecl BracketVarDecl);
     public void visit(IdentVarDecl IdentVarDecl);
     public void visit(VarDeclList VarDeclList);
@@ -140,7 +148,8 @@ public interface Visitor {
     public void visit(BoolConst BoolConst);
     public void visit(CharConst CharConst);
     public void visit(NumConst NumConst);
-    public void visit(ConstDecl ConstDecl);
+    public void visit(ErrorConstDecl ErrorConstDecl);
+    public void visit(ConstDeclConst ConstDeclConst);
     public void visit(ConstDeclList ConstDeclList);
     public void visit(NoConstVarDeclList NoConstVarDeclList);
     public void visit(VConstVarDeclList VConstVarDeclList);

@@ -1,24 +1,25 @@
 // generated with ast extension for cup
 // version 0.8
-// 4/0/2025 23:33:36
+// 5/0/2025 13:3:22
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class VoidSignature extends MethodSignature {
 
-    private String I1;
+    private MethodName MethodName;
 
-    public VoidSignature (String I1) {
-        this.I1=I1;
+    public VoidSignature (MethodName MethodName) {
+        this.MethodName=MethodName;
+        if(MethodName!=null) MethodName.setParent(this);
     }
 
-    public String getI1() {
-        return I1;
+    public MethodName getMethodName() {
+        return MethodName;
     }
 
-    public void setI1(String I1) {
-        this.I1=I1;
+    public void setMethodName(MethodName MethodName) {
+        this.MethodName=MethodName;
     }
 
     public void accept(Visitor visitor) {
@@ -26,13 +27,16 @@ public class VoidSignature extends MethodSignature {
     }
 
     public void childrenAccept(Visitor visitor) {
+        if(MethodName!=null) MethodName.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
+        if(MethodName!=null) MethodName.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
+        if(MethodName!=null) MethodName.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -41,7 +45,10 @@ public class VoidSignature extends MethodSignature {
         buffer.append(tab);
         buffer.append("VoidSignature(\n");
 
-        buffer.append(" "+tab+I1);
+        if(MethodName!=null)
+            buffer.append(MethodName.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
         buffer.append("\n");
 
         buffer.append(tab);

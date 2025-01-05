@@ -1,0 +1,211 @@
+INFO  12:29:45,205 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  12:29:45,259 - #6 program
+INFO  12:29:45,260 - #2 MyApp
+INFO  12:29:45,260 - #9 const
+INFO  12:29:45,261 - #2 int
+INFO  12:29:45,261 - #2 pi
+INFO  12:29:45,262 - #11 =
+INFO  12:29:45,262 - #4 3
+INFO  12:29:45,262 - #10 ;
+INFO  12:29:45,263 - #2 int
+INFO  12:29:45,263 - #2 x
+INFO  12:29:45,264 - #10 ;
+INFO  12:29:45,264 - #7 {
+INFO  12:29:45,265 - #15 void
+INFO  12:29:45,266 - #2 main
+INFO  12:29:45,266 - #16 (
+INFO  12:29:45,266 - #17 )
+INFO  12:29:45,267 - #7 {
+INFO  12:29:45,268 - #2 x
+INFO  12:29:45,269 - #11 =
+INFO  12:29:45,269 - #4 5
+INFO  12:29:45,270 - #10 ;
+INFO  12:29:45,272 - #2 x
+INFO  12:29:45,273 - #11 =
+INFO  12:29:45,273 - #35 *
+ERROR 12:29:45,273 - 
+Sintaksna greska na liniji 10
+INFO  12:29:45,273 - #10 ;
+INFO  12:29:45,273 - #24 if
+INFO  12:29:45,273 - #16 (
+INFO  12:29:45,274 - #2 x
+ERROR 12:29:45,278 - Oporavak od greske u DS. Linija: 10
+INFO  12:29:45,279 - #40 >
+INFO  12:29:45,281 - #4 3
+INFO  12:29:45,282 - #17 )
+INFO  12:29:45,284 - #7 {
+INFO  12:29:45,284 - #32 print
+INFO  12:29:45,284 - #16 (
+INFO  12:29:45,284 - #2 x
+INFO  12:29:45,284 - #17 )
+INFO  12:29:45,285 - #10 ;
+INFO  12:29:45,285 - #8 }
+INFO  12:29:45,285 - #8 }
+INFO  12:29:45,286 - #8 }
+INFO  12:29:45,293 - Program(
+  ProgName(
+   MyApp
+  ) [ProgName]
+  VConstVarDeclList(
+    CConstVarDeclList(
+      NoConstVarDeclList(
+      ) [NoConstVarDeclList]
+      ConstDeclList(
+        Type(
+         int
+        ) [Type]
+        ConstDecl(
+         pi
+          NumConst(
+           3
+          ) [NumConst]
+        ) [ConstDecl]
+        NoMoreConstDeclList(
+        ) [NoMoreConstDeclList]
+      ) [ConstDeclList]
+    ) [CConstVarDeclList]
+    VarDeclList(
+      Type(
+       int
+      ) [Type]
+      IdentVarDecl(
+       x
+      ) [IdentVarDecl]
+      NoMoreVarDeclList(
+      ) [NoMoreVarDeclList]
+    ) [VarDeclList]
+  ) [VConstVarDeclList]
+  ListMethodDecl(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      MethodSignatureList(
+        VoidSignature(
+         main
+        ) [VoidSignature]
+        NoFormParsListZero(
+        ) [NoFormParsListZero]
+      ) [MethodSignatureList]
+      NoEmptyVarDecl(
+      ) [NoEmptyVarDecl]
+      ListStatement(
+        ListStatement(
+          ListStatement(
+            NoStatementList(
+            ) [NoStatementList]
+            SingleStatementDsg(
+              ListDesignatorStatement(
+                DesignatorIdent(
+                 x
+                ) [DesignatorIdent]
+                DesignatorAssignExpr(
+                  Assignop(
+                  ) [Assignop]
+                  ListExpr(
+                    Term(
+                      NoFactorListMinus(
+                        FactorNum(
+                         5
+                        ) [FactorNum]
+                      ) [NoFactorListMinus]
+                      NoMulopTerm(
+                      ) [NoMulopTerm]
+                    ) [Term]
+                    NoAddopExprTerm(
+                    ) [NoAddopExprTerm]
+                  ) [ListExpr]
+                ) [DesignatorAssignExpr]
+              ) [ListDesignatorStatement]
+            ) [SingleStatementDsg]
+          ) [ListStatement]
+          SingleStatementDsg(
+            ListDesignatorStatement(
+              DesignatorIdent(
+               x
+              ) [DesignatorIdent]
+              ErrorDesignatorStatement(
+              ) [ErrorDesignatorStatement]
+            ) [ListDesignatorStatement]
+          ) [SingleStatementDsg]
+        ) [ListStatement]
+        StatementIf(
+          Condition(
+            JustCondTermList(
+              CondTerm(
+                JustCondFactList(
+                  CondFactExprRelop(
+                    ListExpr(
+                      Term(
+                        NoFactorListMinus(
+                          FactorDesignator(
+                            DesignatorList(
+                              DesignatorIdent(
+                               x
+                              ) [DesignatorIdent]
+                            ) [DesignatorList]
+                            NoActParsFactor(
+                            ) [NoActParsFactor]
+                          ) [FactorDesignator]
+                        ) [NoFactorListMinus]
+                        NoMulopTerm(
+                        ) [NoMulopTerm]
+                      ) [Term]
+                      NoAddopExprTerm(
+                      ) [NoAddopExprTerm]
+                    ) [ListExpr]
+                    RelopGt(
+                    ) [RelopGt]
+                    ListExpr(
+                      Term(
+                        NoFactorListMinus(
+                          FactorNum(
+                           3
+                          ) [FactorNum]
+                        ) [NoFactorListMinus]
+                        NoMulopTerm(
+                        ) [NoMulopTerm]
+                      ) [Term]
+                      NoAddopExprTerm(
+                      ) [NoAddopExprTerm]
+                    ) [ListExpr]
+                  ) [CondFactExprRelop]
+                ) [JustCondFactList]
+              ) [CondTerm]
+            ) [JustCondTermList]
+          ) [Condition]
+          StatementRepeat(
+            ListStatement(
+              NoStatementList(
+              ) [NoStatementList]
+              StatementPrint1(
+                ListExpr(
+                  Term(
+                    NoFactorListMinus(
+                      FactorDesignator(
+                        DesignatorList(
+                          DesignatorIdent(
+                           x
+                          ) [DesignatorIdent]
+                        ) [DesignatorList]
+                        NoActParsFactor(
+                        ) [NoActParsFactor]
+                      ) [FactorDesignator]
+                    ) [NoFactorListMinus]
+                    NoMulopTerm(
+                    ) [NoMulopTerm]
+                  ) [Term]
+                  NoAddopExprTerm(
+                  ) [NoAddopExprTerm]
+                ) [ListExpr]
+              ) [StatementPrint1]
+            ) [ListStatement]
+          ) [StatementRepeat]
+          ElseStmtNo(
+          ) [ElseStmtNo]
+        ) [StatementIf]
+      ) [ListStatement]
+    ) [MethodDecl]
+  ) [ListMethodDecl]
+) [Program]
+INFO  12:29:45,293 - =====================================================================
+ERROR 12:29:45,293 - Parsiranje NIJE uspesno zavrseno!

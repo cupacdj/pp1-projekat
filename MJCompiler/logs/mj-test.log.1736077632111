@@ -1,0 +1,11 @@
+INFO  12:43:52,665 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  12:43:52,693 - #6 program
+INFO  12:43:52,693 - #2 MyApp
+INFO  12:43:52,693 - #9 const
+INFO  12:43:52,694 - #2 int
+INFO  12:43:52,694 - #2 pi
+INFO  12:43:52,694 - #11 =
+INFO  12:43:52,694 - #35 *
+ERROR 12:43:52,695 - 
+Sintaksna greska na liniji 2
+ERROR 12:43:52,695 - Fatalna greska, parsiranje se ne moze nastaviti na liniji 2
