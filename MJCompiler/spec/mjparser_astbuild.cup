@@ -318,7 +318,7 @@ ExprList ::= (ListExpr) Term:T1 ExprAddopTerm:E2 {: RESULT=new ListExpr(T1, E2);
 			 ;
 
 
-ExprAddopTerm ::= (AddopExprTerm) Addop:A1 Term:T2 ExprAddopTerm:E3 {: RESULT=new AddopExprTerm(A1, T2, E3); RESULT.setLine(A1left); :}
+ExprAddopTerm ::= (AddopExprTerm) ExprAddopTerm:E1 Addop:A2 Term:T3 {: RESULT=new AddopExprTerm(E1, A2, T3); RESULT.setLine(E1left); :} 
                   |
                   (NoAddopExprTerm) {: RESULT=new NoAddopExprTerm(); :} /* epsilon */
                   ;
@@ -331,7 +331,7 @@ ExprZero ::= (ZeroExpr) ExprList:E1 {: RESULT=new ZeroExpr(E1); RESULT.setLine(E
 
 Term ::= (Term) FactorList:F1 TermMulFactor:T2 {: RESULT=new Term(F1, T2); RESULT.setLine(F1left); :};
 
-TermMulFactor ::= (MulopTerm) Mulop:M1 FactorList:F2 TermMulFactor:T3 {: RESULT=new MulopTerm(M1, F2, T3); RESULT.setLine(M1left); :}
+TermMulFactor ::= (MulopTerm) TermMulFactor:T1 Mulop:M2 FactorList:F3 {: RESULT=new MulopTerm(T1, M2, F3); RESULT.setLine(T1left); :} 
                   |
                   (NoMulopTerm) {: RESULT=new NoMulopTerm(); :} /* epsilon */
                   ;

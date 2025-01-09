@@ -280,7 +280,7 @@ ExprList ::= (ListExpr) Term ExprAddopTerm
 			 ;
 
 
-ExprAddopTerm ::= (AddopExprTerm) Addop Term ExprAddopTerm
+ExprAddopTerm ::= (AddopExprTerm) ExprAddopTerm Addop Term 
                   |
                   (NoAddopExprTerm) /* epsilon */
                   ;
@@ -293,7 +293,7 @@ ExprZero ::= (ZeroExpr) ExprList
 
 Term ::= (Term) FactorList TermMulFactor;
 
-TermMulFactor ::= (MulopTerm) Mulop FactorList TermMulFactor
+TermMulFactor ::= (MulopTerm) TermMulFactor Mulop FactorList 
                   |
                   (NoMulopTerm) /* epsilon */
                   ;

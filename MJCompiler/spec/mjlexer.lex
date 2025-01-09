@@ -38,26 +38,39 @@ import java_cup.runtime.Symbol;
 "\f" 	{ }
 
 "program"   { return new_symbol(sym.PROG, yytext()); }
+"return"    { return new_symbol(sym.RETURN, yytext()); }
+"print"     { return new_symbol(sym.PRINT, yytext()); }
+"const"     { return new_symbol(sym.CONST, yytext()); }
+"new"       { return new_symbol(sym.NEW, yytext()); }
+"read"      { return new_symbol(sym.READ, yytext()); }
+"void"      { return new_symbol(sym.VOID, yytext()); }
 "break"     { return new_symbol(sym.BREAK, yytext()); }
 "else"      { return new_symbol(sym.ELSE, yytext()); }
-"const"     { return new_symbol(sym.CONST, yytext()); }
 "if"        { return new_symbol(sym.IF, yytext()); }
-"new"       { return new_symbol(sym.NEW, yytext()); }
-"print"     { return new_symbol(sym.PRINT, yytext()); }
-"read"      { return new_symbol(sym.READ, yytext()); }
-"return"    { return new_symbol(sym.RETURN, yytext()); }
-"void"      { return new_symbol(sym.VOID, yytext()); }
-"continue"  { return new_symbol(sym.CONTINUE, yytext()); }
-"union"     { return new_symbol(sym.UNION, yytext()); }
 "do"        { return new_symbol(sym.DO, yytext()); }
 "while"     { return new_symbol(sym.WHILE, yytext()); }
+"continue"  { return new_symbol(sym.CONTINUE, yytext()); }
+"union"     { return new_symbol(sym.UNION, yytext()); }
 "map"       { return new_symbol(sym.MAP, yytext()); }
 
 "+"         { return new_symbol(sym.PLUS, yytext()); }
+"++"        { return new_symbol(sym.INC, yytext()); }
 "-"         { return new_symbol(sym.MINUS, yytext()); }
+"--"        { return new_symbol(sym.DEC, yytext()); }
 "*"         { return new_symbol(sym.MUL, yytext()); }
 "/"         { return new_symbol(sym.DIV, yytext()); }
 "%"         { return new_symbol(sym.MOD, yytext()); }
+"="         { return new_symbol(sym.ASSIGN, yytext()); }
+";" 		{ return new_symbol(sym.SEMI, yytext()); }
+"," 		{ return new_symbol(sym.COMMA, yytext()); }
+
+"(" 		{ return new_symbol(sym.LPAREN, yytext()); }
+")" 		{ return new_symbol(sym.RPAREN, yytext()); }
+"{" 		{ return new_symbol(sym.LBRACE, yytext()); }
+"}" 		{ return new_symbol(sym.RBRACE, yytext()); }
+"[" 		{ return new_symbol(sym.LBRACKET, yytext()); }
+"]" 		{ return new_symbol(sym.RBRACKET, yytext()); }
+
 "=="        { return new_symbol(sym.EQ, yytext()); }
 "!="        { return new_symbol(sym.NEQ, yytext()); }
 ">"         { return new_symbol(sym.GT, yytext()); }
@@ -66,18 +79,6 @@ import java_cup.runtime.Symbol;
 "<="        { return new_symbol(sym.LTE, yytext()); }
 "&&"        { return new_symbol(sym.AND, yytext()); }
 "||"        { return new_symbol(sym.OR, yytext()); }
-"="         { return new_symbol(sym.ASSIGN, yytext()); }
-"++"        { return new_symbol(sym.INC, yytext()); }
-"--"        { return new_symbol(sym.DEC, yytext()); }
-"[" 		{ return new_symbol(sym.LBRACKET, yytext()); }
-"]" 		{ return new_symbol(sym.RBRACKET, yytext()); }
-"(" 		{ return new_symbol(sym.LPAREN, yytext()); }
-")" 		{ return new_symbol(sym.RPAREN, yytext()); }
-"{" 		{ return new_symbol(sym.LBRACE, yytext()); }
-"}" 		{ return new_symbol(sym.RBRACE, yytext()); }
-";" 		{ return new_symbol(sym.SEMI, yytext()); }
-"," 		{ return new_symbol(sym.COMMA, yytext()); }
-
 
 
 "//" 			 { yybegin(COMMENT); }

@@ -1,26 +1,13 @@
-//Test 302
+program Cupac
 
-program test302
+const int pi = 3;
 
-int i;
-bool ibool;
-
-int niz2;
-
-int niz[];
-int a;
+chaer carr[];
 
 {
-
-	int inkrement(int a, int inc) 
-		int pom; 
-	{
-		if(inc ,, 1) pom = 1;
-		else if(inc -- 2) pom = a;
-
-		return sum(a,pom);
+	
+	void main() {
+		a = b;
 	}
 
-	
 }
-
