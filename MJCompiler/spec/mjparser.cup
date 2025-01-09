@@ -116,7 +116,7 @@ VarDeclList ::= (VarDeclList) Type VarDecl VarDeclListMore SEMI;
                     
 VarDecl ::= (IdentVarDecl) IDENT
 			| 
-			(BracketVarDecl) IDENT LBRACKET RBRACKET
+			(ArrayVarDecl) IDENT LBRACKET RBRACKET
 			|
 			(ErrorVarDecl) error:l
             {: parser.report_error("Oporavak od greske u definiciji globalne promenjive (NOCONST). Linija: " + lleft, null); :}
@@ -139,12 +139,11 @@ MethodDecl ::= (MethodDecl) MethodSignatureList VarDeclEmpty LBRACE StatementLis
 
 MethodSignatureList ::= (MethodSignatureList) MethodSignature LPAREN FormParsListZero RPAREN;
 
-MethodSignature ::= (TypeSignature) Type MethodName
+MethodSignature ::= (TypeSignature) Type IDENT
 					|
-					(VoidSignature) VOID MethodName
+					(VoidSignature) VOID IDENT
 					;
 					
-MethodName ::= (MethodName) IDENT;
 
 VarDeclEmpty ::= (EmptyVarDecl) VarDeclEmpty VarDeclList
 				 |

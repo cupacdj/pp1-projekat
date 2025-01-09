@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 8/0/2025 14:29:26
+// 9/0/2025 15:0:29
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -26,6 +26,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(CondFactList CondFactList) { }
     public void visit(Designator Designator) { }
     public void visit(ExprAddopTerm ExprAddopTerm) { }
+    public void visit(MethodName MethodName) { }
     public void visit(Condition Condition) { }
     public void visit(FormParsListZero FormParsListZero) { }
     public void visit(DesignatorStatementList DesignatorStatementList) { }
@@ -129,7 +130,6 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(ZeroFormParsList ZeroFormParsList) { visit(); }
     public void visit(NoEmptyVarDecl NoEmptyVarDecl) { visit(); }
     public void visit(EmptyVarDecl EmptyVarDecl) { visit(); }
-    public void visit(MethodName MethodName) { visit(); }
     public void visit(VoidSignature VoidSignature) { visit(); }
     public void visit(TypeSignature TypeSignature) { visit(); }
     public void visit(MethodSignatureList MethodSignatureList) { visit(); }
@@ -140,7 +140,7 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(NoMoreVarDeclList NoMoreVarDeclList) { visit(); }
     public void visit(MoreVarDeclList MoreVarDeclList) { visit(); }
     public void visit(ErrorVarDecl ErrorVarDecl) { visit(); }
-    public void visit(BracketVarDecl BracketVarDecl) { visit(); }
+    public void visit(ArrayVarDecl ArrayVarDecl) { visit(); }
     public void visit(IdentVarDecl IdentVarDecl) { visit(); }
     public void visit(VarDeclList VarDeclList) { visit(); }
     public void visit(NoMoreConstDeclList NoMoreConstDeclList) { visit(); }

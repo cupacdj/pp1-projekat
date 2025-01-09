@@ -1,30 +1,42 @@
-INFO  14:30:31,064 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
-INFO  14:30:31,111 - #6 program
-INFO  14:30:31,112 - #2 Cupac
-INFO  14:30:31,112 - #9 const
-INFO  14:30:31,113 - #2 int
-INFO  14:30:31,113 - #2 pi
-INFO  14:30:31,113 - #11 =
-INFO  14:30:31,113 - #4 3
-INFO  14:30:31,114 - #10 ;
-INFO  14:30:31,114 - #2 chaer
-INFO  14:30:31,115 - #2 carr
-INFO  14:30:31,115 - #13 [
-INFO  14:30:31,115 - #14 ]
-INFO  14:30:31,115 - #10 ;
-INFO  14:30:31,116 - #7 {
-INFO  14:30:31,117 - #15 void
-INFO  14:30:31,117 - #2 main
-INFO  14:30:31,117 - #16 (
-INFO  14:30:31,118 - #17 )
-INFO  14:30:31,119 - #7 {
-INFO  14:30:31,119 - #2 a
-INFO  14:30:31,120 - #11 =
-INFO  14:30:31,121 - #2 b
-INFO  14:30:31,139 - #10 ;
-INFO  14:30:31,142 - #8 }
-INFO  14:30:31,143 - #8 }
-INFO  14:30:31,151 - Program(
+INFO  15:30:12,695 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  15:30:12,746 - #6 program
+INFO  15:30:12,746 - #2 Cupac
+INFO  15:30:12,746 - #9 const
+INFO  15:30:12,747 - #2 int
+INFO  15:30:12,748 - #2 pi
+INFO  15:30:12,748 - #11 =
+INFO  15:30:12,748 - #4 3
+INFO  15:30:12,749 - #12 ,
+INFO  15:30:12,749 - #2 g
+INFO  15:30:12,749 - #11 =
+INFO  15:30:12,749 - #4 11
+INFO  15:30:12,749 - #10 ;
+INFO  15:30:12,750 - #2 char
+INFO  15:30:12,750 - #2 x
+INFO  15:30:12,750 - #12 ,
+INFO  15:30:12,751 - #2 y
+INFO  15:30:12,751 - #13 [
+INFO  15:30:12,751 - #14 ]
+INFO  15:30:12,751 - #10 ;
+INFO  15:30:12,752 - #7 {
+INFO  15:30:12,753 - #15 void
+INFO  15:30:12,753 - #2 maiN
+INFO  15:30:12,772 - #16 (
+INFO  15:30:12,772 - #17 )
+INFO  15:30:12,773 - #2 int
+INFO  15:30:12,774 - #2 a
+INFO  15:30:12,774 - #12 ,
+INFO  15:30:12,774 - #2 b
+INFO  15:30:12,774 - #13 [
+INFO  15:30:12,774 - #14 ]
+INFO  15:30:12,775 - #10 ;
+INFO  15:30:12,775 - #2 int
+INFO  15:30:12,775 - #2 x
+INFO  15:30:12,776 - #10 ;
+INFO  15:30:12,776 - #7 {
+INFO  15:30:12,776 - #8 }
+INFO  15:30:12,776 - #8 }
+INFO  15:30:12,782 - Program(
   ProgName(
    Cupac
   ) [ProgName]
@@ -42,19 +54,32 @@ INFO  14:30:31,151 - Program(
            3
           ) [NumConst]
         ) [ConstDeclConst]
-        NoMoreConstDeclList(
-        ) [NoMoreConstDeclList]
+        MoreConstDeclList(
+          ConstDeclConst(
+           g
+            NumConst(
+             11
+            ) [NumConst]
+          ) [ConstDeclConst]
+          NoMoreConstDeclList(
+          ) [NoMoreConstDeclList]
+        ) [MoreConstDeclList]
       ) [ConstDeclList]
     ) [CConstVarDeclList]
     VarDeclList(
       Type(
-       chaer
+       char
       ) [Type]
-      BracketVarDecl(
-       carr
-      ) [BracketVarDecl]
-      NoMoreVarDeclList(
-      ) [NoMoreVarDeclList]
+      IdentVarDecl(
+       x
+      ) [IdentVarDecl]
+      MoreVarDeclList(
+        ArrayVarDecl(
+         y
+        ) [ArrayVarDecl]
+        NoMoreVarDeclList(
+        ) [NoMoreVarDeclList]
+      ) [MoreVarDeclList]
     ) [VarDeclList]
   ) [VConstVarDeclList]
   ListMethodDecl(
@@ -63,51 +88,46 @@ INFO  14:30:31,151 - Program(
     MethodDecl(
       MethodSignatureList(
         VoidSignature(
-          MethodName(
-           main
-          ) [MethodName]
+         maiN
         ) [VoidSignature]
         NoFormParsListZero(
         ) [NoFormParsListZero]
       ) [MethodSignatureList]
-      NoEmptyVarDecl(
-      ) [NoEmptyVarDecl]
-      ListStatement(
-        NoStatementList(
-        ) [NoStatementList]
-        SingleStatementDsg(
-          ListDesignatorStatement(
-            DesignatorIdent(
+      EmptyVarDecl(
+        EmptyVarDecl(
+          NoEmptyVarDecl(
+          ) [NoEmptyVarDecl]
+          VarDeclList(
+            Type(
+             int
+            ) [Type]
+            IdentVarDecl(
              a
-            ) [DesignatorIdent]
-            DesignatorAssignExpr(
-              Assignop(
-              ) [Assignop]
-              ListExpr(
-                Term(
-                  NoFactorListMinus(
-                    FactorDesignator(
-                      DesignatorList(
-                        DesignatorIdent(
-                         b
-                        ) [DesignatorIdent]
-                      ) [DesignatorList]
-                      NoActParsFactor(
-                      ) [NoActParsFactor]
-                    ) [FactorDesignator]
-                  ) [NoFactorListMinus]
-                  NoMulopTerm(
-                  ) [NoMulopTerm]
-                ) [Term]
-                NoAddopExprTerm(
-                ) [NoAddopExprTerm]
-              ) [ListExpr]
-            ) [DesignatorAssignExpr]
-          ) [ListDesignatorStatement]
-        ) [SingleStatementDsg]
-      ) [ListStatement]
+            ) [IdentVarDecl]
+            MoreVarDeclList(
+              ArrayVarDecl(
+               b
+              ) [ArrayVarDecl]
+              NoMoreVarDeclList(
+              ) [NoMoreVarDeclList]
+            ) [MoreVarDeclList]
+          ) [VarDeclList]
+        ) [EmptyVarDecl]
+        VarDeclList(
+          Type(
+           int
+          ) [Type]
+          IdentVarDecl(
+           x
+          ) [IdentVarDecl]
+          NoMoreVarDeclList(
+          ) [NoMoreVarDeclList]
+        ) [VarDeclList]
+      ) [EmptyVarDecl]
+      NoStatementList(
+      ) [NoStatementList]
     ) [MethodDecl]
   ) [ListMethodDecl]
 ) [Program]
-INFO  14:30:31,152 - =====================================================================
-INFO  14:30:31,152 - Parsiranje uspesno zavrseno!
+INFO  15:30:12,783 - =====================================================================
+INFO  15:30:12,794 - Parsiranje uspesno zavrseno!

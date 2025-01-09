@@ -1,0 +1,114 @@
+INFO  12:34:15,193 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  12:34:15,245 - #6 program
+INFO  12:34:15,245 - #2 Cupac
+INFO  12:34:15,245 - #9 const
+INFO  12:34:15,246 - #2 int
+INFO  12:34:15,246 - #2 pi
+INFO  12:34:15,247 - #11 =
+INFO  12:34:15,247 - #4 3
+INFO  12:34:15,247 - #10 ;
+INFO  12:34:15,248 - #2 chaer
+INFO  12:34:15,249 - #2 carr
+INFO  12:34:15,249 - #13 [
+INFO  12:34:15,249 - #14 ]
+INFO  12:34:15,249 - #10 ;
+INFO  12:34:15,249 - #7 {
+INFO  12:34:15,250 - #15 void
+INFO  12:34:15,251 - #2 main
+INFO  12:34:15,251 - #16 (
+INFO  12:34:15,252 - #17 )
+INFO  12:34:15,252 - #7 {
+INFO  12:34:15,253 - #2 a
+INFO  12:34:15,254 - #11 =
+INFO  12:34:15,255 - #2 b
+INFO  12:34:15,273 - #10 ;
+INFO  12:34:15,278 - #8 }
+INFO  12:34:15,278 - #8 }
+INFO  12:34:15,285 - Program(
+  ProgName(
+   Cupac
+  ) [ProgName]
+  VConstVarDeclList(
+    CConstVarDeclList(
+      NoConstVarDeclList(
+      ) [NoConstVarDeclList]
+      ConstDeclList(
+        Type(
+         int
+        ) [Type]
+        ConstDeclConst(
+         pi
+          NumConst(
+           3
+          ) [NumConst]
+        ) [ConstDeclConst]
+        NoMoreConstDeclList(
+        ) [NoMoreConstDeclList]
+      ) [ConstDeclList]
+    ) [CConstVarDeclList]
+    VarDeclList(
+      Type(
+       chaer
+      ) [Type]
+      BracketVarDecl(
+       carr
+      ) [BracketVarDecl]
+      NoMoreVarDeclList(
+      ) [NoMoreVarDeclList]
+    ) [VarDeclList]
+  ) [VConstVarDeclList]
+  ListMethodDecl(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      MethodSignatureList(
+        VoidSignature(
+          MethodName(
+           main
+          ) [MethodName]
+        ) [VoidSignature]
+        NoFormParsListZero(
+        ) [NoFormParsListZero]
+      ) [MethodSignatureList]
+      NoEmptyVarDecl(
+      ) [NoEmptyVarDecl]
+      ListStatement(
+        NoStatementList(
+        ) [NoStatementList]
+        SingleStatementDsg(
+          ListDesignatorStatement(
+            DesignatorIdent(
+             a
+            ) [DesignatorIdent]
+            DesignatorAssignExpr(
+              Assignop(
+              ) [Assignop]
+              ListExpr(
+                Term(
+                  NoFactorListMinus(
+                    FactorDesignator(
+                      DesignatorList(
+                        DesignatorIdent(
+                         b
+                        ) [DesignatorIdent]
+                      ) [DesignatorList]
+                      NoActParsFactor(
+                      ) [NoActParsFactor]
+                    ) [FactorDesignator]
+                  ) [NoFactorListMinus]
+                  NoMulopTerm(
+                  ) [NoMulopTerm]
+                ) [Term]
+                NoAddopExprTerm(
+                ) [NoAddopExprTerm]
+              ) [ListExpr]
+            ) [DesignatorAssignExpr]
+          ) [ListDesignatorStatement]
+        ) [SingleStatementDsg]
+      ) [ListStatement]
+    ) [MethodDecl]
+  ) [ListMethodDecl]
+) [Program]
+INFO  12:34:15,285 - =====================================================================
+INFO  12:34:15,293 - Hello program na liniji 1
+INFO  12:34:15,294 - Parsiranje uspesno zavrseno!

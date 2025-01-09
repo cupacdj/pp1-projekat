@@ -1,0 +1,61 @@
+INFO  13:06:50,286 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  13:06:50,332 - #6 program
+INFO  13:06:50,332 - #2 Cupac
+INFO  13:06:50,332 - #9 const
+INFO  13:06:50,334 - #2 byte
+INFO  13:06:50,334 - #2 pi
+INFO  13:06:50,335 - #11 =
+INFO  13:06:50,335 - #4 3
+INFO  13:06:50,335 - #10 ;
+INFO  13:06:50,336 - #7 {
+INFO  13:06:50,336 - #15 void
+INFO  13:06:50,337 - #2 main
+INFO  13:06:50,337 - #16 (
+INFO  13:06:50,337 - #17 )
+INFO  13:06:50,338 - #7 {
+INFO  13:06:50,339 - #8 }
+INFO  13:06:50,339 - #8 }
+INFO  13:06:50,342 - Program(
+  ProgName(
+   Cupac
+  ) [ProgName]
+  CConstVarDeclList(
+    NoConstVarDeclList(
+    ) [NoConstVarDeclList]
+    ConstDeclList(
+      Type(
+       byte
+      ) [Type]
+      ConstDeclConst(
+       pi
+        NumConst(
+         3
+        ) [NumConst]
+      ) [ConstDeclConst]
+      NoMoreConstDeclList(
+      ) [NoMoreConstDeclList]
+    ) [ConstDeclList]
+  ) [CConstVarDeclList]
+  ListMethodDecl(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      MethodSignatureList(
+        VoidSignature(
+          MethodName(
+           main
+          ) [MethodName]
+        ) [VoidSignature]
+        NoFormParsListZero(
+        ) [NoFormParsListZero]
+      ) [MethodSignatureList]
+      NoEmptyVarDecl(
+      ) [NoEmptyVarDecl]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+  ) [ListMethodDecl]
+) [Program]
+INFO  13:06:50,343 - =====================================================================
+ERROR 13:06:50,351 - GRESKA: Nije pronadjen tip podatka - byte na liniji 3
+INFO  13:06:50,352 - Parsiranje uspesno zavrseno!

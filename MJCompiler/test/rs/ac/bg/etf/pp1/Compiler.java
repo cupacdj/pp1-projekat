@@ -7,13 +7,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 
-import java_cup.runtime.Symbol;
+import java_cup.runtime.*;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
-import rs.ac.bg.etf.pp1.ast.Program;
+import rs.ac.bg.etf.pp1.ast.*;
 import rs.ac.bg.etf.pp1.util.Log4JUtils;
+import rs.etf.pp1.symboltable.*;
+import rs.etf.pp1.symboltable.concepts.Obj;
+import rs.etf.pp1.symboltable.concepts.Struct;
 
 public class Compiler {
 
@@ -46,9 +49,24 @@ public class Compiler {
 			// ispis AST
 			log.info(prog.toString(""));
 			log.info("=====================================================================");
+			
+			// inicijalizacija tabele simbola 
+			Tab.init();
+			Struct boolType = new Struct(Struct.Bool);
+			Obj boolObj = Tab.insert(Obj.Type, "bool", boolType);
+			boolObj.setAdr(-1);
+			boolObj.setLevel(-1);
+			
+			
+			// Semanticka analiza 
+			SemanticPass sp = new SemanticPass();
+			prog.traverseBottomUp(sp);
+			
+			// Ispis tabele simbola 
+			Tab.dump();
 
 			
-			if(!p.errorDetected){
+			if(!p.errorDetected & sp.passed()){
 				log.info("Parsiranje uspesno zavrseno!");
 			}else{
 				log.error("Parsiranje NIJE uspesno zavrseno!");

@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 8/0/2025 14:29:26
+// 9/0/2025 15:0:29
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,13 +8,12 @@ package rs.ac.bg.etf.pp1.ast;
 public class TypeSignature extends MethodSignature {
 
     private Type Type;
-    private MethodName MethodName;
+    private String I2;
 
-    public TypeSignature (Type Type, MethodName MethodName) {
+    public TypeSignature (Type Type, String I2) {
         this.Type=Type;
         if(Type!=null) Type.setParent(this);
-        this.MethodName=MethodName;
-        if(MethodName!=null) MethodName.setParent(this);
+        this.I2=I2;
     }
 
     public Type getType() {
@@ -25,12 +24,12 @@ public class TypeSignature extends MethodSignature {
         this.Type=Type;
     }
 
-    public MethodName getMethodName() {
-        return MethodName;
+    public String getI2() {
+        return I2;
     }
 
-    public void setMethodName(MethodName MethodName) {
-        this.MethodName=MethodName;
+    public void setI2(String I2) {
+        this.I2=I2;
     }
 
     public void accept(Visitor visitor) {
@@ -39,18 +38,15 @@ public class TypeSignature extends MethodSignature {
 
     public void childrenAccept(Visitor visitor) {
         if(Type!=null) Type.accept(visitor);
-        if(MethodName!=null) MethodName.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
         if(Type!=null) Type.traverseTopDown(visitor);
-        if(MethodName!=null) MethodName.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
         if(Type!=null) Type.traverseBottomUp(visitor);
-        if(MethodName!=null) MethodName.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -65,10 +61,7 @@ public class TypeSignature extends MethodSignature {
             buffer.append(tab+"  null");
         buffer.append("\n");
 
-        if(MethodName!=null)
-            buffer.append(MethodName.toString("  "+tab));
-        else
-            buffer.append(tab+"  null");
+        buffer.append(" "+tab+I2);
         buffer.append("\n");
 
         buffer.append(tab);

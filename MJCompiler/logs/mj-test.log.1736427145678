@@ -1,0 +1,81 @@
+INFO  13:51:14,974 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  13:51:15,002 - #6 program
+INFO  13:51:15,002 - #2 Cupac
+INFO  13:51:15,002 - #9 const
+INFO  13:51:15,003 - #2 int
+INFO  13:51:15,003 - #2 pi
+INFO  13:51:15,003 - #11 =
+INFO  13:51:15,004 - #4 3
+INFO  13:51:15,004 - #10 ;
+INFO  13:51:15,005 - #9 const
+INFO  13:51:15,005 - #2 int
+INFO  13:51:15,005 - #2 pi
+INFO  13:51:15,005 - #11 =
+INFO  13:51:15,005 - #4 33
+INFO  13:51:15,005 - #10 ;
+INFO  13:51:15,005 - #10 ;
+ERROR 13:51:15,005 - 
+Sintaksna greska na liniji 4
+INFO  13:51:15,006 - #7 {
+INFO  13:51:15,006 - #15 void
+INFO  13:51:15,006 - #2 main
+ERROR 13:51:15,008 - Oporavak od greske u definiciji globalne promenjive (CONST). Linija: 4
+INFO  13:51:15,028 - #16 (
+INFO  13:51:15,029 - #17 )
+INFO  13:51:15,030 - #7 {
+INFO  13:51:15,031 - #8 }
+INFO  13:51:15,031 - #8 }
+INFO  13:51:15,035 - Program(
+  ProgName(
+   Cupac
+  ) [ProgName]
+  CConstVarDeclList(
+    CConstVarDeclList(
+      NoConstVarDeclList(
+      ) [NoConstVarDeclList]
+      ConstDeclList(
+        Type(
+         int
+        ) [Type]
+        ConstDeclConst(
+         pi
+          NumConst(
+           3
+          ) [NumConst]
+        ) [ConstDeclConst]
+        NoMoreConstDeclList(
+        ) [NoMoreConstDeclList]
+      ) [ConstDeclList]
+    ) [CConstVarDeclList]
+    ConstDeclList(
+      Type(
+       int
+      ) [Type]
+      ErrorConstDecl(
+      ) [ErrorConstDecl]
+      NoMoreConstDeclList(
+      ) [NoMoreConstDeclList]
+    ) [ConstDeclList]
+  ) [CConstVarDeclList]
+  ListMethodDecl(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      MethodSignatureList(
+        VoidSignature(
+          MethodName(
+           main
+          ) [MethodName]
+        ) [VoidSignature]
+        NoFormParsListZero(
+        ) [NoFormParsListZero]
+      ) [MethodSignatureList]
+      NoEmptyVarDecl(
+      ) [NoEmptyVarDecl]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+  ) [ListMethodDecl]
+) [Program]
+INFO  13:51:15,035 - =====================================================================
+ERROR 13:51:15,043 - Parsiranje NIJE uspesno zavrseno!

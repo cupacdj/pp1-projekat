@@ -1,13 +1,13 @@
 program Cupac
 
-const int pi = 3;
+const int pi = 3, g = 11;
 
-chaer carr[];
+char x, y[];
 
 {
 	
-	void main() {
-		a = b;
+	void main() int a, b[]; int x;{
+	
 	}
 
 }

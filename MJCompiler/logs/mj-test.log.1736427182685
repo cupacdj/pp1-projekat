@@ -1,0 +1,82 @@
+INFO  13:52:25,687 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  13:52:25,715 - #6 program
+INFO  13:52:25,716 - #2 Cupac
+INFO  13:52:25,716 - #9 const
+INFO  13:52:25,716 - #2 int
+INFO  13:52:25,716 - #2 pi
+INFO  13:52:25,717 - #11 =
+INFO  13:52:25,717 - #4 3
+INFO  13:52:25,717 - #10 ;
+INFO  13:52:25,717 - #9 const
+INFO  13:52:25,718 - #2 int
+INFO  13:52:25,718 - #2 pi
+INFO  13:52:25,718 - #11 =
+INFO  13:52:25,718 - #4 33
+INFO  13:52:25,718 - #10 ;
+INFO  13:52:25,718 - #7 {
+INFO  13:52:25,718 - #15 void
+INFO  13:52:25,718 - #2 main
+INFO  13:52:25,718 - #16 (
+INFO  13:52:25,719 - #17 )
+INFO  13:52:25,719 - #7 {
+INFO  13:52:25,720 - #8 }
+INFO  13:52:25,720 - #8 }
+INFO  13:52:25,742 - Program(
+  ProgName(
+   Cupac
+  ) [ProgName]
+  CConstVarDeclList(
+    CConstVarDeclList(
+      NoConstVarDeclList(
+      ) [NoConstVarDeclList]
+      ConstDeclList(
+        Type(
+         int
+        ) [Type]
+        ConstDeclConst(
+         pi
+          NumConst(
+           3
+          ) [NumConst]
+        ) [ConstDeclConst]
+        NoMoreConstDeclList(
+        ) [NoMoreConstDeclList]
+      ) [ConstDeclList]
+    ) [CConstVarDeclList]
+    ConstDeclList(
+      Type(
+       int
+      ) [Type]
+      ConstDeclConst(
+       pi
+        NumConst(
+         33
+        ) [NumConst]
+      ) [ConstDeclConst]
+      NoMoreConstDeclList(
+      ) [NoMoreConstDeclList]
+    ) [ConstDeclList]
+  ) [CConstVarDeclList]
+  ListMethodDecl(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      MethodSignatureList(
+        VoidSignature(
+          MethodName(
+           main
+          ) [MethodName]
+        ) [VoidSignature]
+        NoFormParsListZero(
+        ) [NoFormParsListZero]
+      ) [MethodSignatureList]
+      NoEmptyVarDecl(
+      ) [NoEmptyVarDecl]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+  ) [ListMethodDecl]
+) [Program]
+INFO  13:52:25,743 - =====================================================================
+ERROR 13:52:25,751 - GRESKA: Dovstruja definicija konstante - pi na liniji 4
+ERROR 13:52:25,751 - Parsiranje NIJE uspesno zavrseno!

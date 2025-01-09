@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="MJCompilerA" basedir=".">
+<project name="MJCompilerB" basedir=".">
 	
 	<target name="delete">
 			<delete>
@@ -7,6 +7,7 @@
 					<exclude name="sym.java"/>
 					<exclude name="util/Log4JUtils.java"/>
 					<exclude name="Yylex.java"/>
+					<exclude name="SemanticPass.java"/>
 				</fileset>
 			</delete>
 	</target>
@@ -45,6 +46,7 @@
 				<pathelement path="lib/JFlex.jar"/>
 				<pathelement path="lib/cup_v10k.jar"/>
 				<pathelement path="lib/log4j-1.2.17.jar"/>
+				<pathelement path="symboltable-1-1.jar"/>
 			</classpath>
 		</javac>
 	</target>

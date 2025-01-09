@@ -1,0 +1,60 @@
+INFO  13:45:43,597 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  13:45:43,678 - #6 program
+INFO  13:45:43,678 - #2 Cupac
+INFO  13:45:43,678 - #9 const
+INFO  13:45:43,679 - #2 int
+INFO  13:45:43,680 - #2 pi
+INFO  13:45:43,680 - #11 =
+INFO  13:45:43,680 - #4 3
+INFO  13:45:43,680 - #10 ;
+INFO  13:45:43,681 - #7 {
+INFO  13:45:43,681 - #15 void
+INFO  13:45:43,681 - #2 main
+INFO  13:45:43,681 - #16 (
+INFO  13:45:43,682 - #17 )
+INFO  13:45:43,682 - #7 {
+INFO  13:45:43,683 - #8 }
+INFO  13:45:43,684 - #8 }
+INFO  13:45:43,687 - Program(
+  ProgName(
+   Cupac
+  ) [ProgName]
+  CConstVarDeclList(
+    NoConstVarDeclList(
+    ) [NoConstVarDeclList]
+    ConstDeclList(
+      Type(
+       int
+      ) [Type]
+      ConstDeclConst(
+       pi
+        NumConst(
+         3
+        ) [NumConst]
+      ) [ConstDeclConst]
+      NoMoreConstDeclList(
+      ) [NoMoreConstDeclList]
+    ) [ConstDeclList]
+  ) [CConstVarDeclList]
+  ListMethodDecl(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      MethodSignatureList(
+        VoidSignature(
+          MethodName(
+           main
+          ) [MethodName]
+        ) [VoidSignature]
+        NoFormParsListZero(
+        ) [NoFormParsListZero]
+      ) [MethodSignatureList]
+      NoEmptyVarDecl(
+      ) [NoEmptyVarDecl]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+  ) [ListMethodDecl]
+) [Program]
+INFO  13:45:43,705 - =====================================================================
+INFO  13:45:43,714 - Parsiranje uspesno zavrseno!

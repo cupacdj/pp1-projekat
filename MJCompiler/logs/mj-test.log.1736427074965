@@ -1,0 +1,73 @@
+INFO  13:50:38,917 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  13:50:38,947 - #6 program
+INFO  13:50:38,947 - #2 Cupac
+INFO  13:50:38,947 - #9 const
+INFO  13:50:38,948 - #2 int
+INFO  13:50:38,948 - #2 pi
+INFO  13:50:38,949 - #11 =
+INFO  13:50:38,949 - #4 3
+INFO  13:50:38,949 - #12 ,
+INFO  13:50:38,949 - #2 pi
+INFO  13:50:38,949 - #11 =
+INFO  13:50:38,949 - #4 33
+INFO  13:50:38,949 - #10 ;
+INFO  13:50:38,950 - #7 {
+INFO  13:50:38,950 - #15 void
+INFO  13:50:38,950 - #2 main
+INFO  13:50:38,950 - #16 (
+INFO  13:50:38,951 - #17 )
+INFO  13:50:38,951 - #7 {
+INFO  13:50:38,951 - #8 }
+INFO  13:50:38,952 - #8 }
+INFO  13:50:38,954 - Program(
+  ProgName(
+   Cupac
+  ) [ProgName]
+  CConstVarDeclList(
+    NoConstVarDeclList(
+    ) [NoConstVarDeclList]
+    ConstDeclList(
+      Type(
+       int
+      ) [Type]
+      ConstDeclConst(
+       pi
+        NumConst(
+         3
+        ) [NumConst]
+      ) [ConstDeclConst]
+      MoreConstDeclList(
+        ConstDeclConst(
+         pi
+          NumConst(
+           33
+          ) [NumConst]
+        ) [ConstDeclConst]
+        NoMoreConstDeclList(
+        ) [NoMoreConstDeclList]
+      ) [MoreConstDeclList]
+    ) [ConstDeclList]
+  ) [CConstVarDeclList]
+  ListMethodDecl(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      MethodSignatureList(
+        VoidSignature(
+          MethodName(
+           main
+          ) [MethodName]
+        ) [VoidSignature]
+        NoFormParsListZero(
+        ) [NoFormParsListZero]
+      ) [MethodSignatureList]
+      NoEmptyVarDecl(
+      ) [NoEmptyVarDecl]
+      NoStatementList(
+      ) [NoStatementList]
+    ) [MethodDecl]
+  ) [ListMethodDecl]
+) [Program]
+INFO  13:50:38,973 - =====================================================================
+ERROR 13:50:38,979 - GRESKA: Dovstruja definicija konstante - pi na liniji 3
+ERROR 13:50:38,979 - Parsiranje NIJE uspesno zavrseno!
