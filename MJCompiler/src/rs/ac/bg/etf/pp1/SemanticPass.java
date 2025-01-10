@@ -229,5 +229,104 @@ public class SemanticPass extends VisitorAdaptor {
 	}
 	
 	
+	// CONTECST CONDITIONS
+
+	@Override
+	public void visit(FactorChar factorChar) {
+		factorChar.struct = Tab.charType;
+	}
 	
+	@Override
+	public void visit(FactorNum factorNum) {
+		factorNum.struct = Tab.intType;
+	}
+	
+	@Override
+	public void visit(FactorBool factorBool) {
+		factorBool.struct = boolType;
+	}
+	
+	@Override
+	public void visit(FactorDesignator factorDesignator) {
+		factorDesignator.struct = factorDesignator.getDesignator().obj.getType();
+	}
+	
+
+	@Override
+	public void visit(FactorListMinus factor) {
+		if (factor.getFactor().struct.equals(Tab.intType)) {
+			factor.struct = Tab.intType;
+		} else {
+			report_error("GRESKA: Negacija vrednosti koja nije tipa int", factor);
+			factor.struct = Tab.noType;
+		}
+		
+	}
+	
+	@Override
+	public void visit(NoFactorListMinus factor) {
+		factor.struct = factor.getFactor().struct;
+	}
+	
+	@Override
+	public void visit(FactorNew factor) {
+		if (factor.getExprList().struct.equals(Tab.intType)) {
+			factor.struct = new Struct(Struct.Array, currType);
+		} else {
+			report_error("GRESKA: Velicina niza nije tipa int", factor);
+			factor.struct = Tab.noType;
+		}
+	}
+	
+	@Override
+	public void visit(FactorExpr factor) {
+		factor.struct = factor.getExprList().struct;
+	}
+	
+	
+	@Override
+	public void visit(DesignatorIdent designatorIdent) {
+		String ident = designatorIdent.getI1();
+		Obj obj = Tab.find(ident);
+		if (obj == Tab.noObj) {
+			report_error("GRESKA: Identifikator - " + ident + " - nije definisan", designatorIdent);
+			designatorIdent.obj = Tab.noObj;
+		} else if (obj.getKind() != Obj.Var && obj.getKind() != Obj.Con) {
+			report_error("GRESKA: Identifikator - " + ident + " - nije promenljiva ili konstanta", designatorIdent);
+			designatorIdent.obj = Tab.noObj;
+		}
+		else {
+			designatorIdent.obj = obj;
+		}
+	}
+	
+	@Override
+	public void visit(DesignatorArray designatorArray) {
+		String arr = designatorArray.getI1();
+		Obj obj = Tab.find(arr);
+		if (obj == Tab.noObj) {
+			report_error("GRESKA: Niz - " + arr + " - nije deklarisan", designatorArray);
+			designatorArray.obj = Tab.noObj;
+		} else if (obj.getKind() != Obj.Var && obj.getType().getKind() != Struct.Array) {
+			report_error("GRESKA: Promenljiva - " + arr + " - nije niz", designatorArray);
+			designatorArray.obj = Tab.noObj;
+		} 
+		else {
+			designatorArray.obj = obj;
+		}
+	}
+	
+	@Override
+	public void visit(DesignatorExpr designatorExpr) {
+		Obj obj = designatorExpr.getDesignatorArray().obj;
+		if(obj == Tab.noObj) {
+			designatorExpr.obj = Tab.noObj;
+		} else if(!designatorExpr.getExprList().equals(Tab.intType)) {
+            report_error("GRESKA: Indeks niza nije tipa int", designatorExpr);
+            designatorExpr.obj = Tab.noObj;
+		}
+		else {
+			designatorExpr.obj = new Obj(Obj.Elem, obj.getName() + "{$}", obj.getType().getElemType());
+		}
+	}
 }

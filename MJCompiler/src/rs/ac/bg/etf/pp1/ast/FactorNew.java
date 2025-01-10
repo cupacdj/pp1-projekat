@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 10/0/2025 12:59:8
+// 10/0/2025 18:58:12
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,13 +8,13 @@ package rs.ac.bg.etf.pp1.ast;
 public class FactorNew extends Factor {
 
     private Type Type;
-    private FactorExprAct FactorExprAct;
+    private ExprList ExprList;
 
-    public FactorNew (Type Type, FactorExprAct FactorExprAct) {
+    public FactorNew (Type Type, ExprList ExprList) {
         this.Type=Type;
         if(Type!=null) Type.setParent(this);
-        this.FactorExprAct=FactorExprAct;
-        if(FactorExprAct!=null) FactorExprAct.setParent(this);
+        this.ExprList=ExprList;
+        if(ExprList!=null) ExprList.setParent(this);
     }
 
     public Type getType() {
@@ -25,12 +25,12 @@ public class FactorNew extends Factor {
         this.Type=Type;
     }
 
-    public FactorExprAct getFactorExprAct() {
-        return FactorExprAct;
+    public ExprList getExprList() {
+        return ExprList;
     }
 
-    public void setFactorExprAct(FactorExprAct FactorExprAct) {
-        this.FactorExprAct=FactorExprAct;
+    public void setExprList(ExprList ExprList) {
+        this.ExprList=ExprList;
     }
 
     public void accept(Visitor visitor) {
@@ -39,18 +39,18 @@ public class FactorNew extends Factor {
 
     public void childrenAccept(Visitor visitor) {
         if(Type!=null) Type.accept(visitor);
-        if(FactorExprAct!=null) FactorExprAct.accept(visitor);
+        if(ExprList!=null) ExprList.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
         if(Type!=null) Type.traverseTopDown(visitor);
-        if(FactorExprAct!=null) FactorExprAct.traverseTopDown(visitor);
+        if(ExprList!=null) ExprList.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
         if(Type!=null) Type.traverseBottomUp(visitor);
-        if(FactorExprAct!=null) FactorExprAct.traverseBottomUp(visitor);
+        if(ExprList!=null) ExprList.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -65,8 +65,8 @@ public class FactorNew extends Factor {
             buffer.append(tab+"  null");
         buffer.append("\n");
 
-        if(FactorExprAct!=null)
-            buffer.append(FactorExprAct.toString("  "+tab));
+        if(ExprList!=null)
+            buffer.append(ExprList.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

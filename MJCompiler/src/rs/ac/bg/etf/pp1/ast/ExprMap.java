@@ -1,36 +1,36 @@
 // generated with ast extension for cup
 // version 0.8
-// 10/0/2025 12:59:8
+// 10/0/2025 18:58:12
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class ExprMap extends ExprList {
 
-    private DesignatorList DesignatorList;
-    private DesignatorList DesignatorList1;
+    private Designator Designator;
+    private Designator Designator1;
 
-    public ExprMap (DesignatorList DesignatorList, DesignatorList DesignatorList1) {
-        this.DesignatorList=DesignatorList;
-        if(DesignatorList!=null) DesignatorList.setParent(this);
-        this.DesignatorList1=DesignatorList1;
-        if(DesignatorList1!=null) DesignatorList1.setParent(this);
+    public ExprMap (Designator Designator, Designator Designator1) {
+        this.Designator=Designator;
+        if(Designator!=null) Designator.setParent(this);
+        this.Designator1=Designator1;
+        if(Designator1!=null) Designator1.setParent(this);
     }
 
-    public DesignatorList getDesignatorList() {
-        return DesignatorList;
+    public Designator getDesignator() {
+        return Designator;
     }
 
-    public void setDesignatorList(DesignatorList DesignatorList) {
-        this.DesignatorList=DesignatorList;
+    public void setDesignator(Designator Designator) {
+        this.Designator=Designator;
     }
 
-    public DesignatorList getDesignatorList1() {
-        return DesignatorList1;
+    public Designator getDesignator1() {
+        return Designator1;
     }
 
-    public void setDesignatorList1(DesignatorList DesignatorList1) {
-        this.DesignatorList1=DesignatorList1;
+    public void setDesignator1(Designator Designator1) {
+        this.Designator1=Designator1;
     }
 
     public void accept(Visitor visitor) {
@@ -38,19 +38,19 @@ public class ExprMap extends ExprList {
     }
 
     public void childrenAccept(Visitor visitor) {
-        if(DesignatorList!=null) DesignatorList.accept(visitor);
-        if(DesignatorList1!=null) DesignatorList1.accept(visitor);
+        if(Designator!=null) Designator.accept(visitor);
+        if(Designator1!=null) Designator1.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
-        if(DesignatorList!=null) DesignatorList.traverseTopDown(visitor);
-        if(DesignatorList1!=null) DesignatorList1.traverseTopDown(visitor);
+        if(Designator!=null) Designator.traverseTopDown(visitor);
+        if(Designator1!=null) Designator1.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
-        if(DesignatorList!=null) DesignatorList.traverseBottomUp(visitor);
-        if(DesignatorList1!=null) DesignatorList1.traverseBottomUp(visitor);
+        if(Designator!=null) Designator.traverseBottomUp(visitor);
+        if(Designator1!=null) Designator1.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -59,14 +59,14 @@ public class ExprMap extends ExprList {
         buffer.append(tab);
         buffer.append("ExprMap(\n");
 
-        if(DesignatorList!=null)
-            buffer.append(DesignatorList.toString("  "+tab));
+        if(Designator!=null)
+            buffer.append(Designator.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");
 
-        if(DesignatorList1!=null)
-            buffer.append(DesignatorList1.toString("  "+tab));
+        if(Designator1!=null)
+            buffer.append(Designator1.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

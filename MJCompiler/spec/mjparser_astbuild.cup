@@ -95,25 +95,22 @@ nonterminal CondTermList CondTermList;
 nonterminal CondTerm CondTerm;
 nonterminal CondFactList CondFactList;
 nonterminal CondFact CondFact;
-nonterminal ExprList ExprList;
-nonterminal ExprAddopTerm ExprAddopTerm;
-nonterminal ExprZero ExprZero;
-nonterminal Term Term;
-nonterminal TermMulFactor TermMulFactor;
-nonterminal Factor Factor;
 nonterminal FactorActPars FactorActPars;
-nonterminal FactorExprAct FactorExprAct;
-nonterminal FactorList FactorList;
-nonterminal DesignatorList DesignatorList;
-nonterminal Designator Designator;
-nonterminal DesignatorArray DesignatorArray;
 nonterminal Assignop Assignop;
 nonterminal Addop Addop;
 nonterminal Mulop Mulop;
 nonterminal Relop Relop;
 nonterminal Setop Setop;
 
+nonterminal rs.etf.pp1.symboltable.concepts.Struct FactorList, Factor;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Term, TermMulFactor;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct ExprList, ExprAddopTerm, ExprZero;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator, DesignatorArray;
+
 precedence left ELSE;
+
+
+
 
 Program ::= (Program) PROG ProgName:P1 ConstVarDeclList:C2 LBRACE MethodDeclList:M3 RBRACE {: RESULT=new Program(P1, C2, M3); RESULT.setLine(P1left); :};
 
@@ -313,7 +310,7 @@ CondFact ::=  (CondFactExpr) ExprList:E1 {: RESULT=new CondFactExpr(E1); RESULT.
 
 ExprList ::= (ListExpr) Term:T1 ExprAddopTerm:E2 {: RESULT=new ListExpr(T1, E2); RESULT.setLine(T1left); :} 
 			 |
-			 (ExprMap) DesignatorList:D1 MAP DesignatorList:D2 {: RESULT=new ExprMap(D1, D2); RESULT.setLine(D1left); :}
+			 (ExprMap) Designator:D1 MAP Designator:D2 {: RESULT=new ExprMap(D1, D2); RESULT.setLine(D1left); :}
 			 ;
 
 
@@ -341,7 +338,7 @@ FactorList ::= (FactorListMinus) MINUS Factor:F1 {: RESULT=new FactorListMinus(F
                ;
 	
                   
-Factor ::= (FactorDesignator) DesignatorList:D1 FactorActPars:F2 {: RESULT=new FactorDesignator(D1, F2); RESULT.setLine(D1left); :}
+Factor ::= (FactorDesignator) Designator:D1 FactorActPars:F2 {: RESULT=new FactorDesignator(D1, F2); RESULT.setLine(D1left); :}
            |
 		   (FactorNum) NUM:N1 {: RESULT=new FactorNum(N1); RESULT.setLine(N1left); :}
            |
@@ -349,7 +346,7 @@ Factor ::= (FactorDesignator) DesignatorList:D1 FactorActPars:F2 {: RESULT=new F
            |
            (FactorBool) BOOL:B1 {: RESULT=new FactorBool(B1); RESULT.setLine(B1left); :}
            |
-           (FactorNew) NEW Type:T1 FactorExprAct:F2 {: RESULT=new FactorNew(T1, F2); RESULT.setLine(T1left); :}
+           (FactorNew) NEW Type:T1 LBRACKET ExprList:E2 RBRACKET {: RESULT=new FactorNew(T1, E2); RESULT.setLine(T1left); :}
            |
            (FactorExpr) LPAREN ExprList:E1 RPAREN {: RESULT=new FactorExpr(E1); RESULT.setLine(E1left); :}
            ;
@@ -359,25 +356,16 @@ FactorActPars ::= (ActParsFactor) LPAREN ActParsZero:A1 RPAREN {: RESULT=new Act
                   (NoActParsFactor) {: RESULT=new NoActParsFactor(); :} /* epsilon */
                   ;
               
-
-FactorExprAct ::= (ExprFact) LBRACKET ExprList:E1 RBRACKET {: RESULT=new ExprFact(E1); RESULT.setLine(E1left); :}
-                  |
-                  (ActFact) LPAREN ActParsZero:A1 RPAREN {: RESULT=new ActFact(A1); RESULT.setLine(A1left); :}
-                  ;
-
-
 			
 				
-
-DesignatorList ::= (DesignatorList) Designator:D1 {: RESULT=new DesignatorList(D1); RESULT.setLine(D1left); :};
 
 Designator ::= (DesignatorIdent) IDENT:I1 {: RESULT=new DesignatorIdent(I1); RESULT.setLine(I1left); :}
                |
                (DesignatorExpr) DesignatorArray:D1 LBRACKET ExprList:E2 RBRACKET {: RESULT=new DesignatorExpr(D1, E2); RESULT.setLine(D1left); :}
                ;
-
 				  
 DesignatorArray ::= (DesignatorArray) IDENT:I1 {: RESULT=new DesignatorArray(I1); RESULT.setLine(I1left); :};		  
+
 
 Assignop ::= (Assignop) ASSIGN {: RESULT=new Assignop(); :};
 

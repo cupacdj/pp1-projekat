@@ -68,14 +68,19 @@ nonterminal FormParsList, FormParsListMore, FormParsListZero, FormPar;
 nonterminal StatementList, Statement, StatementElse;
 nonterminal DesignatorStatementList, DesignatorStatement, ConditionDesignator;
 nonterminal ActParsList, ActPars, ActParsZero;
-nonterminal Condition, CondTermList, CondTerm, CondFactList, CondFact,;
-nonterminal ExprList, ExprAddopTerm, ExprZero;
-nonterminal Term, TermMulFactor;
-nonterminal Factor, FactorActPars, FactorExprAct, FactorList;
-nonterminal DesignatorList, Designator, DesignatorArray;
+nonterminal Condition, CondTermList, CondTerm, CondFactList, CondFact;
+nonterminal FactorActPars;
 nonterminal Assignop, Addop, Mulop, Relop, Setop;
 
+nonterminal rs.etf.pp1.symboltable.concepts.Struct FactorList, Factor;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Term, TermMulFactor;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct ExprList, ExprAddopTerm, ExprZero;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator, DesignatorArray;
+
 precedence left ELSE;
+
+
+
 
 Program ::= (Program) PROG ProgName ConstVarDeclList LBRACE MethodDeclList RBRACE;
 
@@ -275,7 +280,7 @@ CondFact ::=  (CondFactExpr) ExprList
 
 ExprList ::= (ListExpr) Term ExprAddopTerm 
 			 |
-			 (ExprMap) DesignatorList MAP DesignatorList
+			 (ExprMap) Designator MAP Designator
 			 ;
 
 
@@ -303,7 +308,7 @@ FactorList ::= (FactorListMinus) MINUS Factor
                ;
 	
                   
-Factor ::= (FactorDesignator) DesignatorList FactorActPars
+Factor ::= (FactorDesignator) Designator FactorActPars
            |
 		   (FactorNum) NUM
            |
@@ -311,7 +316,7 @@ Factor ::= (FactorDesignator) DesignatorList FactorActPars
            |
            (FactorBool) BOOL
            |
-           (FactorNew) NEW Type FactorExprAct
+           (FactorNew) NEW Type LBRACKET ExprList RBRACKET
            |
            (FactorExpr) LPAREN ExprList RPAREN
            ;
@@ -321,25 +326,16 @@ FactorActPars ::= (ActParsFactor) LPAREN ActParsZero RPAREN
                   (NoActParsFactor) /* epsilon */
                   ;
               
-
-FactorExprAct ::= (ExprFact) LBRACKET ExprList RBRACKET
-                  |
-                  (ActFact) LPAREN ActParsZero RPAREN
-                  ;
-
-
 			
 				
-
-DesignatorList ::= (DesignatorList) Designator;
 
 Designator ::= (DesignatorIdent) IDENT
                |
                (DesignatorExpr) DesignatorArray LBRACKET ExprList RBRACKET
                ;
-
 				  
 DesignatorArray ::= (DesignatorArray) IDENT;		  
+
 
 Assignop ::= (Assignop) ASSIGN;
 
