@@ -199,7 +199,7 @@ FormParsListZero ::= (ZeroFormParsList) FormParsList:F1 {: RESULT=new ZeroFormPa
 
 FormParsList ::= (FormParsList) FormPar:F1 FormParsListMore:F2 {: RESULT=new FormParsList(F1, F2); RESULT.setLine(F1left); :};
 
-FormParsListMore ::= (MoreFormParsList) COMMA FormPar:F1 VarDeclListMore:V2 {: RESULT=new MoreFormParsList(F1, V2); RESULT.setLine(F1left); :}
+FormParsListMore ::= (MoreFormParsList) COMMA FormPar:F1 FormParsListMore:F2 {: RESULT=new MoreFormParsList(F1, F2); RESULT.setLine(F1left); :}
                      |
                      (NoMoreFormParsList) {: RESULT=new NoMoreFormParsList(); :} /* epsilon */
                      ;

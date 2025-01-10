@@ -137,7 +137,7 @@ public class SemanticPass extends VisitorAdaptor {
 			varObj = Tab.insert(Obj.Var, arrName, new Struct(Struct.Array, currType));
            
 		}else {
-			report_error("GRESKA: Dovstruja definicija varijable - " + arrName, varArray);
+			report_error("GRESKA: Dovstruja definicija varijable (niz) - " + arrName, varArray);
         }
 	}
 	
@@ -166,6 +166,51 @@ public class SemanticPass extends VisitorAdaptor {
 		Tab.closeScope();
 		currMethod = null;
 	}
+	
+	
+	
+	//FORMAL PARAMETER DECLARATION
+	
+	@Override
+	public void visit(FormParVar formParVar) {
+		String varName = formParVar.getI2();
+		Obj varObj = null;
+		if(currMethod == null) {
+			report_error("GRESKA: Semanticka greska {FormParVar}", formParVar);
+		}
+		else {
+			varObj = Tab.currentScope().findSymbol(varName);
+		}
+		if(varObj == null || varObj == Tab.noObj) {
+			varObj = Tab.insert(Obj.Var, varName, currType);
+			varObj.setFpPos(1);
+			currMethod.setLevel(currMethod.getLevel() + 1);
+            
+		}else {
+			report_error("GRESKA: Dovstruja definicija formalnog parametra - " + varName, formParVar);
+        }
+	}
+	
+	@Override
+	public void visit(FormParArray formParArray) {
+		String arrName = formParArray.getI2();
+		Obj varObj = null;
+		if(currMethod == null) {
+			report_error("GRESKA: Semanticka greska {FormParArray}", formParArray);
+		}
+		else {
+			varObj = Tab.currentScope().findSymbol(arrName);
+		}
+		if(varObj == null || varObj == Tab.noObj) {
+			varObj = Tab.insert(Obj.Var, arrName, new Struct(Struct.Array, currType));
+			varObj.setFpPos(1);
+			currMethod.setLevel(currMethod.getLevel() + 1);
+           
+		}else {
+			report_error("GRESKA: Dovstruja definicija formalnog parametra (niz) - " + arrName, formParArray);
+        }
+	}
+	
 	
 	
 	@Override

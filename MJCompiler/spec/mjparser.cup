@@ -161,7 +161,7 @@ FormParsListZero ::= (ZeroFormParsList) FormParsList
 
 FormParsList ::= (FormParsList) FormPar FormParsListMore;
 
-FormParsListMore ::= (MoreFormParsList) COMMA FormPar VarDeclListMore
+FormParsListMore ::= (MoreFormParsList) COMMA FormPar FormParsListMore
                      |
                      (NoMoreFormParsList) /* epsilon */
                      ;

@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 9/0/2025 15:0:29
+// 10/0/2025 12:59:8
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,13 +8,13 @@ package rs.ac.bg.etf.pp1.ast;
 public class MoreFormParsList extends FormParsListMore {
 
     private FormPar FormPar;
-    private VarDeclListMore VarDeclListMore;
+    private FormParsListMore FormParsListMore;
 
-    public MoreFormParsList (FormPar FormPar, VarDeclListMore VarDeclListMore) {
+    public MoreFormParsList (FormPar FormPar, FormParsListMore FormParsListMore) {
         this.FormPar=FormPar;
         if(FormPar!=null) FormPar.setParent(this);
-        this.VarDeclListMore=VarDeclListMore;
-        if(VarDeclListMore!=null) VarDeclListMore.setParent(this);
+        this.FormParsListMore=FormParsListMore;
+        if(FormParsListMore!=null) FormParsListMore.setParent(this);
     }
 
     public FormPar getFormPar() {
@@ -25,12 +25,12 @@ public class MoreFormParsList extends FormParsListMore {
         this.FormPar=FormPar;
     }
 
-    public VarDeclListMore getVarDeclListMore() {
-        return VarDeclListMore;
+    public FormParsListMore getFormParsListMore() {
+        return FormParsListMore;
     }
 
-    public void setVarDeclListMore(VarDeclListMore VarDeclListMore) {
-        this.VarDeclListMore=VarDeclListMore;
+    public void setFormParsListMore(FormParsListMore FormParsListMore) {
+        this.FormParsListMore=FormParsListMore;
     }
 
     public void accept(Visitor visitor) {
@@ -39,18 +39,18 @@ public class MoreFormParsList extends FormParsListMore {
 
     public void childrenAccept(Visitor visitor) {
         if(FormPar!=null) FormPar.accept(visitor);
-        if(VarDeclListMore!=null) VarDeclListMore.accept(visitor);
+        if(FormParsListMore!=null) FormParsListMore.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
         if(FormPar!=null) FormPar.traverseTopDown(visitor);
-        if(VarDeclListMore!=null) VarDeclListMore.traverseTopDown(visitor);
+        if(FormParsListMore!=null) FormParsListMore.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
         if(FormPar!=null) FormPar.traverseBottomUp(visitor);
-        if(VarDeclListMore!=null) VarDeclListMore.traverseBottomUp(visitor);
+        if(FormParsListMore!=null) FormParsListMore.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -65,8 +65,8 @@ public class MoreFormParsList extends FormParsListMore {
             buffer.append(tab+"  null");
         buffer.append("\n");
 
-        if(VarDeclListMore!=null)
-            buffer.append(VarDeclListMore.toString("  "+tab));
+        if(FormParsListMore!=null)
+            buffer.append(FormParsListMore.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

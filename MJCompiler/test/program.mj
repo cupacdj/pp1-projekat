@@ -4,10 +4,20 @@ const int pi = 3, g = 11;
 
 char x, y[];
 
+const bool t = true;
 {
 	
-	void main() int a, b[]; int x;{
+	void main() int a, b[]; int x; char eol;{
 	
 	}
+	
+	bool sum(int fp1,bool fp3, char fp2[]) 
+		int a, b[]; 
+		int x[], y; 
+		char eol;
+	{
+	
+	}
+    
 
 }

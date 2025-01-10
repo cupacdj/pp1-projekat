@@ -1,113 +1,272 @@
-INFO  15:30:12,695 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
-INFO  15:30:12,746 - #6 program
-INFO  15:30:12,746 - #2 Cupac
-INFO  15:30:12,746 - #9 const
-INFO  15:30:12,747 - #2 int
-INFO  15:30:12,748 - #2 pi
-INFO  15:30:12,748 - #11 =
-INFO  15:30:12,748 - #4 3
-INFO  15:30:12,749 - #12 ,
-INFO  15:30:12,749 - #2 g
-INFO  15:30:12,749 - #11 =
-INFO  15:30:12,749 - #4 11
-INFO  15:30:12,749 - #10 ;
-INFO  15:30:12,750 - #2 char
-INFO  15:30:12,750 - #2 x
-INFO  15:30:12,750 - #12 ,
-INFO  15:30:12,751 - #2 y
-INFO  15:30:12,751 - #13 [
-INFO  15:30:12,751 - #14 ]
-INFO  15:30:12,751 - #10 ;
-INFO  15:30:12,752 - #7 {
-INFO  15:30:12,753 - #15 void
-INFO  15:30:12,753 - #2 maiN
-INFO  15:30:12,772 - #16 (
-INFO  15:30:12,772 - #17 )
-INFO  15:30:12,773 - #2 int
-INFO  15:30:12,774 - #2 a
-INFO  15:30:12,774 - #12 ,
-INFO  15:30:12,774 - #2 b
-INFO  15:30:12,774 - #13 [
-INFO  15:30:12,774 - #14 ]
-INFO  15:30:12,775 - #10 ;
-INFO  15:30:12,775 - #2 int
-INFO  15:30:12,775 - #2 x
-INFO  15:30:12,776 - #10 ;
-INFO  15:30:12,776 - #7 {
-INFO  15:30:12,776 - #8 }
-INFO  15:30:12,776 - #8 }
-INFO  15:30:12,782 - Program(
+INFO  12:53:22,351 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  12:53:22,397 - #6 program
+INFO  12:53:22,397 - #2 Cupac
+INFO  12:53:22,397 - #9 const
+INFO  12:53:22,398 - #2 int
+INFO  12:53:22,398 - #2 pi
+INFO  12:53:22,399 - #11 =
+INFO  12:53:22,399 - #4 3
+INFO  12:53:22,399 - #12 ,
+INFO  12:53:22,399 - #2 g
+INFO  12:53:22,399 - #11 =
+INFO  12:53:22,399 - #4 11
+INFO  12:53:22,399 - #10 ;
+INFO  12:53:22,400 - #2 char
+INFO  12:53:22,400 - #2 x
+INFO  12:53:22,400 - #12 ,
+INFO  12:53:22,400 - #2 y
+INFO  12:53:22,402 - #13 [
+INFO  12:53:22,402 - #14 ]
+INFO  12:53:22,402 - #10 ;
+INFO  12:53:22,402 - #9 const
+INFO  12:53:22,403 - #2 bool
+INFO  12:53:22,404 - #2 t
+INFO  12:53:22,404 - #11 =
+INFO  12:53:22,405 - #5 1
+INFO  12:53:22,405 - #10 ;
+INFO  12:53:22,405 - #7 {
+INFO  12:53:22,405 - #15 void
+INFO  12:53:22,405 - #2 main
+INFO  12:53:22,405 - #16 (
+INFO  12:53:22,405 - #17 )
+INFO  12:53:22,406 - #2 int
+INFO  12:53:22,407 - #2 a
+INFO  12:53:22,407 - #12 ,
+INFO  12:53:22,407 - #2 b
+INFO  12:53:22,407 - #13 [
+INFO  12:53:22,407 - #14 ]
+INFO  12:53:22,407 - #10 ;
+INFO  12:53:22,407 - #2 int
+INFO  12:53:22,407 - #2 x
+INFO  12:53:22,407 - #10 ;
+INFO  12:53:22,408 - #2 char
+INFO  12:53:22,408 - #2 eol
+INFO  12:53:22,408 - #10 ;
+INFO  12:53:22,408 - #7 {
+INFO  12:53:22,408 - #8 }
+INFO  12:53:22,409 - #2 bool
+INFO  12:53:22,409 - #2 sum
+INFO  12:53:22,409 - #16 (
+INFO  12:53:22,409 - #2 int
+INFO  12:53:22,409 - #2 fp1
+INFO  12:53:22,411 - #12 ,
+INFO  12:53:22,411 - #2 bool
+INFO  12:53:22,411 - #2 fp3
+INFO  12:53:22,411 - #12 ,
+INFO  12:53:22,411 - #2 char
+INFO  12:53:22,411 - #2 fp2
+INFO  12:53:22,411 - #13 [
+INFO  12:53:22,412 - #14 ]
+INFO  12:53:22,412 - #17 )
+INFO  12:53:22,413 - #2 int
+INFO  12:53:22,413 - #2 a
+INFO  12:53:22,413 - #12 ,
+INFO  12:53:22,413 - #2 b
+INFO  12:53:22,413 - #13 [
+INFO  12:53:22,414 - #14 ]
+INFO  12:53:22,414 - #10 ;
+INFO  12:53:22,414 - #2 int
+INFO  12:53:22,414 - #2 x
+INFO  12:53:22,414 - #13 [
+INFO  12:53:22,414 - #14 ]
+INFO  12:53:22,414 - #12 ,
+INFO  12:53:22,414 - #2 y
+INFO  12:53:22,414 - #10 ;
+INFO  12:53:22,414 - #2 char
+INFO  12:53:22,414 - #2 eol
+INFO  12:53:22,414 - #10 ;
+INFO  12:53:22,415 - #7 {
+INFO  12:53:22,415 - #8 }
+INFO  12:53:22,415 - #8 }
+INFO  12:53:22,421 - Program(
   ProgName(
    Cupac
   ) [ProgName]
-  VConstVarDeclList(
-    CConstVarDeclList(
-      NoConstVarDeclList(
-      ) [NoConstVarDeclList]
-      ConstDeclList(
-        Type(
-         int
-        ) [Type]
-        ConstDeclConst(
-         pi
-          NumConst(
-           3
-          ) [NumConst]
-        ) [ConstDeclConst]
-        MoreConstDeclList(
+  CConstVarDeclList(
+    VConstVarDeclList(
+      CConstVarDeclList(
+        NoConstVarDeclList(
+        ) [NoConstVarDeclList]
+        ConstDeclList(
+          Type(
+           int
+          ) [Type]
           ConstDeclConst(
-           g
+           pi
             NumConst(
-             11
+             3
             ) [NumConst]
           ) [ConstDeclConst]
-          NoMoreConstDeclList(
-          ) [NoMoreConstDeclList]
-        ) [MoreConstDeclList]
-      ) [ConstDeclList]
-    ) [CConstVarDeclList]
-    VarDeclList(
+          MoreConstDeclList(
+            ConstDeclConst(
+             g
+              NumConst(
+               11
+              ) [NumConst]
+            ) [ConstDeclConst]
+            NoMoreConstDeclList(
+            ) [NoMoreConstDeclList]
+          ) [MoreConstDeclList]
+        ) [ConstDeclList]
+      ) [CConstVarDeclList]
+      VarDeclList(
+        Type(
+         char
+        ) [Type]
+        IdentVarDecl(
+         x
+        ) [IdentVarDecl]
+        MoreVarDeclList(
+          ArrayVarDecl(
+           y
+          ) [ArrayVarDecl]
+          NoMoreVarDeclList(
+          ) [NoMoreVarDeclList]
+        ) [MoreVarDeclList]
+      ) [VarDeclList]
+    ) [VConstVarDeclList]
+    ConstDeclList(
       Type(
-       char
+       bool
       ) [Type]
-      IdentVarDecl(
-       x
-      ) [IdentVarDecl]
-      MoreVarDeclList(
-        ArrayVarDecl(
-         y
-        ) [ArrayVarDecl]
-        NoMoreVarDeclList(
-        ) [NoMoreVarDeclList]
-      ) [MoreVarDeclList]
-    ) [VarDeclList]
-  ) [VConstVarDeclList]
+      ConstDeclConst(
+       t
+        BoolConst(
+         1
+        ) [BoolConst]
+      ) [ConstDeclConst]
+      NoMoreConstDeclList(
+      ) [NoMoreConstDeclList]
+    ) [ConstDeclList]
+  ) [CConstVarDeclList]
   ListMethodDecl(
-    NoMethodDeclList(
-    ) [NoMethodDeclList]
+    ListMethodDecl(
+      NoMethodDeclList(
+      ) [NoMethodDeclList]
+      MethodDecl(
+        MethodSignatureList(
+          VoidSignature(
+           main
+          ) [VoidSignature]
+          NoFormParsListZero(
+          ) [NoFormParsListZero]
+        ) [MethodSignatureList]
+        EmptyVarDecl(
+          EmptyVarDecl(
+            EmptyVarDecl(
+              NoEmptyVarDecl(
+              ) [NoEmptyVarDecl]
+              VarDeclList(
+                Type(
+                 int
+                ) [Type]
+                IdentVarDecl(
+                 a
+                ) [IdentVarDecl]
+                MoreVarDeclList(
+                  ArrayVarDecl(
+                   b
+                  ) [ArrayVarDecl]
+                  NoMoreVarDeclList(
+                  ) [NoMoreVarDeclList]
+                ) [MoreVarDeclList]
+              ) [VarDeclList]
+            ) [EmptyVarDecl]
+            VarDeclList(
+              Type(
+               int
+              ) [Type]
+              IdentVarDecl(
+               x
+              ) [IdentVarDecl]
+              NoMoreVarDeclList(
+              ) [NoMoreVarDeclList]
+            ) [VarDeclList]
+          ) [EmptyVarDecl]
+          VarDeclList(
+            Type(
+             char
+            ) [Type]
+            IdentVarDecl(
+             eol
+            ) [IdentVarDecl]
+            NoMoreVarDeclList(
+            ) [NoMoreVarDeclList]
+          ) [VarDeclList]
+        ) [EmptyVarDecl]
+        NoStatementList(
+        ) [NoStatementList]
+      ) [MethodDecl]
+    ) [ListMethodDecl]
     MethodDecl(
       MethodSignatureList(
-        VoidSignature(
-         maiN
-        ) [VoidSignature]
-        NoFormParsListZero(
-        ) [NoFormParsListZero]
+        TypeSignature(
+          Type(
+           bool
+          ) [Type]
+         sum
+        ) [TypeSignature]
+        ZeroFormParsList(
+          FormParsList(
+            FormParVar(
+              Type(
+               int
+              ) [Type]
+             fp1
+            ) [FormParVar]
+            MoreFormParsList(
+              FormParVar(
+                Type(
+                 bool
+                ) [Type]
+               fp3
+              ) [FormParVar]
+              MoreFormParsList(
+                FormParArray(
+                  Type(
+                   char
+                  ) [Type]
+                 fp2
+                ) [FormParArray]
+                NoMoreFormParsList(
+                ) [NoMoreFormParsList]
+              ) [MoreFormParsList]
+            ) [MoreFormParsList]
+          ) [FormParsList]
+        ) [ZeroFormParsList]
       ) [MethodSignatureList]
       EmptyVarDecl(
         EmptyVarDecl(
-          NoEmptyVarDecl(
-          ) [NoEmptyVarDecl]
+          EmptyVarDecl(
+            NoEmptyVarDecl(
+            ) [NoEmptyVarDecl]
+            VarDeclList(
+              Type(
+               int
+              ) [Type]
+              IdentVarDecl(
+               a
+              ) [IdentVarDecl]
+              MoreVarDeclList(
+                ArrayVarDecl(
+                 b
+                ) [ArrayVarDecl]
+                NoMoreVarDeclList(
+                ) [NoMoreVarDeclList]
+              ) [MoreVarDeclList]
+            ) [VarDeclList]
+          ) [EmptyVarDecl]
           VarDeclList(
             Type(
              int
             ) [Type]
-            IdentVarDecl(
-             a
-            ) [IdentVarDecl]
+            ArrayVarDecl(
+             x
+            ) [ArrayVarDecl]
             MoreVarDeclList(
-              ArrayVarDecl(
-               b
-              ) [ArrayVarDecl]
+              IdentVarDecl(
+               y
+              ) [IdentVarDecl]
               NoMoreVarDeclList(
               ) [NoMoreVarDeclList]
             ) [MoreVarDeclList]
@@ -115,10 +274,10 @@ INFO  15:30:12,782 - Program(
         ) [EmptyVarDecl]
         VarDeclList(
           Type(
-           int
+           char
           ) [Type]
           IdentVarDecl(
-           x
+           eol
           ) [IdentVarDecl]
           NoMoreVarDeclList(
           ) [NoMoreVarDeclList]
@@ -129,5 +288,5 @@ INFO  15:30:12,782 - Program(
     ) [MethodDecl]
   ) [ListMethodDecl]
 ) [Program]
-INFO  15:30:12,783 - =====================================================================
-INFO  15:30:12,794 - Parsiranje uspesno zavrseno!
+INFO  12:53:22,422 - =====================================================================
+INFO  12:53:22,429 - Parsiranje uspesno zavrseno!
