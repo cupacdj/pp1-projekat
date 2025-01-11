@@ -1,63 +1,78 @@
-INFO  20:24:03,307 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
-INFO  20:24:03,336 - #6 program
-INFO  20:24:03,336 - #2 Cupac
-INFO  20:24:03,336 - #9 const
-INFO  20:24:03,337 - #2 int
-INFO  20:24:03,337 - #2 pi
-INFO  20:24:03,337 - #11 =
-INFO  20:24:03,337 - #4 3
-INFO  20:24:03,337 - #12 ,
-INFO  20:24:03,338 - #2 g
-INFO  20:24:03,338 - #11 =
-INFO  20:24:03,338 - #4 11
-INFO  20:24:03,338 - #10 ;
-INFO  20:24:03,338 - #2 char
-INFO  20:24:03,339 - #2 x
-INFO  20:24:03,339 - #12 ,
-INFO  20:24:03,339 - #2 y
-INFO  20:24:03,339 - #13 [
-INFO  20:24:03,339 - #14 ]
-INFO  20:24:03,339 - #10 ;
-INFO  20:24:03,339 - #9 const
-INFO  20:24:03,340 - #2 bool
-INFO  20:24:03,340 - #2 t
-INFO  20:24:03,358 - #11 =
-INFO  20:24:03,358 - #5 1
-INFO  20:24:03,358 - #10 ;
-INFO  20:24:03,358 - #7 {
-INFO  20:24:03,358 - #15 void
-INFO  20:24:03,359 - #2 main
-INFO  20:24:03,359 - #16 (
-INFO  20:24:03,359 - #17 )
-INFO  20:24:03,359 - #2 int
-INFO  20:24:03,361 - #2 a
-INFO  20:24:03,361 - #12 ,
-INFO  20:24:03,361 - #2 b
-INFO  20:24:03,361 - #13 [
-INFO  20:24:03,361 - #14 ]
-INFO  20:24:03,361 - #10 ;
-INFO  20:24:03,361 - #2 int
-INFO  20:24:03,361 - #2 x
-INFO  20:24:03,362 - #13 [
-INFO  20:24:03,362 - #14 ]
-INFO  20:24:03,362 - #12 ,
-INFO  20:24:03,362 - #2 y
-INFO  20:24:03,362 - #10 ;
-INFO  20:24:03,363 - #2 char
-INFO  20:24:03,363 - #2 eol
-INFO  20:24:03,363 - #10 ;
-INFO  20:24:03,363 - #7 {
-INFO  20:24:03,363 - #32 print
-INFO  20:24:03,363 - #16 (
-INFO  20:24:03,363 - #2 x
-INFO  20:24:03,363 - #13 [
-INFO  20:24:03,365 - #4 5
-INFO  20:24:03,365 - #14 ]
-INFO  20:24:03,366 - #17 )
-INFO  20:24:03,366 - #10 ;
-INFO  20:24:03,367 - #8 }
-INFO  20:24:03,367 - #8 }
-INFO  20:24:03,372 - Program(
+INFO  19:40:46,358 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  19:40:46,389 - #6 program
+INFO  19:40:46,389 - #2 Cupac
+INFO  19:40:46,389 - #9 const
+INFO  19:40:46,390 - #2 int
+INFO  19:40:46,390 - #2 pi
+INFO  19:40:46,390 - #11 =
+INFO  19:40:46,390 - #4 3
+INFO  19:40:46,390 - #12 ,
+INFO  19:40:46,391 - #2 g
+INFO  19:40:46,391 - #11 =
+INFO  19:40:46,391 - #4 11
+INFO  19:40:46,391 - #10 ;
+INFO  19:40:46,391 - #2 char
+INFO  19:40:46,391 - #2 x
+INFO  19:40:46,392 - #12 ,
+INFO  19:40:46,392 - #2 y
+INFO  19:40:46,392 - #13 [
+INFO  19:40:46,392 - #14 ]
+INFO  19:40:46,392 - #10 ;
+INFO  19:40:46,392 - #9 const
+INFO  19:40:46,393 - #2 bool
+INFO  19:40:46,393 - #2 t
+INFO  19:40:46,393 - #11 =
+INFO  19:40:46,393 - #5 1
+INFO  19:40:46,393 - #10 ;
+INFO  19:40:46,393 - #7 {
+INFO  19:40:46,393 - #2 int
+INFO  19:40:46,393 - #2 square
+INFO  19:40:46,394 - #16 (
+INFO  19:40:46,394 - #2 char
+INFO  19:40:46,394 - #2 a
+INFO  19:40:46,394 - #17 )
+INFO  19:40:46,395 - #2 int
+INFO  19:40:46,395 - #2 x
+INFO  19:40:46,395 - #10 ;
+INFO  19:40:46,395 - #7 {
+INFO  19:40:46,395 - #30 return
+INFO  19:40:46,396 - #2 a
+INFO  19:40:46,396 - #10 ;
+INFO  19:40:46,396 - #8 }
+INFO  19:40:46,397 - #15 void
+INFO  19:40:46,397 - #2 main
+INFO  19:40:46,397 - #16 (
+INFO  19:40:46,397 - #17 )
+INFO  19:40:46,398 - #2 int
+INFO  19:40:46,398 - #2 a
+INFO  19:40:46,398 - #12 ,
+INFO  19:40:46,398 - #2 b
+INFO  19:40:46,398 - #13 [
+INFO  19:40:46,398 - #14 ]
+INFO  19:40:46,398 - #10 ;
+INFO  19:40:46,398 - #2 int
+INFO  19:40:46,398 - #2 x
+INFO  19:40:46,398 - #13 [
+INFO  19:40:46,398 - #14 ]
+INFO  19:40:46,398 - #12 ,
+INFO  19:40:46,398 - #2 y
+INFO  19:40:46,398 - #10 ;
+INFO  19:40:46,398 - #2 char
+INFO  19:40:46,398 - #2 eol
+INFO  19:40:46,398 - #10 ;
+INFO  19:40:46,398 - #2 int
+INFO  19:40:46,398 - #2 result
+INFO  19:40:46,399 - #10 ;
+INFO  19:40:46,399 - #7 {
+INFO  19:40:46,399 - #2 result
+INFO  19:40:46,399 - #11 =
+INFO  19:40:46,399 - #2 square
+INFO  19:40:46,399 - #18 map
+INFO  19:40:46,399 - #2 x
+INFO  19:40:46,399 - #10 ;
+INFO  19:40:46,400 - #8 }
+INFO  19:40:46,400 - #8 }
+INFO  19:40:46,404 - Program(
   ProgName(
    Cupac
   ) [ProgName]
@@ -119,8 +134,71 @@ INFO  20:24:03,372 - Program(
     ) [ConstDeclList]
   ) [CConstVarDeclList]
   ListMethodDecl(
-    NoMethodDeclList(
-    ) [NoMethodDeclList]
+    ListMethodDecl(
+      NoMethodDeclList(
+      ) [NoMethodDeclList]
+      MethodDecl(
+        MethodSignatureList(
+          TypeSignature(
+            Type(
+             int
+            ) [Type]
+           square
+          ) [TypeSignature]
+          ZeroFormParsList(
+            FormParsList(
+              FormParVar(
+                Type(
+                 char
+                ) [Type]
+               a
+              ) [FormParVar]
+              NoMoreFormParsList(
+              ) [NoMoreFormParsList]
+            ) [FormParsList]
+          ) [ZeroFormParsList]
+        ) [MethodSignatureList]
+        EmptyVarDecl(
+          NoEmptyVarDecl(
+          ) [NoEmptyVarDecl]
+          VarDeclList(
+            Type(
+             int
+            ) [Type]
+            IdentVarDecl(
+             x
+            ) [IdentVarDecl]
+            NoMoreVarDeclList(
+            ) [NoMoreVarDeclList]
+          ) [VarDeclList]
+        ) [EmptyVarDecl]
+        ListStatement(
+          NoStatementList(
+          ) [NoStatementList]
+          StatementReturn(
+            ZeroExpr(
+              ListExpr(
+                TermAddopExprTerm(
+                  Term(
+                    FactorMulopTerm(
+                      NoFactorListMinus(
+                        FactorDesignator(
+                          DesignatorIdent(
+                           a
+                          ) [DesignatorIdent]
+                          NoActParsFactor(
+                          ) [NoActParsFactor]
+                        ) [FactorDesignator]
+                      ) [NoFactorListMinus]
+                    ) [FactorMulopTerm]
+                  ) [Term]
+                ) [TermAddopExprTerm]
+              ) [ListExpr]
+            ) [ZeroExpr]
+          ) [StatementReturn]
+        ) [ListStatement]
+      ) [MethodDecl]
+    ) [ListMethodDecl]
     MethodDecl(
       MethodSignatureList(
         VoidSignature(
@@ -132,19 +210,36 @@ INFO  20:24:03,372 - Program(
       EmptyVarDecl(
         EmptyVarDecl(
           EmptyVarDecl(
-            NoEmptyVarDecl(
-            ) [NoEmptyVarDecl]
+            EmptyVarDecl(
+              NoEmptyVarDecl(
+              ) [NoEmptyVarDecl]
+              VarDeclList(
+                Type(
+                 int
+                ) [Type]
+                IdentVarDecl(
+                 a
+                ) [IdentVarDecl]
+                MoreVarDeclList(
+                  ArrayVarDecl(
+                   b
+                  ) [ArrayVarDecl]
+                  NoMoreVarDeclList(
+                  ) [NoMoreVarDeclList]
+                ) [MoreVarDeclList]
+              ) [VarDeclList]
+            ) [EmptyVarDecl]
             VarDeclList(
               Type(
                int
               ) [Type]
-              IdentVarDecl(
-               a
-              ) [IdentVarDecl]
+              ArrayVarDecl(
+               x
+              ) [ArrayVarDecl]
               MoreVarDeclList(
-                ArrayVarDecl(
-                 b
-                ) [ArrayVarDecl]
+                IdentVarDecl(
+                 y
+                ) [IdentVarDecl]
                 NoMoreVarDeclList(
                 ) [NoMoreVarDeclList]
               ) [MoreVarDeclList]
@@ -152,26 +247,21 @@ INFO  20:24:03,372 - Program(
           ) [EmptyVarDecl]
           VarDeclList(
             Type(
-             int
+             char
             ) [Type]
-            ArrayVarDecl(
-             x
-            ) [ArrayVarDecl]
-            MoreVarDeclList(
-              IdentVarDecl(
-               y
-              ) [IdentVarDecl]
-              NoMoreVarDeclList(
-              ) [NoMoreVarDeclList]
-            ) [MoreVarDeclList]
+            IdentVarDecl(
+             eol
+            ) [IdentVarDecl]
+            NoMoreVarDeclList(
+            ) [NoMoreVarDeclList]
           ) [VarDeclList]
         ) [EmptyVarDecl]
         VarDeclList(
           Type(
-           char
+           int
           ) [Type]
           IdentVarDecl(
-           eol
+           result
           ) [IdentVarDecl]
           NoMoreVarDeclList(
           ) [NoMoreVarDeclList]
@@ -180,43 +270,28 @@ INFO  20:24:03,372 - Program(
       ListStatement(
         NoStatementList(
         ) [NoStatementList]
-        StatementPrint1(
-          ListExpr(
-            Term(
-              NoFactorListMinus(
-                FactorDesignator(
-                  DesignatorExpr(
-                    DesignatorArray(
-                     x
-                    ) [DesignatorArray]
-                    ListExpr(
-                      Term(
-                        NoFactorListMinus(
-                          FactorNum(
-                           5
-                          ) [FactorNum]
-                        ) [NoFactorListMinus]
-                        NoMulopTerm(
-                        ) [NoMulopTerm]
-                      ) [Term]
-                      NoAddopExprTerm(
-                      ) [NoAddopExprTerm]
-                    ) [ListExpr]
-                  ) [DesignatorExpr]
-                  NoActParsFactor(
-                  ) [NoActParsFactor]
-                ) [FactorDesignator]
-              ) [NoFactorListMinus]
-              NoMulopTerm(
-              ) [NoMulopTerm]
-            ) [Term]
-            NoAddopExprTerm(
-            ) [NoAddopExprTerm]
-          ) [ListExpr]
-        ) [StatementPrint1]
+        SingleStatementDsg(
+          ListDesignatorStatement(
+            DesignatorIdent(
+             result
+            ) [DesignatorIdent]
+            DesignatorAssignExpr(
+              Assignop(
+              ) [Assignop]
+              ExprMap(
+                DesignatorIdent(
+                 square
+                ) [DesignatorIdent]
+                DesignatorIdent(
+                 x
+                ) [DesignatorIdent]
+              ) [ExprMap]
+            ) [DesignatorAssignExpr]
+          ) [ListDesignatorStatement]
+        ) [SingleStatementDsg]
       ) [ListStatement]
     ) [MethodDecl]
   ) [ListMethodDecl]
 ) [Program]
-INFO  20:24:03,372 - =====================================================================
-INFO  20:24:03,378 - Parsiranje uspesno zavrseno!
+INFO  19:40:46,404 - =====================================================================
+INFO  19:40:46,409 - Parsiranje uspesno zavrseno!

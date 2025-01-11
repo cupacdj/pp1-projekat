@@ -90,11 +90,6 @@ nonterminal ConditionDesignator ConditionDesignator;
 nonterminal ActParsList ActParsList;
 nonterminal ActPars ActPars;
 nonterminal ActParsZero ActParsZero;
-nonterminal Condition Condition;
-nonterminal CondTermList CondTermList;
-nonterminal CondTerm CondTerm;
-nonterminal CondFactList CondFactList;
-nonterminal CondFact CondFact;
 nonterminal FactorActPars FactorActPars;
 nonterminal Assignop Assignop;
 nonterminal Addop Addop;
@@ -106,6 +101,7 @@ nonterminal rs.etf.pp1.symboltable.concepts.Struct FactorList, Factor;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Term, TermMulFactor;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct ExprList, ExprAddopTerm, ExprZero;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator, DesignatorArray;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Condition, CondTermList, CondTerm, CondFactList, CondFact;
 
 precedence left ELSE;
 
@@ -308,7 +304,7 @@ CondFact ::=  (CondFactExpr) ExprList:E1 {: RESULT=new CondFactExpr(E1); RESULT.
 
 
 
-ExprList ::= (ListExpr) Term:T1 ExprAddopTerm:E2 {: RESULT=new ListExpr(T1, E2); RESULT.setLine(T1left); :} 
+ExprList ::= (ListExpr) ExprAddopTerm:E1 {: RESULT=new ListExpr(E1); RESULT.setLine(E1left); :} 
 			 |
 			 (ExprMap) Designator:D1 MAP Designator:D2 {: RESULT=new ExprMap(D1, D2); RESULT.setLine(D1left); :}
 			 ;
@@ -316,7 +312,7 @@ ExprList ::= (ListExpr) Term:T1 ExprAddopTerm:E2 {: RESULT=new ListExpr(T1, E2);
 
 ExprAddopTerm ::= (AddopExprTerm) ExprAddopTerm:E1 Addop:A2 Term:T3 {: RESULT=new AddopExprTerm(E1, A2, T3); RESULT.setLine(E1left); :} 
                   |
-                  (NoAddopExprTerm) {: RESULT=new NoAddopExprTerm(); :} /* epsilon */
+                  (TermAddopExprTerm) Term:T1 {: RESULT=new TermAddopExprTerm(T1); RESULT.setLine(T1left); :}
                   ;
 
 ExprZero ::= (ZeroExpr) ExprList:E1 {: RESULT=new ZeroExpr(E1); RESULT.setLine(E1left); :}
@@ -325,11 +321,11 @@ ExprZero ::= (ZeroExpr) ExprList:E1 {: RESULT=new ZeroExpr(E1); RESULT.setLine(E
              ;
                   
 
-Term ::= (Term) FactorList:F1 TermMulFactor:T2 {: RESULT=new Term(F1, T2); RESULT.setLine(F1left); :};
+Term ::= (Term) TermMulFactor:T1 {: RESULT=new Term(T1); RESULT.setLine(T1left); :};
 
 TermMulFactor ::= (MulopTerm) TermMulFactor:T1 Mulop:M2 FactorList:F3 {: RESULT=new MulopTerm(T1, M2, F3); RESULT.setLine(T1left); :} 
                   |
-                  (NoMulopTerm) {: RESULT=new NoMulopTerm(); :} /* epsilon */
+                  (FactorMulopTerm) FactorList:F1 {: RESULT=new FactorMulopTerm(F1); RESULT.setLine(F1left); :}
                   ;
                   
 FactorList ::= (FactorListMinus) MINUS Factor:F1 {: RESULT=new FactorListMinus(F1); RESULT.setLine(F1left); :}

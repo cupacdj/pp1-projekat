@@ -59,7 +59,7 @@ public class Compiler {
 			
 			
 			// Semanticka analiza 
-			SemanticPass sp = new SemanticPass();
+			SemanticAnalyzer sp = new SemanticAnalyzer();
 			prog.traverseBottomUp(sp);
 			
 			// Ispis tabele simbola 

@@ -7,7 +7,7 @@ import rs.etf.pp1.symboltable.Tab;
 import rs.etf.pp1.symboltable.concepts.Obj;
 import rs.etf.pp1.symboltable.concepts.Struct;
 
-public class SemanticPass extends VisitorAdaptor {
+public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	Logger log = Logger.getLogger(getClass());
 	
@@ -161,12 +161,11 @@ public class SemanticPass extends VisitorAdaptor {
 	}
 	
 	@Override
-	public void visit(MethodDecl methodDecl) {
+	public void visit(MethodDecl methodDecl) {	
 		Tab.chainLocalSymbols(currMethod);
 		Tab.closeScope();
 		currMethod = null;
 	}
-	
 	
 	
 	//FORMAL PARAMETER DECLARATION
@@ -185,6 +184,7 @@ public class SemanticPass extends VisitorAdaptor {
 			varObj = Tab.insert(Obj.Var, varName, currType);
 			varObj.setFpPos(1);
 			currMethod.setLevel(currMethod.getLevel() + 1);
+			
             
 		}else {
 			report_error("GRESKA: Dovstruja definicija formalnog parametra - " + varName, formParVar);
@@ -231,6 +231,8 @@ public class SemanticPass extends VisitorAdaptor {
 	
 	// CONTECST CONDITIONS
 
+	//FACTOR
+	
 	@Override
 	public void visit(FactorChar factorChar) {
 		factorChar.struct = Tab.charType;
@@ -284,6 +286,9 @@ public class SemanticPass extends VisitorAdaptor {
 	}
 	
 	
+	
+	//DESIGNATOR
+	
 	@Override
 	public void visit(DesignatorIdent designatorIdent) {
 		String ident = designatorIdent.getI1();
@@ -291,10 +296,11 @@ public class SemanticPass extends VisitorAdaptor {
 		if (obj == Tab.noObj) {
 			report_error("GRESKA: Identifikator - " + ident + " - nije definisan", designatorIdent);
 			designatorIdent.obj = Tab.noObj;
-		} else if (obj.getKind() != Obj.Var && obj.getKind() != Obj.Con) {
-			report_error("GRESKA: Identifikator - " + ident + " - nije promenljiva ili konstanta", designatorIdent);
-			designatorIdent.obj = Tab.noObj;
-		}
+		} 
+//		else if (obj.getKind() != Obj.Var && obj.getKind() != Obj.Con) {
+//			report_error("GRESKA: Identifikator - " + ident + " - nije promenljiva ili konstanta", designatorIdent);
+//			designatorIdent.obj = Tab.noObj;
+//		}
 		else {
 			designatorIdent.obj = obj;
 		}
@@ -321,12 +327,124 @@ public class SemanticPass extends VisitorAdaptor {
 		Obj obj = designatorExpr.getDesignatorArray().obj;
 		if(obj == Tab.noObj) {
 			designatorExpr.obj = Tab.noObj;
-		} else if(!designatorExpr.getExprList().equals(Tab.intType)) {
-            report_error("GRESKA: Indeks niza nije tipa int", designatorExpr);
-            designatorExpr.obj = Tab.noObj;
-		}
-		else {
+		} else if(designatorExpr.getExprList().struct.equals(Tab.intType)) {
 			designatorExpr.obj = new Obj(Obj.Elem, obj.getName() + "{$}", obj.getType().getElemType());
 		}
+		else {
+			report_error("GRESKA: Indeks niza nije tipa int", designatorExpr);
+            designatorExpr.obj = Tab.noObj;
+		}
 	}
+	
+
+	
+	//TERM
+
+	@Override
+	public void visit(Term term) {
+		term.struct = term.getTermMulFactor().struct;
+	}
+	
+	@Override
+	public void visit(MulopTerm mulTerm) {
+		Struct term = mulTerm.getTermMulFactor().struct;
+		Struct factor = mulTerm.getFactorList().struct;
+		if(term.equals(Tab.intType) && factor.equals(Tab.intType))
+			mulTerm.struct = Tab.intType;
+		else {
+			report_error("Obe variable moraju da budu int vrednost (Mulop)", mulTerm);
+			mulTerm.struct = Tab.noType;
+		}
+	}
+
+	@Override
+	public void visit(FactorMulopTerm term) {
+		term.struct = term.getFactorList().struct;
+	}
+	
+    
+	
+	//EXPR
+	
+	@Override
+	public void visit(ListExpr listExpr) {
+		listExpr.struct = listExpr.getExprAddopTerm().struct;
+	}
+	
+	@Override
+	public void visit(AddopExprTerm addopExprTerm) {
+		Struct expr = addopExprTerm.getExprAddopTerm().struct;
+		Struct term = addopExprTerm.getTerm().struct;
+		if (expr.equals(Tab.intType) && term.equals(Tab.intType))
+			addopExprTerm.struct = Tab.intType;
+		else {
+			report_error("Obe variable moraju da budu int vrednost (Addop)", addopExprTerm);
+			addopExprTerm.struct = Tab.noType;
+		}
+	}
+	
+	@Override
+	public void visit(TermAddopExprTerm expr) {
+		expr.struct = expr.getTerm().struct;
+	}
+	
+	@Override
+	public void visit(ExprMap exprMap) {
+		Obj desg1 = exprMap.getDesignator().obj;
+		Obj desg2 = exprMap.getDesignator1().obj;
+		
+		if(desg1.getKind() != Obj.Meth) {
+			report_error("GRESKA: Levi designator - " + desg1.getName() + " - nije metoda", exprMap);
+			exprMap.struct = Tab.noType;
+			return;
+		}
+		
+		Obj methodObj = Tab.find(desg1.getName());
+		if(methodObj == null) {
+			report_error("GRESKA: Identifikator - " + desg1.getName() + " - nije pronadjen", exprMap);
+            exprMap.struct = Tab.noType;
+            return;
+        } else if(!methodObj.getType().equals(Tab.intType)){
+			report_error("GRESKA: Povratna vrednost metode - " + desg1.getName() + " - nije tipa int", exprMap);
+			exprMap.struct = Tab.noType;
+			return;
+        } else if(methodObj.getLevel() != 1) {
+        	report_error("GRESKA: Metoda - " + desg1.getName() + " - mora da ima samo jedan parametar", exprMap);
+        	exprMap.struct = Tab.noType;
+        	return;
+        } //else if(methodObj.ge)
+		if(desg2.getType().getKind() != Struct.Array) {
+			report_error("GRESKA: Desni designator - " + desg2.getName() + " - nije niz", exprMap);
+			exprMap.struct = Tab.noType;
+			return;
+		}
+		
+		exprMap.struct = Tab.intType;
+	}
+	
+	
+	
+	//CONDITIONS
+	
+	public void visit(CondFactExprRelop condFact) {
+		Struct expr1 = condFact.getExprList().struct;
+        Struct expr2 = condFact.getExprList1().struct;
+        if(!expr1.compatibleWith(expr2)) {
+        	report_error("GRESKA: Tipovi nisu kompatibilni", condFact);
+        	condFact.struct = Tab.noType;
+        	return;
+        	
+		} else if ((expr1.getKind() == (Struct.Array)) && (expr2.getKind() == (Struct.Array))) {
+			if (condFact.getRelop() instanceof RelopEq || condFact.getRelop() instanceof RelopNe) {
+				condFact.struct = boolType;
+			} else {
+				report_error("GRESKA: Nizovi ne mogu da se porede sa tim operatorom", condFact);
+				condFact.struct = Tab.noType;
+				return;
+				
+			}
+		}
+        condFact.struct = boolType;  
+	}
+	
 }

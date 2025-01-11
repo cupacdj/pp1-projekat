@@ -35,6 +35,7 @@ import java_cup.runtime.Symbol;
 "\b" 	{ }
 "\t" 	{ }
 "\r\n" 	{ }
+"\n" 	{ }
 "\f" 	{ }
 
 "program"   { return new_symbol(sym.PROG, yytext()); }
@@ -57,7 +58,7 @@ import java_cup.runtime.Symbol;
 "++"        { return new_symbol(sym.INC, yytext()); }
 "-"         { return new_symbol(sym.MINUS, yytext()); }
 "--"        { return new_symbol(sym.DEC, yytext()); }
-"*"         { return new_symbol(sym.MUL, yytext()); }
+"*"         { return new_symbol(sym.MUL, yytext()); }	
 "/"         { return new_symbol(sym.DIV, yytext()); }
 "%"         { return new_symbol(sym.MOD, yytext()); }
 "="         { return new_symbol(sym.ASSIGN, yytext()); }

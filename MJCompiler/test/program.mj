@@ -7,8 +7,12 @@ char x, y[];
 const bool t = true;
 {
 	
-	void main() int a, b[]; int x[], y; char eol;{
-		print(x[5]);
+	 int square(char a)int x; {
+        return a;
+    }
+	
+	void main() int a, b[]; int x[], y; char eol; int result;{
+		result = square map x;
 	}
     
 

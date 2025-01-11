@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 10/0/2025 18:58:12
+// 11/0/2025 20:30:57
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -29,8 +29,8 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(Condition Condition) { }
     public void visit(FormParsListZero FormParsListZero) { }
     public void visit(DesignatorStatementList DesignatorStatementList) { }
-    public void visit(FactorActPars FactorActPars) { }
     public void visit(ConstDeclListMore ConstDeclListMore) { }
+    public void visit(FactorActPars FactorActPars) { }
     public void visit(ExprList ExprList) { }
     public void visit(ActPars ActPars) { }
     public void visit(DesignatorStatement DesignatorStatement) { }
@@ -69,12 +69,12 @@ public abstract class VisitorAdaptor implements Visitor {
     public void visit(FactorDesignator FactorDesignator) { visit(); }
     public void visit(NoFactorListMinus NoFactorListMinus) { visit(); }
     public void visit(FactorListMinus FactorListMinus) { visit(); }
-    public void visit(NoMulopTerm NoMulopTerm) { visit(); }
+    public void visit(FactorMulopTerm FactorMulopTerm) { visit(); }
     public void visit(MulopTerm MulopTerm) { visit(); }
     public void visit(Term Term) { visit(); }
     public void visit(NoZeroExpr NoZeroExpr) { visit(); }
     public void visit(ZeroExpr ZeroExpr) { visit(); }
-    public void visit(NoAddopExprTerm NoAddopExprTerm) { visit(); }
+    public void visit(TermAddopExprTerm TermAddopExprTerm) { visit(); }
     public void visit(AddopExprTerm AddopExprTerm) { visit(); }
     public void visit(ExprMap ExprMap) { visit(); }
     public void visit(ListExpr ListExpr) { visit(); }

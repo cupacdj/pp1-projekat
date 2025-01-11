@@ -68,7 +68,6 @@ nonterminal FormParsList, FormParsListMore, FormParsListZero, FormPar;
 nonterminal StatementList, Statement, StatementElse;
 nonterminal DesignatorStatementList, DesignatorStatement, ConditionDesignator;
 nonterminal ActParsList, ActPars, ActParsZero;
-nonterminal Condition, CondTermList, CondTerm, CondFactList, CondFact;
 nonterminal FactorActPars;
 nonterminal Assignop, Addop, Mulop, Relop, Setop;
 
@@ -76,6 +75,7 @@ nonterminal rs.etf.pp1.symboltable.concepts.Struct FactorList, Factor;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Term, TermMulFactor;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct ExprList, ExprAddopTerm, ExprZero;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator, DesignatorArray;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Condition, CondTermList, CondTerm, CondFactList, CondFact;
 
 precedence left ELSE;
 
@@ -278,7 +278,7 @@ CondFact ::=  (CondFactExpr) ExprList
 
 
 
-ExprList ::= (ListExpr) Term ExprAddopTerm 
+ExprList ::= (ListExpr) ExprAddopTerm 
 			 |
 			 (ExprMap) Designator MAP Designator
 			 ;
@@ -286,7 +286,7 @@ ExprList ::= (ListExpr) Term ExprAddopTerm
 
 ExprAddopTerm ::= (AddopExprTerm) ExprAddopTerm Addop Term 
                   |
-                  (NoAddopExprTerm) /* epsilon */
+                  (TermAddopExprTerm) Term
                   ;
 
 ExprZero ::= (ZeroExpr) ExprList
@@ -295,11 +295,11 @@ ExprZero ::= (ZeroExpr) ExprList
              ;
                   
 
-Term ::= (Term) FactorList TermMulFactor;
+Term ::= (Term) TermMulFactor;
 
 TermMulFactor ::= (MulopTerm) TermMulFactor Mulop FactorList 
                   |
-                  (NoMulopTerm) /* epsilon */
+                  (FactorMulopTerm) FactorList
                   ;
                   
 FactorList ::= (FactorListMinus) MINUS Factor
