@@ -1,25 +1,36 @@
 // generated with ast extension for cup
 // version 0.8
-// 11/0/2025 20:30:57
+// 13/0/2025 18:27:16
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class DesignatorActPars extends DesignatorStatement {
 
-    private ActParsZero ActParsZero;
+    private Designator Designator;
+    private ActParsList ActParsList;
 
-    public DesignatorActPars (ActParsZero ActParsZero) {
-        this.ActParsZero=ActParsZero;
-        if(ActParsZero!=null) ActParsZero.setParent(this);
+    public DesignatorActPars (Designator Designator, ActParsList ActParsList) {
+        this.Designator=Designator;
+        if(Designator!=null) Designator.setParent(this);
+        this.ActParsList=ActParsList;
+        if(ActParsList!=null) ActParsList.setParent(this);
     }
 
-    public ActParsZero getActParsZero() {
-        return ActParsZero;
+    public Designator getDesignator() {
+        return Designator;
     }
 
-    public void setActParsZero(ActParsZero ActParsZero) {
-        this.ActParsZero=ActParsZero;
+    public void setDesignator(Designator Designator) {
+        this.Designator=Designator;
+    }
+
+    public ActParsList getActParsList() {
+        return ActParsList;
+    }
+
+    public void setActParsList(ActParsList ActParsList) {
+        this.ActParsList=ActParsList;
     }
 
     public void accept(Visitor visitor) {
@@ -27,16 +38,19 @@ public class DesignatorActPars extends DesignatorStatement {
     }
 
     public void childrenAccept(Visitor visitor) {
-        if(ActParsZero!=null) ActParsZero.accept(visitor);
+        if(Designator!=null) Designator.accept(visitor);
+        if(ActParsList!=null) ActParsList.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
-        if(ActParsZero!=null) ActParsZero.traverseTopDown(visitor);
+        if(Designator!=null) Designator.traverseTopDown(visitor);
+        if(ActParsList!=null) ActParsList.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
-        if(ActParsZero!=null) ActParsZero.traverseBottomUp(visitor);
+        if(Designator!=null) Designator.traverseBottomUp(visitor);
+        if(ActParsList!=null) ActParsList.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -45,8 +59,14 @@ public class DesignatorActPars extends DesignatorStatement {
         buffer.append(tab);
         buffer.append("DesignatorActPars(\n");
 
-        if(ActParsZero!=null)
-            buffer.append(ActParsZero.toString("  "+tab));
+        if(Designator!=null)
+            buffer.append(Designator.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
+        buffer.append("\n");
+
+        if(ActParsList!=null)
+            buffer.append(ActParsList.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

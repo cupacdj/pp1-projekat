@@ -1,39 +1,15 @@
 // generated with ast extension for cup
 // version 0.8
-// 11/0/2025 20:30:57
+// 13/0/2025 18:27:16
 
 
 package rs.ac.bg.etf.pp1.ast;
 
-public class ActParsList implements SyntaxNode {
+public abstract class ActParsList implements SyntaxNode {
 
     private SyntaxNode parent;
+
     private int line;
-    private ExprList ExprList;
-    private ActPars ActPars;
-
-    public ActParsList (ExprList ExprList, ActPars ActPars) {
-        this.ExprList=ExprList;
-        if(ExprList!=null) ExprList.setParent(this);
-        this.ActPars=ActPars;
-        if(ActPars!=null) ActPars.setParent(this);
-    }
-
-    public ExprList getExprList() {
-        return ExprList;
-    }
-
-    public void setExprList(ExprList ExprList) {
-        this.ExprList=ExprList;
-    }
-
-    public ActPars getActPars() {
-        return ActPars;
-    }
-
-    public void setActPars(ActPars ActPars) {
-        this.ActPars=ActPars;
-    }
 
     public SyntaxNode getParent() {
         return parent;
@@ -51,46 +27,11 @@ public class ActParsList implements SyntaxNode {
         this.line=line;
     }
 
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
+    public abstract void accept(Visitor visitor);
+    public abstract void childrenAccept(Visitor visitor);
+    public abstract void traverseTopDown(Visitor visitor);
+    public abstract void traverseBottomUp(Visitor visitor);
 
-    public void childrenAccept(Visitor visitor) {
-        if(ExprList!=null) ExprList.accept(visitor);
-        if(ActPars!=null) ActPars.accept(visitor);
-    }
-
-    public void traverseTopDown(Visitor visitor) {
-        accept(visitor);
-        if(ExprList!=null) ExprList.traverseTopDown(visitor);
-        if(ActPars!=null) ActPars.traverseTopDown(visitor);
-    }
-
-    public void traverseBottomUp(Visitor visitor) {
-        if(ExprList!=null) ExprList.traverseBottomUp(visitor);
-        if(ActPars!=null) ActPars.traverseBottomUp(visitor);
-        accept(visitor);
-    }
-
-    public String toString(String tab) {
-        StringBuffer buffer=new StringBuffer();
-        buffer.append(tab);
-        buffer.append("ActParsList(\n");
-
-        if(ExprList!=null)
-            buffer.append(ExprList.toString("  "+tab));
-        else
-            buffer.append(tab+"  null");
-        buffer.append("\n");
-
-        if(ActPars!=null)
-            buffer.append(ActPars.toString("  "+tab));
-        else
-            buffer.append(tab+"  null");
-        buffer.append("\n");
-
-        buffer.append(tab);
-        buffer.append(") [ActParsList]");
-        return buffer.toString();
-    }
+    public String toString() { return toString(""); }
+    public abstract String toString(String tab);
 }

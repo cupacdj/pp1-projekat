@@ -1,13 +1,31 @@
 // generated with ast extension for cup
 // version 0.8
-// 11/0/2025 20:30:57
+// 13/0/2025 18:27:16
 
 
 package rs.ac.bg.etf.pp1.ast;
 
-public class NoZeroExpr extends ExprZero {
+public class DoVisit implements SyntaxNode {
 
-    public NoZeroExpr () {
+    private SyntaxNode parent;
+    private int line;
+    public DoVisit () {
+    }
+
+    public SyntaxNode getParent() {
+        return parent;
+    }
+
+    public void setParent(SyntaxNode parent) {
+        this.parent=parent;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public void setLine(int line) {
+        this.line=line;
     }
 
     public void accept(Visitor visitor) {
@@ -28,10 +46,10 @@ public class NoZeroExpr extends ExprZero {
     public String toString(String tab) {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
-        buffer.append("NoZeroExpr(\n");
+        buffer.append("DoVisit(\n");
 
         buffer.append(tab);
-        buffer.append(") [NoZeroExpr]");
+        buffer.append(") [DoVisit]");
         return buffer.toString();
     }
 }

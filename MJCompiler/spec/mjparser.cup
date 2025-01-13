@@ -65,15 +65,15 @@ nonterminal ConstDeclList, ConstDecl, Constant, ConstDeclListMore;
 nonterminal VarDeclList, VarDecl, VarDeclListMore, VarDeclEmpty;
 nonterminal MethodDeclList, MethodDecl, MethodSignature, MethodSignatureList, MethodName;
 nonterminal FormParsList, FormParsListMore, FormParsListZero, FormPar;
-nonterminal StatementList, Statement, StatementElse;
+nonterminal StatementList, Statement, StatementElse, DoVisit;
 nonterminal DesignatorStatementList, DesignatorStatement, ConditionDesignator;
-nonterminal ActParsList, ActPars, ActParsZero;
 nonterminal FactorActPars;
+nonterminal ActParsList, ActPars, ActPar, ActParsListBegin;
 nonterminal Assignop, Addop, Mulop, Relop, Setop;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Struct FactorList, Factor;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Term, TermMulFactor;
-nonterminal rs.etf.pp1.symboltable.concepts.Struct ExprList, ExprAddopTerm, ExprZero;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct ExprList, ExprAddopTerm;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator, DesignatorArray;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Condition, CondTermList, CondTerm, CondFactList, CondFact;
 
@@ -193,7 +193,9 @@ Statement ::= (SingleStatementDsg) DesignatorStatementList SEMI
 					|
 					(StatementContinue) CONTINUE SEMI
 					|
-			  		(StatementReturn) RETURN ExprZero SEMI
+			  		(StatementReturn) RETURN SEMI
+			  		|
+			  		(StatementReturnExpr) RETURN ExprList SEMI
 			  		|
 			  		(StatementRead) READ LPAREN Designator RPAREN SEMI
 			  		|
@@ -201,10 +203,12 @@ Statement ::= (SingleStatementDsg) DesignatorStatementList SEMI
 			  		|
 			  		(StatementPrint2) PRINT LPAREN ExprList COMMA NUM RPAREN SEMI
 			  		|
-			  		(StatementDo) DO Statement WHILE LPAREN ConditionDesignator RPAREN SEMI
+			  		(StatementDo) DoVisit Statement WHILE LPAREN ConditionDesignator RPAREN SEMI
 					|
 					(StatementRepeat) LBRACE StatementList RBRACE 
 			  		;
+
+DoVisit ::= (DoVisit) DO;
 
 StatementElse ::= (ElseStmtYes) ELSE Statement
 				  |
@@ -220,36 +224,39 @@ ConditionDesignator ::= (CondDesignator) Condition
 
 
 
-DesignatorStatementList ::= (ListDesignatorStatement) Designator DesignatorStatement
+DesignatorStatementList ::= (ListDesignatorStatement) DesignatorStatement
 							|
 							(DesignatorAssignopSetop) Designator Assignop Designator Setop Designator
 							;
 
-DesignatorStatement ::= (DesignatorAssignExpr) Assignop ExprList
+DesignatorStatement ::= (DesignatorAssignExpr) Designator Assignop ExprList
                     	|
                     	(ErrorDesignatorStatement) error:e
                     	{: parser.report_error("Oporavak od greske u konstrukciji dodele. Linija: " + eleft, null); :}
                     	|
-                    	(DesignatorActPars) LPAREN ActParsZero RPAREN
+                    	(DesignatorActPars) Designator LPAREN ActParsList RPAREN
                      	|
-                    	(DesignatorINC) INC
+                    	(DesignatorINC) Designator INC
                    		|
-                    	(DesignatorDEC) DEC
+                    	(DesignatorDEC) Designator DEC
                     	;
 
 
 
-ActParsList ::= (ActParsList) ExprList ActPars;
+ActParsList ::= (ListActPars) ActParsListBegin ActPar ActPars
+                |
+                (NoActParsList) ActParsListBegin
+                ;
 
-ActPars ::= (ActParsRepeat) COMMA ExprList ActPars
+ActParsListBegin ::= (ActParsListBegin) /* epsilon */;
+
+ActPars ::= (ActParsRepeat) COMMA ActPar ActPars
             |
             (NoActPars) /* epsilon */
             ;
 
-ActParsZero ::= (ZeroActPars) ActParsList
-                |
-                (NoZeroActPars) /* epsilon */
-                ;
+
+ActPar ::= (ActPar) ExprList;
 
 
 
@@ -258,6 +265,7 @@ Condition ::= (ConditionC) CondTermList
               (ErrorCondition) error:c
               {: parser.report_error("Oporavak od greske u logickom izrazu IF-a. Linija: " + cleft, null); :}	
               ;
+
 
 CondTermList ::= (JustCondTermList) CondTerm
                  |
@@ -288,11 +296,6 @@ ExprAddopTerm ::= (AddopExprTerm) ExprAddopTerm Addop Term
                   |
                   (TermAddopExprTerm) Term
                   ;
-
-ExprZero ::= (ZeroExpr) ExprList
-             |
-			 (NoZeroExpr) /* epsilon */
-             ;
                   
 
 Term ::= (Term) TermMulFactor;
@@ -321,7 +324,7 @@ Factor ::= (FactorDesignator) Designator FactorActPars
            (FactorExpr) LPAREN ExprList RPAREN
            ;
 
-FactorActPars ::= (ActParsFactor) LPAREN ActParsZero RPAREN
+FactorActPars ::= (ActParsFactor) LPAREN ActParsList RPAREN
                   |
                   (NoActParsFactor) /* epsilon */
                   ;

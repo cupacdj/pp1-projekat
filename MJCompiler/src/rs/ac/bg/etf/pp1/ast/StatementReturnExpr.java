@@ -1,15 +1,15 @@
 // generated with ast extension for cup
 // version 0.8
-// 11/0/2025 20:30:57
+// 13/0/2025 18:27:16
 
 
 package rs.ac.bg.etf.pp1.ast;
 
-public class ZeroExpr extends ExprZero {
+public class StatementReturnExpr extends Statement {
 
     private ExprList ExprList;
 
-    public ZeroExpr (ExprList ExprList) {
+    public StatementReturnExpr (ExprList ExprList) {
         this.ExprList=ExprList;
         if(ExprList!=null) ExprList.setParent(this);
     }
@@ -43,7 +43,7 @@ public class ZeroExpr extends ExprZero {
     public String toString(String tab) {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
-        buffer.append("ZeroExpr(\n");
+        buffer.append("StatementReturnExpr(\n");
 
         if(ExprList!=null)
             buffer.append(ExprList.toString("  "+tab));
@@ -52,7 +52,7 @@ public class ZeroExpr extends ExprZero {
         buffer.append("\n");
 
         buffer.append(tab);
-        buffer.append(") [ZeroExpr]");
+        buffer.append(") [StatementReturnExpr]");
         return buffer.toString();
     }
 }

@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 11/0/2025 20:30:57
+// 13/0/2025 18:27:16
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -10,11 +10,9 @@ public interface Visitor {
     public void visit(Mulop Mulop);
     public void visit(Constant Constant);
     public void visit(Relop Relop);
-    public void visit(ActParsZero ActParsZero);
     public void visit(CondTermList CondTermList);
     public void visit(FormParsListMore FormParsListMore);
     public void visit(StatementElse StatementElse);
-    public void visit(ExprZero ExprZero);
     public void visit(MethodSignature MethodSignature);
     public void visit(StatementList StatementList);
     public void visit(FactorList FactorList);
@@ -27,6 +25,7 @@ public interface Visitor {
     public void visit(ExprAddopTerm ExprAddopTerm);
     public void visit(MethodName MethodName);
     public void visit(Condition Condition);
+    public void visit(ActParsList ActParsList);
     public void visit(FormParsListZero FormParsListZero);
     public void visit(DesignatorStatementList DesignatorStatementList);
     public void visit(ConstDeclListMore ConstDeclListMore);
@@ -72,8 +71,6 @@ public interface Visitor {
     public void visit(FactorMulopTerm FactorMulopTerm);
     public void visit(MulopTerm MulopTerm);
     public void visit(Term Term);
-    public void visit(NoZeroExpr NoZeroExpr);
-    public void visit(ZeroExpr ZeroExpr);
     public void visit(TermAddopExprTerm TermAddopExprTerm);
     public void visit(AddopExprTerm AddopExprTerm);
     public void visit(ExprMap ExprMap);
@@ -87,11 +84,12 @@ public interface Visitor {
     public void visit(JustCondTermList JustCondTermList);
     public void visit(ErrorCondition ErrorCondition);
     public void visit(ConditionC ConditionC);
-    public void visit(NoZeroActPars NoZeroActPars);
-    public void visit(ZeroActPars ZeroActPars);
+    public void visit(ActPar ActPar);
     public void visit(NoActPars NoActPars);
     public void visit(ActParsRepeat ActParsRepeat);
-    public void visit(ActParsList ActParsList);
+    public void visit(ActParsListBegin ActParsListBegin);
+    public void visit(NoActParsList NoActParsList);
+    public void visit(ListActPars ListActPars);
     public void visit(DesignatorDEC DesignatorDEC);
     public void visit(DesignatorINC DesignatorINC);
     public void visit(DesignatorActPars DesignatorActPars);
@@ -104,11 +102,13 @@ public interface Visitor {
     public void visit(CondDesignator CondDesignator);
     public void visit(ElseStmtNo ElseStmtNo);
     public void visit(ElseStmtYes ElseStmtYes);
+    public void visit(DoVisit DoVisit);
     public void visit(StatementRepeat StatementRepeat);
     public void visit(StatementDo StatementDo);
     public void visit(StatementPrint2 StatementPrint2);
     public void visit(StatementPrint1 StatementPrint1);
     public void visit(StatementRead StatementRead);
+    public void visit(StatementReturnExpr StatementReturnExpr);
     public void visit(StatementReturn StatementReturn);
     public void visit(StatementContinue StatementContinue);
     public void visit(StatementBreak StatementBreak);

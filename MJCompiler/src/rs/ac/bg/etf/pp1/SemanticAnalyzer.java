@@ -1,5 +1,8 @@
 package rs.ac.bg.etf.pp1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import rs.ac.bg.etf.pp1.ast.*;
@@ -17,8 +20,11 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	private int constant;
 	private Struct constType;
 	private Struct boolType = Tab.find("bool").getType();
+	private Struct setType = Tab.find("set").getType();
 	private Obj currMethod;
 	private Obj main;
+	private boolean hasReturn;
+	private int loopCnt = 0;
 	
 	/* LOG MESSAGES */
 	
@@ -164,8 +170,12 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	public void visit(MethodDecl methodDecl) {	
 		Tab.chainLocalSymbols(currMethod);
 		Tab.closeScope();
+		if (currMethod.getType() != Tab.noType && !hasReturn)
+			report_error("GRESKA: Metoda - " + currMethod.getName() + " - nema return iskaz", methodDecl);
 		currMethod = null;
+		hasReturn = false;
 	}
+	
 	
 	
 	//FORMAL PARAMETER DECLARATION
@@ -250,7 +260,46 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	@Override
 	public void visit(FactorDesignator factorDesignator) {
-		factorDesignator.struct = factorDesignator.getDesignator().obj.getType();
+		if(factorDesignator.getFactorActPars() instanceof NoActParsFactor)
+			factorDesignator.struct = factorDesignator.getDesignator().obj.getType();
+		else {
+			if (factorDesignator.getDesignator().obj.getKind() != Obj.Meth) {
+				report_error("GRESKA: Identifikator - " + factorDesignator.getDesignator().obj.getName() + " - nije metoda", factorDesignator);
+				factorDesignator.struct = Tab.noType;
+			} else {
+				Obj desgObj = factorDesignator.getDesignator().obj;
+				
+				factorDesignator.struct = desgObj.getType();
+				
+				List<Struct> formalList = new ArrayList<>();
+				for (Obj param : desgObj.getLocalSymbols()) {
+					if(param.getKind() == Obj.Var && param.getLevel() == 1 && param.getFpPos() == 1) {
+						formalList.add(param.getType());
+					}
+				}
+				ParamsCounter paramsCounter = new ParamsCounter();
+				factorDesignator.getFactorActPars().traverseBottomUp(paramsCounter);
+				List<Struct> actualList = paramsCounter.finalParams;
+
+				
+				try {
+//					report_info("Poziv metode: " + desgObj.getName() + " broj ap - " + actualList.size(), desg);
+//					report_info("Poziv metode: " + desgObj.getName() + " broj fp - " + formalList.size(), desg);
+					if(formalList.size() != actualList.size()) {
+						throw new Exception("GRESKA: Neodgovarajuci broj parametara");
+					}
+					for(int i = 0; i < formalList.size(); i++) {
+						Struct formal = formalList.get(i);
+						Struct actual = actualList.get(i);
+						if (!actual.assignableTo(formal)) {
+							throw new Exception("GRESKA: Neodgovarajuci tip parametara");
+						}
+					}
+				} catch (Exception e) {
+					report_error(e.getMessage(), factorDesignator);
+				}
+			}
+		}
 	}
 	
 
@@ -297,10 +346,10 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			report_error("GRESKA: Identifikator - " + ident + " - nije definisan", designatorIdent);
 			designatorIdent.obj = Tab.noObj;
 		} 
-//		else if (obj.getKind() != Obj.Var && obj.getKind() != Obj.Con) {
-//			report_error("GRESKA: Identifikator - " + ident + " - nije promenljiva ili konstanta", designatorIdent);
-//			designatorIdent.obj = Tab.noObj;
-//		}
+		else if (obj.getKind() != Obj.Var && obj.getKind() != Obj.Con && obj.getKind() != Obj.Meth) {
+			report_error("GRESKA: Identifikator - " + ident + " - nije promenljiva ili konstanta", designatorIdent);
+			designatorIdent.obj = Tab.noObj;
+		}
 		else {
 			designatorIdent.obj = obj;
 		}
@@ -328,7 +377,8 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		if(obj == Tab.noObj) {
 			designatorExpr.obj = Tab.noObj;
 		} else if(designatorExpr.getExprList().struct.equals(Tab.intType)) {
-			designatorExpr.obj = new Obj(Obj.Elem, obj.getName() + "{$}", obj.getType().getElemType());
+			designatorExpr.obj = new Obj(Obj.Elem, obj.getName() , obj.getType().getElemType());
+			//report_info("Pristup elementu niza - " + designatorExpr.obj.getName() + " Kind: "+ designatorExpr.obj.getKind(), designatorExpr);
 		}
 		else {
 			report_error("GRESKA: Indeks niza nije tipa int", designatorExpr);
@@ -352,7 +402,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		if(term.equals(Tab.intType) && factor.equals(Tab.intType))
 			mulTerm.struct = Tab.intType;
 		else {
-			report_error("Obe variable moraju da budu int vrednost (Mulop)", mulTerm);
+			report_error("GRESKA: Obe variable moraju da budu int vrednost (Mulop)", mulTerm);
 			mulTerm.struct = Tab.noType;
 		}
 	}
@@ -375,10 +425,15 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	public void visit(AddopExprTerm addopExprTerm) {
 		Struct expr = addopExprTerm.getExprAddopTerm().struct;
 		Struct term = addopExprTerm.getTerm().struct;
+		if(!expr.compatibleWith(term)) {
+			report_error("GRESKA: Tipovi nisu kompatibilni", addopExprTerm);
+			addopExprTerm.struct = Tab.noType;
+			return;
+		}
 		if (expr.equals(Tab.intType) && term.equals(Tab.intType))
 			addopExprTerm.struct = Tab.intType;
 		else {
-			report_error("Obe variable moraju da budu int vrednost (Addop)", addopExprTerm);
+			report_error("GRESKA: Obe variable moraju da budu int vrednost (Addop)", addopExprTerm);
 			addopExprTerm.struct = Tab.noType;
 		}
 	}
@@ -386,6 +441,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	@Override
 	public void visit(TermAddopExprTerm expr) {
 		expr.struct = expr.getTerm().struct;
+		
 	}
 	
 	@Override
@@ -412,7 +468,15 @@ public class SemanticAnalyzer extends VisitorAdaptor {
         	report_error("GRESKA: Metoda - " + desg1.getName() + " - mora da ima samo jedan parametar", exprMap);
         	exprMap.struct = Tab.noType;
         	return;
-        } //else if(methodObj.ge)
+        } else if(methodObj.getLevel() == 1) {
+			for(Obj param : desg1.getLocalSymbols()) {
+				if (param.getType() != Tab.intType) {
+					report_error("GRESKA: Parametar metode - " + desg1.getName() + " - nije tipa int", exprMap);
+					exprMap.struct = Tab.noType;
+					return;
+				}
+			}
+        }
 		if(desg2.getType().getKind() != Struct.Array) {
 			report_error("GRESKA: Desni designator - " + desg2.getName() + " - nije niz", exprMap);
 			exprMap.struct = Tab.noType;
@@ -420,11 +484,176 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 		
 		exprMap.struct = Tab.intType;
+		
 	}
 	
 	
 	
+	
+	//DESIGNATOR STATEMENTS
+	
+	@Override
+	public void visit(DesignatorAssignExpr desg) {
+		Obj desgObj = desg.getDesignator().obj;
+		Struct expr = desg.getExprList().struct;
+		if (desgObj.getKind() != Obj.Var && desgObj.getKind() != Obj.Elem) {
+			report_error("GRESKA: Dodela u neadekvatnu promenljivu - " + desgObj.getName(), desg);
+		} else if (!expr.assignableTo(desgObj.getType())) {
+			report_error("GRESKA: Neadekvatna dodela vrednosti u promenjivu - i" + desgObj.getName(), desg);
+		}
+	}
+	
+	@Override
+	public void visit(DesignatorINC desg) {
+		Obj desgObj = desg.getDesignator().obj;
+		if (desgObj.getKind() != Obj.Var && desgObj.getKind() != Obj.Elem) {
+			report_error("GRESKA: Inkrementiranje neadekvatne promenljive - " + desgObj.getName(), desg);
+		} else if (!desgObj.getType().equals(Tab.intType)) {
+			report_error("GRESKA: Inkrementiranje promenljive koja nije tipa int - " + desgObj.getName(), desg);
+		}
+	}
+	
+	@Override
+	public void visit(DesignatorDEC desg) {
+		Obj desgObj = desg.getDesignator().obj;
+		if (desgObj.getKind() != Obj.Var && desgObj.getKind() != Obj.Elem) {
+			report_error("GRESKA: Dekrementiranje neadekvatne promenljive - " + desgObj.getName(), desg);
+		} else if (!desgObj.getType().equals(Tab.intType)) {
+			report_error("GRESKA: Dekrementiranje promenljive koja nije tipa int - " + desgObj.getName(), desg);
+		}
+	}
+	
+	@Override
+	public void visit(DesignatorActPars desg) {
+		Obj desgObj = desg.getDesignator().obj;
+		if (desgObj.getKind() != Obj.Meth) {
+			report_error("GRESKA: Poziv metode nad promenljivom koja nije metoda - " + desgObj.getName(), desg);
+		} else {
+			List<Struct> formalList = new ArrayList<>();
+			for (Obj param : desgObj.getLocalSymbols()) {
+				if(param.getKind() == Obj.Var && param.getLevel() == 1 && param.getFpPos() == 1) {
+					formalList.add(param.getType());
+				}
+			}
+			ParamsCounter paramsCounter = new ParamsCounter();
+			desg.getActParsList().traverseBottomUp(paramsCounter);
+			List<Struct> actualList = paramsCounter.finalParams;
+
+			
+			try {
+//				report_info("Poziv metode: " + desgObj.getName() + " broj ap - " + actualList.size(), desg);
+//				report_info("Poziv metode: " + desgObj.getName() + " broj fp - " + formalList.size(), desg);
+				if(formalList.size() != actualList.size()) {
+					throw new Exception("GRESKA: Neodgovarajuci broj parametara");
+				}
+				for(int i = 0; i < formalList.size(); i++) {
+					Struct formal = formalList.get(i);
+					Struct actual = actualList.get(i);
+					if (!actual.assignableTo(formal)) {
+						throw new Exception("GRESKA: Neodgovarajuci tip parametara");
+					}
+				}
+			} catch (Exception e) {
+				report_error(e.getMessage(), desg);
+			}
+		}
+	}
+	
+	
+	
+	
+	//STATEMENTS
+	
+	@Override
+	public void visit(StatementRead stmt) {
+		Obj stmtObj = stmt.getDesignator().obj;
+		if (stmtObj.getKind() != Obj.Var && stmtObj.getKind() != Obj.Elem) {
+			report_error("GRESKA: Read operacija neadekvatne promenljive - " + stmtObj.getName(), stmt);
+		} else if (!stmtObj.getType().equals(Tab.intType) && !stmtObj.getType().equals(Tab.charType) && !stmtObj.getType().equals(boolType)) {
+			report_error("GRESKA: Read operacija promenljive koja nije dobrog tipa - " + stmtObj.getName(), stmt);
+		}
+	}
+	
+	@Override
+	public void visit(StatementPrint1 stmt) {
+		Struct stmtStruct = stmt.getExprList().struct;
+		if (!stmtStruct.equals(Tab.intType) && !stmtStruct.equals(Tab.charType) && !stmtStruct.equals(boolType) && !stmtStruct.equals(setType)) {
+			report_error("GRESKA: Print operacija promenljive koja nije dobrog tipa ", stmt);
+		}
+	}
+	
+	@Override
+	public void visit(StatementPrint2 stmt) {
+		Struct stmtStruct = stmt.getExprList().struct;
+		if (!stmtStruct.equals(Tab.intType) && !stmtStruct.equals(Tab.charType) && !stmtStruct.equals(boolType) && !stmtStruct.equals(setType)) {
+			report_error("GRESKA: Print operacija promenljive koja nije dobrog tipa ", stmt);
+		}
+	}
+	
+	@Override
+	public void visit(StatementReturn rtrn) {
+		hasReturn = true;
+		if(currMethod == null) {
+			report_error("GRESKA: Return van metode", rtrn);
+			return;
+		}
+		if(currMethod.getType() != Tab.noType) {
+			report_error("GRESKA: Nevalidan return unutar metode - " + currMethod.getName() , rtrn);
+		} 
+	}
+	
+	@Override
+	public void visit(StatementReturnExpr rtrn) {
+		hasReturn = true;
+		if(currMethod == null) {
+			report_error("GRESKA: Return van metode", rtrn);
+			return;
+		}
+		if (!currMethod.getType().equals(rtrn.getExprList().struct)) {
+			report_error("GRESKA: Nevalidan return unutar metode (pogresna vrednost) - " + currMethod.getName(), rtrn);
+		}
+ 
+	}
+	
+	@Override
+	public void visit(DoVisit doVisit) {
+		loopCnt++;
+	}
+	
+	@Override
+	public void visit(StatementDo stmt) {
+		loopCnt--;
+	}
+	
+	@Override
+	public void visit(StatementBreak stmt) {
+		if (loopCnt == 0) {
+			report_error("GRESKA: Break van petlje", stmt);
+		}
+	}
+	
+	@Override
+	public void visit(StatementContinue stmt) {
+		if (loopCnt == 0) {
+			report_error("GRESKA: Continue van petlje", stmt);
+		}
+	}
+	
+	
+	
+	
 	//CONDITIONS
+	
+	@Override
+	public void visit(CondFactExpr cond) {
+		Struct expr = cond.getExprList().struct;
+		if (!expr.equals(boolType)) {
+			report_error("GRESKA: Logicki operand nije tipa bool", cond);
+			cond.struct = Tab.noType;
+			return;
+		}
+		cond.struct = boolType;
+	}
 	
 	public void visit(CondFactExprRelop condFact) {
 		Struct expr1 = condFact.getExprList().struct;
@@ -446,5 +675,59 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
         condFact.struct = boolType;  
 	}
+	
+	//AND
+	
+	@Override
+	public void visit(JustCondTermList cond) {
+		cond.struct = cond.getCondTerm().struct;
+	}
+	
+	@Override
+	public void visit(CondTermListOr cond) {
+		Struct cond1 = cond.getCondTermList().struct;
+		Struct cond2 = cond.getCondTerm().struct;
+		if (cond1.equals(boolType) && cond2.equals(boolType))
+			cond.struct = boolType;
+		else {
+			report_error("GRESKA: OR operacija mora da ima bool vrednosti", cond);
+			cond.struct = Tab.noType;
+		}
+	}
+	
+	// OR
+	
+	@Override
+	public void visit(ConditionC cond) {
+		cond.struct = cond.getCondTermList().struct;
+		
+	}
+	
+	@Override
+	public void visit(JustCondFactList cond) {
+		cond.struct = cond.getCondFact().struct;
+	}
+	
+	@Override
+	public void visit(CondFactListAnd cond) {
+		Struct cond1 = cond.getCondFactList().struct;
+		Struct cond2 = cond.getCondFact().struct;
+		if (cond1.equals(boolType) && cond2.equals(boolType))
+			cond.struct = boolType;
+		else {
+			report_error("GRESKA: And operacija mora da ima bool vrednosti", cond);
+			cond.struct = Tab.noType;
+		}
+	}
+	
+	@Override
+	public void visit(CondTerm cond) {
+		cond.struct = cond.getCondFactList().struct;
+		if (!cond.struct.equals(boolType)) {
+			report_error("GRESKA: Logicki operand nije tipa bool", cond);
+		}
+		
+	}
+	
 	
 }
