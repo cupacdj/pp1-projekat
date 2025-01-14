@@ -52,10 +52,16 @@ public class Compiler {
 			
 			// inicijalizacija tabele simbola 
 			Tab.init();
+			
 			Struct boolType = new Struct(Struct.Bool);
 			Obj boolObj = Tab.insert(Obj.Type, "bool", boolType);
 			boolObj.setAdr(-1);
 			boolObj.setLevel(-1);
+			
+			Struct setType = new Struct(Struct.Class);
+			Obj setObj = Tab.insert(Obj.Type, "set", setType);
+			setObj.setAdr(-1);
+			setObj.setLevel(-1);
 			
 			
 			// Semanticka analiza 

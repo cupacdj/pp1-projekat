@@ -234,6 +234,9 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			report_error("GRESKA: Identifikator - " + typeName + " - nije tip podatka", type);
 			currType = Tab.noType;
 		} else {
+//			if(typeObj.getType().equals(setType)) {
+//				report_info("Type set ", type);
+//			}
 			currType = typeObj.getType();
 		}
 	}
@@ -283,8 +286,6 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 
 				
 				try {
-//					report_info("Poziv metode: " + desgObj.getName() + " broj ap - " + actualList.size(), desg);
-//					report_info("Poziv metode: " + desgObj.getName() + " broj fp - " + formalList.size(), desg);
 					if(formalList.size() != actualList.size()) {
 						throw new Exception("GRESKA: Neodgovarajuci broj parametara");
 					}
@@ -293,7 +294,8 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 						Struct actual = actualList.get(i);
 						if (!actual.assignableTo(formal)) {
 							throw new Exception("GRESKA: Neodgovarajuci tip parametara");
-						}
+						}		
+						//report_info("Poziv metode - " + desgObj.getName(), factorDesignator);
 					}
 				} catch (Exception e) {
 					report_error(e.getMessage(), factorDesignator);
@@ -321,9 +323,11 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	@Override
 	public void visit(FactorNew factor) {
-		if (factor.getExprList().struct.equals(Tab.intType)) {
+		Struct expr = factor.getExprList().struct;
+		if (expr.equals(Tab.intType)) {
 			factor.struct = new Struct(Struct.Array, currType);
-		} else {
+		} 
+		else {
 			report_error("GRESKA: Velicina niza nije tipa int", factor);
 			factor.struct = Tab.noType;
 		}
@@ -498,8 +502,12 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		Struct expr = desg.getExprList().struct;
 		if (desgObj.getKind() != Obj.Var && desgObj.getKind() != Obj.Elem) {
 			report_error("GRESKA: Dodela u neadekvatnu promenljivu - " + desgObj.getName(), desg);
-		} else if (!expr.assignableTo(desgObj.getType())) {
-			report_error("GRESKA: Neadekvatna dodela vrednosti u promenjivu - i" + desgObj.getName(), desg);
+		} 
+		else if(currType.equals(setType)) {
+			return;
+		}
+		else if (!expr.assignableTo(desgObj.getType())) {
+			report_error("GRESKA: Neadekvatna dodela vrednosti u promenjivu - " + desgObj.getName(), desg);
 		}
 	}
 	
@@ -541,8 +549,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 
 			
 			try {
-//				report_info("Poziv metode: " + desgObj.getName() + " broj ap - " + actualList.size(), desg);
-//				report_info("Poziv metode: " + desgObj.getName() + " broj fp - " + formalList.size(), desg);
+
 				if(formalList.size() != actualList.size()) {
 					throw new Exception("GRESKA: Neodgovarajuci broj parametara");
 				}
@@ -552,10 +559,21 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 					if (!actual.assignableTo(formal)) {
 						throw new Exception("GRESKA: Neodgovarajuci tip parametara");
 					}
+					report_info("Poziv metode - " + desgObj.getName(), desg);
 				}
 			} catch (Exception e) {
 				report_error(e.getMessage(), desg);
 			}
+		}
+	}
+	
+	@Override
+	public void visit(DesignatorAssignopSetop desg) {
+		Obj desg1 = desg.getDesignator().obj;
+		Obj desg2 = desg.getDesignator1().obj;
+		Obj desg3 = desg.getDesignator2().obj;
+		if (!desg1.getType().equals(setType) || !desg2.getType().equals(setType) || !desg3.getType().equals(setType)) {
+			report_error("GRESKA: Neki designator nije set", desg);
 		}
 	}
 	
