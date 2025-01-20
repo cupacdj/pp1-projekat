@@ -39,18 +39,18 @@ import java_cup.runtime.Symbol;
 "\f" 	{ }
 
 "program"   { return new_symbol(sym.PROG, yytext()); }
-"return"    { return new_symbol(sym.RETURN, yytext()); }
 "print"     { return new_symbol(sym.PRINT, yytext()); }
+"return"    { return new_symbol(sym.RETURN, yytext()); }
 "const"     { return new_symbol(sym.CONST, yytext()); }
 "new"       { return new_symbol(sym.NEW, yytext()); }
-"read"      { return new_symbol(sym.READ, yytext()); }
 "void"      { return new_symbol(sym.VOID, yytext()); }
-"break"     { return new_symbol(sym.BREAK, yytext()); }
-"else"      { return new_symbol(sym.ELSE, yytext()); }
+"read"      { return new_symbol(sym.READ, yytext()); }
 "if"        { return new_symbol(sym.IF, yytext()); }
+"else"      { return new_symbol(sym.ELSE, yytext()); }
 "do"        { return new_symbol(sym.DO, yytext()); }
 "while"     { return new_symbol(sym.WHILE, yytext()); }
 "continue"  { return new_symbol(sym.CONTINUE, yytext()); }
+"break"     { return new_symbol(sym.BREAK, yytext()); }
 "union"     { return new_symbol(sym.UNION, yytext()); }
 "map"       { return new_symbol(sym.MAP, yytext()); }
 

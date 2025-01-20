@@ -14,6 +14,7 @@ import org.apache.log4j.xml.DOMConfigurator;
 
 import rs.ac.bg.etf.pp1.ast.*;
 import rs.ac.bg.etf.pp1.util.Log4JUtils;
+import rs.etf.pp1.mj.runtime.Code;
 import rs.etf.pp1.symboltable.*;
 import rs.etf.pp1.symboltable.concepts.Obj;
 import rs.etf.pp1.symboltable.concepts.Struct;
@@ -65,17 +66,27 @@ public class Compiler {
 			
 			
 			// Semanticka analiza 
-			SemanticAnalyzer sp = new SemanticAnalyzer();
-			prog.traverseBottomUp(sp);
+			SemanticAnalyzer sa = new SemanticAnalyzer();
+			prog.traverseBottomUp(sa);
 			
 			// Ispis tabele simbola 
 			Tab.dump();
 
 			
-			if(!p.errorDetected & sp.passed()){
-				log.info("Parsiranje uspesno zavrseno!");
+			if(!p.errorDetected & sa.passed()){
+				// Generisanje koda
+				File objFile = new File("test/program.obj");
+				if(objFile.exists()) objFile.delete();
+				
+				CodeGenerator code = new CodeGenerator();
+				prog.traverseBottomUp(code);
+				Code.dataSize = sa.nVars;
+				Code.mainPc = code.getmPc();
+				Code.write(new FileOutputStream(objFile));
+				
+				log.info("Generisanje koda uspesno zavrseno!");
 			}else{
-				log.error("Parsiranje NIJE uspesno zavrseno!");
+				log.error("Generisanje koda NIJE uspesno zavrseno!");
 			}
 			
 		} 

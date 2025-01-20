@@ -1,82 +1,14 @@
-program Cupac
+program Cupac 
 
-const int pi = 3, g = 11;
-
-char x, y[];
-
-const bool t = true;
+const int pi = 3;
+int c, y[];
 {
+
+	void main() {
 	
-	int square(int a)int x; {
-        return a;
-    }
+		print(1);
 	
-	
-	void main() int a, b[]; int x[], y; char eol; int result;{
-		result = square map x;
-		a = 3 + b[2]*2;
-		x = new int[5];
-		x[2] = a;
-		x[3]= x[4];
-		x = null;
-		
-		x[2]++;
-		a--;
-		
-		read(a);
-		read(eol);
-		read(x[2]);
-		
-		print(1, 4);
-		print(a, 4);
-		print(eol, 4);
-		print(false, 4);
-		
-		print(x[3], 4);
-		
-		if (b != null) a++;
-        
 	}
-	
-	bool m1(int fp1, char fp2[], bool fp3) int a, b[]; int x[], y; char eol;{
-	
-	   //m2(); error
-	   return false;
-    }
-    
-    int m2()int a; bool b; { 
-    	
-    	return 2; 
-    	//a = m1(); error
-    	//b = m1();
-    	
-    	do {
-    	    break;
-    	    continue;
-    		do {
-    	    	break;
-    	
-    		} while (true);
-    		break;
-    		continue;
-    	} while (true);
-    	
-    	square(6);
-    	if(true && a == 2 || b && a < 2) a++;
-    	
-    }
-    
-    int f1(int x) {
-    	return x;
-    }
-    int f2(int x, bool b, char c) int a;{
-    	return f1(x) + a + 1;
-    }
-    
-    int f3() {
-        f2(f2(3, true, 'a'), false, 'b');
-        return 1;
-    }
-    
 
 }
+

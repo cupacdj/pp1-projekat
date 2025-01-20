@@ -1,0 +1,104 @@
+INFO  18:43:00,455 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  18:43:00,506 - #6 program
+INFO  18:43:00,506 - #2 Cupac
+INFO  18:43:00,506 - #9 const
+INFO  18:43:00,508 - #2 int
+INFO  18:43:00,508 - #2 pi
+INFO  18:43:00,509 - #11 =
+INFO  18:43:00,510 - #4 3
+INFO  18:43:00,510 - #10 ;
+INFO  18:43:00,510 - #2 int
+INFO  18:43:00,511 - #2 c
+INFO  18:43:00,511 - #12 ,
+INFO  18:43:00,511 - #2 y
+INFO  18:43:00,511 - #13 [
+INFO  18:43:00,511 - #14 ]
+INFO  18:43:00,511 - #10 ;
+INFO  18:43:00,512 - #7 {
+INFO  18:43:00,513 - #15 void
+INFO  18:43:00,514 - #2 main
+INFO  18:43:00,514 - #16 (
+INFO  18:43:00,514 - #17 )
+INFO  18:43:00,515 - #7 {
+INFO  18:43:00,515 - #32 print
+INFO  18:43:00,516 - #16 (
+INFO  18:43:00,516 - #4 1
+INFO  18:43:00,516 - #17 )
+INFO  18:43:00,517 - #10 ;
+INFO  18:43:00,517 - #8 }
+INFO  18:43:00,517 - #8 }
+INFO  18:43:00,519 - Program(
+  ProgName(
+   Cupac
+  ) [ProgName]
+  VConstVarDeclList(
+    CConstVarDeclList(
+      NoConstVarDeclList(
+      ) [NoConstVarDeclList]
+      ConstDeclList(
+        Type(
+         int
+        ) [Type]
+        ConstDeclConst(
+         pi
+          NumConst(
+           3
+          ) [NumConst]
+        ) [ConstDeclConst]
+        NoMoreConstDeclList(
+        ) [NoMoreConstDeclList]
+      ) [ConstDeclList]
+    ) [CConstVarDeclList]
+    VarDeclList(
+      Type(
+       int
+      ) [Type]
+      IdentVarDecl(
+       c
+      ) [IdentVarDecl]
+      MoreVarDeclList(
+        ArrayVarDecl(
+         y
+        ) [ArrayVarDecl]
+        NoMoreVarDeclList(
+        ) [NoMoreVarDeclList]
+      ) [MoreVarDeclList]
+    ) [VarDeclList]
+  ) [VConstVarDeclList]
+  ListMethodDecl(
+    NoMethodDeclList(
+    ) [NoMethodDeclList]
+    MethodDecl(
+      MethodSignatureList(
+        VoidSignature(
+         main
+        ) [VoidSignature]
+        NoFormParsListZero(
+        ) [NoFormParsListZero]
+      ) [MethodSignatureList]
+      NoEmptyVarDecl(
+      ) [NoEmptyVarDecl]
+      ListStatement(
+        NoStatementList(
+        ) [NoStatementList]
+        StatementPrint1(
+          ListExpr(
+            TermAddopExprTerm(
+              Term(
+                FactorMulopTerm(
+                  NoFactorListMinus(
+                    FactorNum(
+                     1
+                    ) [FactorNum]
+                  ) [NoFactorListMinus]
+                ) [FactorMulopTerm]
+              ) [Term]
+            ) [TermAddopExprTerm]
+          ) [ListExpr]
+        ) [StatementPrint1]
+      ) [ListStatement]
+    ) [MethodDecl]
+  ) [ListMethodDecl]
+) [Program]
+INFO  18:43:00,520 - =====================================================================
+INFO  18:43:00,533 - Generisanje koda uspesno zavrseno!

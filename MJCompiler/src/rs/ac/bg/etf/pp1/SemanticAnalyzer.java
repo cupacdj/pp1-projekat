@@ -25,6 +25,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	private Obj main;
 	private boolean hasReturn;
 	private int loopCnt = 0;
+	int nVars;
 	
 	/* LOG MESSAGES */
 	
@@ -60,6 +61,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	@Override
 	public void visit(Program program) {
+		nVars = Tab.currentScope().getnVars();
 		Tab.chainLocalSymbols(currProgam);
 		Tab.closeScope();
 		currProgam = null;
@@ -506,7 +508,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		else if(currType.equals(setType)) {
 			return;
 		}
-		else if (!expr.assignableTo(desgObj.getType())) {
+		else if(!expr.assignableTo(desgObj.getType())) {
 			report_error("GRESKA: Neadekvatna dodela vrednosti u promenjivu - " + desgObj.getName(), desg);
 		}
 	}
