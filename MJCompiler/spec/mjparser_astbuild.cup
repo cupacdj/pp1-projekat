@@ -63,7 +63,6 @@ terminal UNION;
 nonterminal Program Program;
 nonterminal ProgName ProgName;
 nonterminal ConstVarDeclList ConstVarDeclList;
-nonterminal Type Type;
 nonterminal ConstDeclList ConstDeclList;
 nonterminal ConstDecl ConstDecl;
 nonterminal Constant Constant;
@@ -74,7 +73,6 @@ nonterminal VarDeclListMore VarDeclListMore;
 nonterminal VarDeclEmpty VarDeclEmpty;
 nonterminal MethodDeclList MethodDeclList;
 nonterminal MethodDecl MethodDecl;
-nonterminal MethodSignature MethodSignature;
 nonterminal MethodSignatureList MethodSignatureList;
 nonterminal MethodName MethodName;
 nonterminal FormParsList FormParsList;
@@ -99,10 +97,10 @@ nonterminal Mulop Mulop;
 nonterminal Relop Relop;
 nonterminal Setop Setop;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Struct FactorList, Factor;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct FactorList, Factor, Type;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Term, TermMulFactor;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct ExprList, ExprAddopTerm;
-nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator, DesignatorArray;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator, DesignatorArray, MethodSignature;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Condition, CondTermList, CondTerm, CondFactList, CondFact;
 
 precedence left ELSE;

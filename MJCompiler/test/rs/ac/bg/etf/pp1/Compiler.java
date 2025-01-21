@@ -64,6 +64,13 @@ public class Compiler {
 			setObj.setAdr(-1);
 			setObj.setLevel(-1);
 			
+			Obj addObj = Tab.insert(Obj.Meth, "add", Tab.noType);
+			addObj.setAdr(0);
+			addObj.setLevel(2);
+			
+			Obj addAllObj = Tab.insert(Obj.Meth, "addAll", Tab.noType);
+			addAllObj.setAdr(0);
+			addAllObj.setLevel(2);
 			
 			// Semanticka analiza 
 			SemanticAnalyzer sa = new SemanticAnalyzer();

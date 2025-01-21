@@ -155,7 +155,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	@Override
 	public void visit(VoidSignature voidSignature) {
-		currMethod = Tab.insert(Obj.Meth, voidSignature.getI1(), Tab.noType);
+		voidSignature.obj = currMethod = Tab.insert(Obj.Meth, voidSignature.getI1(), Tab.noType);
 		Tab.openScope();
 		
 		if(voidSignature.getI1().equalsIgnoreCase("main"))
@@ -164,7 +164,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	@Override
 	public void visit(TypeSignature typeSignature) {
-		currMethod = Tab.insert(Obj.Meth, typeSignature.getI2(), currType);
+		typeSignature.obj = currMethod = Tab.insert(Obj.Meth, typeSignature.getI2(), currType);
 		Tab.openScope();
 	}
 	
@@ -231,15 +231,15 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		Obj typeObj = Tab.find(typeName);
 		if(typeObj == Tab.noObj) {
             report_error("GRESKA: Nije pronadjen tip podatka - " + typeName, type);
-            currType = Tab.noType;
+            type.struct = currType = Tab.noType;
 		} else if (typeObj.getKind() != Obj.Type) {
 			report_error("GRESKA: Identifikator - " + typeName + " - nije tip podatka", type);
-			currType = Tab.noType;
+			type.struct = currType = Tab.noType;
 		} else {
 //			if(typeObj.getType().equals(setType)) {
 //				report_info("Type set ", type);
 //			}
-			currType = typeObj.getType();
+			type.struct = currType = typeObj.getType();
 		}
 	}
 	
@@ -277,11 +277,34 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 				factorDesignator.struct = desgObj.getType();
 				
 				List<Struct> formalList = new ArrayList<>();
-				for (Obj param : desgObj.getLocalSymbols()) {
-					if(param.getKind() == Obj.Var && param.getLevel() == 1 && param.getFpPos() == 1) {
-						formalList.add(param.getType());
-					}
+				
+				// PROVERI OVO
+				switch(desgObj.getName()){
+					case "ord":
+                        formalList.add(Tab.charType);
+                        break;
+                    case "chr":
+                    	formalList.add(Tab.intType);
+                        break;
+                    case "len":
+						formalList.add(new Struct(Struct.Array, Tab.noType));
+						break;
+					case "add":
+						formalList.add(setType);
+						formalList.add(Tab.intType);
+						break;
+					case "addAll":
+						formalList.add(setType);
+						formalList.add(new Struct(Struct.Array, Tab.intType));
+						break;
+					default:
+						for (Obj param : desgObj.getLocalSymbols()) {
+							if (param.getKind() == Obj.Var && param.getLevel() == 1 && param.getFpPos() == 1) {
+								formalList.add(param.getType());
+							}
+						}
 				}
+				
 				ParamsCounter paramsCounter = new ParamsCounter();
 				factorDesignator.getFactorActPars().traverseBottomUp(paramsCounter);
 				List<Struct> actualList = paramsCounter.finalParams;
@@ -289,6 +312,12 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 				
 				try {
 					if(formalList.size() != actualList.size()) {
+//						report_info("Broj formalnih parametara je " + formalList.size() + " a stvarnih je " + actualList.size(), factorDesignator);
+//						report_info("Poziv metode - " + desgObj.getName(), factorDesignator);
+//						report_info("level " + desgObj.getLevel(),  factorDesignator);
+						for (Obj param : desgObj.getLocalSymbols()) {
+							report_info("Parametar metode - " + param.getName() + " - tipa " + param.getType().getKind() + " level - " + param.getLevel(), factorDesignator);
+						}
 						throw new Exception("GRESKA: Neodgovarajuci broj parametara");
 					}
 					for(int i = 0; i < formalList.size(); i++) {
@@ -540,11 +569,31 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			report_error("GRESKA: Poziv metode nad promenljivom koja nije metoda - " + desgObj.getName(), desg);
 		} else {
 			List<Struct> formalList = new ArrayList<>();
-			for (Obj param : desgObj.getLocalSymbols()) {
-				if(param.getKind() == Obj.Var && param.getLevel() == 1 && param.getFpPos() == 1) {
-					formalList.add(param.getType());
+			switch(desgObj.getName()){
+			case "ord":
+                formalList.add(Tab.charType);
+                break;
+            case "chr":
+            	formalList.add(Tab.intType);
+                break;
+            case "len":
+				formalList.add(new Struct(Struct.Array, Tab.noType));
+				break;
+			case "add":
+				formalList.add(setType);
+				formalList.add(Tab.intType);
+				break;
+			case "addAll":
+				formalList.add(setType);
+				formalList.add(new Struct(Struct.Array, Tab.intType));
+				break;
+			default:
+				for (Obj param : desgObj.getLocalSymbols()) {
+					if (param.getKind() == Obj.Var && param.getLevel() == 1 && param.getFpPos() == 1) {
+						formalList.add(param.getType());
+					}
 				}
-			}
+		}
 			ParamsCounter paramsCounter = new ParamsCounter();
 			desg.getActParsList().traverseBottomUp(paramsCounter);
 			List<Struct> actualList = paramsCounter.finalParams;
@@ -561,7 +610,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 					if (!actual.assignableTo(formal)) {
 						throw new Exception("GRESKA: Neodgovarajuci tip parametara");
 					}
-					report_info("Poziv metode - " + desgObj.getName(), desg);
+					//report_info("Poziv metode - " + desgObj.getName(), desg);
 				}
 			} catch (Exception e) {
 				report_error(e.getMessage(), desg);
@@ -748,6 +797,5 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 		
 	}
-	
-	
+		
 }

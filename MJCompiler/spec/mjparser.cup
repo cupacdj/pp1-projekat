@@ -60,10 +60,10 @@ terminal EQ, NEQ, GT, GTE, LT, LTE;
 terminal UNION;
 
 
-nonterminal Program, ProgName, ConstVarDeclList, Type;
+nonterminal Program, ProgName, ConstVarDeclList;
 nonterminal ConstDeclList, ConstDecl, Constant, ConstDeclListMore;
 nonterminal VarDeclList, VarDecl, VarDeclListMore, VarDeclEmpty;
-nonterminal MethodDeclList, MethodDecl, MethodSignature, MethodSignatureList, MethodName;
+nonterminal MethodDeclList, MethodDecl, MethodSignatureList, MethodName;
 nonterminal FormParsList, FormParsListMore, FormParsListZero, FormPar;
 nonterminal StatementList, Statement, StatementElse, DoVisit;
 nonterminal DesignatorStatementList, DesignatorStatement, ConditionDesignator;
@@ -71,10 +71,10 @@ nonterminal FactorActPars;
 nonterminal ActParsList, ActPars, ActPar, ActParsListBegin;
 nonterminal Assignop, Addop, Mulop, Relop, Setop;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Struct FactorList, Factor;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct FactorList, Factor, Type;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Term, TermMulFactor;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct ExprList, ExprAddopTerm;
-nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator, DesignatorArray;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator, DesignatorArray, MethodSignature;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Condition, CondTermList, CondTerm, CondFactList, CondFact;
 
 precedence left ELSE;

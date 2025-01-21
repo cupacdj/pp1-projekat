@@ -35,7 +35,6 @@ import java_cup.runtime.Symbol;
 "\b" 	{ }
 "\t" 	{ }
 "\r\n" 	{ }
-"\n" 	{ }
 "\f" 	{ }
 
 "program"   { return new_symbol(sym.PROG, yytext()); }
