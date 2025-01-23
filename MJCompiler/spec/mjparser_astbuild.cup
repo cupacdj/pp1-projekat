@@ -322,6 +322,7 @@ ExprAddopTerm ::= (AddopExprTerm) ExprAddopTerm:E1 Addop:A2 Term:T3 {: RESULT=ne
                   |
                   (TermAddopExprTerm) Term:T1 {: RESULT=new TermAddopExprTerm(T1); RESULT.setLine(T1left); :}
                   ;
+    
                   
 
 Term ::= (Term) TermMulFactor:T1 {: RESULT=new Term(T1); RESULT.setLine(T1left); :};
@@ -330,12 +331,13 @@ TermMulFactor ::= (MulopTerm) TermMulFactor:T1 Mulop:M2 FactorList:F3 {: RESULT=
                   |
                   (FactorMulopTerm) FactorList:F1 {: RESULT=new FactorMulopTerm(F1); RESULT.setLine(F1left); :}
                   ;
+                
+                
                   
 FactorList ::= (FactorListMinus) MINUS Factor:F1 {: RESULT=new FactorListMinus(F1); RESULT.setLine(F1left); :}
                |
                (NoFactorListMinus) Factor:F1 {: RESULT=new NoFactorListMinus(F1); RESULT.setLine(F1left); :}
                ;
-	
                   
 Factor ::= (FactorDesignator) Designator:D1 FactorActPars:F2 {: RESULT=new FactorDesignator(D1, F2); RESULT.setLine(D1left); :}
            |
@@ -364,6 +366,8 @@ Designator ::= (DesignatorIdent) IDENT:I1 {: RESULT=new DesignatorIdent(I1); RES
                ;
 				  
 DesignatorArray ::= (DesignatorArray) IDENT:I1 {: RESULT=new DesignatorArray(I1); RESULT.setLine(I1left); :};		  
+
+
 
 
 Assignop ::= (Assignop) ASSIGN {: RESULT=new Assignop(); :};

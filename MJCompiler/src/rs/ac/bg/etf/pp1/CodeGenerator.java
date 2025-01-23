@@ -43,6 +43,8 @@ public class CodeGenerator extends VisitorAdaptor {
 	@Override
 	public void visit(VoidSignature methName) {
 		methName.obj.setAdr(Code.pc);
+		if(methName.getI1().equalsIgnoreCase("main"))
+			this.mPC = Code.pc;
 		Code.put(Code.enter);
 		Code.put(methName.obj.getLevel()); //b1
 		Code.put(methName.obj.getLocalSymbols().size()); //b2
@@ -52,11 +54,9 @@ public class CodeGenerator extends VisitorAdaptor {
 	@Override
 	public void visit(TypeSignature methName) {
 		methName.obj.setAdr(Code.pc);
-		if(methName.getI2().equalsIgnoreCase("main"))
-			this.mPC = Code.pc;
 		Code.put(Code.enter);
 		Code.put(methName.obj.getLevel()); //b1
-		//Code.put(methName.obj.getLocalSymbols().size()); //b2
+		Code.put(methName.obj.getLocalSymbols().size()); //b2
 	}
 	
 	@Override
@@ -93,6 +93,13 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	@Override
+	public void visit(StatementReturnExpr ret) {
+		Struct expr = ret.getExprList().struct;
+		Code.put(Code.exit);
+		Code.put(Code.return_);
+	}
+	
+	@Override
 	public void visit(StatementRead read) {
 		Obj readObj = read.getDesignator().obj;
 		if (readObj.getType().equals(Tab.charType))
@@ -111,9 +118,6 @@ public class CodeGenerator extends VisitorAdaptor {
 		if (desgObj.getKind() == Obj.Elem)
 			Code.put(Code.dup2);
 		// stavljamo promenljivu na stek
-		//if (inc.getDesignator().obj.getName() == "set") 
-		//report_info("Pristup elementima skupa nije podrzan (INC) - " + inc.getDesignator().obj.getName(), inc);
-		
 		Code.load(inc.getDesignator().obj);
 		Code.loadConst(1);
 		// sabiramo promenljivo sa 1
@@ -127,9 +131,6 @@ public class CodeGenerator extends VisitorAdaptor {
 		Obj desgObj = dec.getDesignator().obj;
 		if (desgObj.getKind() == Obj.Elem)
 			Code.put(Code.dup2);
-		//if (dec.getDesignator().obj.getName() == "set") 
-		//report_info("Pristup elementima skupa nije podrzan (DEC) - " + dec.getDesignator().obj.getName(), dec);
-		
 		Code.load(desgObj);
 		Code.loadConst(1);
 		Code.put(Code.sub);
@@ -141,14 +142,22 @@ public class CodeGenerator extends VisitorAdaptor {
 		Code.store(desg.getDesignator().obj);
 	}
 	
+	@Override
+	public void visit(DesignatorActPars desg) {
+		int offset = desg.getDesignator().obj.getAdr() - Code.pc;
+		Code.put(Code.call);
+		Code.put2(offset);
+		
+		// ako nije void metoda skida se sa steka
+		if (desg.getDesignator().obj.getType() != Tab.noType)
+			Code.put(Code.pop);
+	}
+	
 	
 	// DESIGNATOR
 	
 	@Override
 	public void visit(DesignatorArray desg) {
-		//if (desg.obj.getName() == "set") 
-		//report_info("Pristup elementima skupa nije podrzan (ARR) - " + desg.obj.getName(), desg);
-		
 		Code.load(desg.obj);
 	}
 	
@@ -173,10 +182,13 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	@Override
 	public void visit(FactorDesignator fact) {
-		//if (fact.getDesignator().obj.getName() == "set") 
-		//report_info("Pristup elementima skupa nije podrzan (FACDESG) - " + fact.getDesignator().obj.getName(), fact);
-		
-		Code.load(fact.getDesignator().obj);
+		if(fact.getFactorActPars() instanceof NoActParsFactor)
+			Code.load(fact.getDesignator().obj);
+		else {
+			int offset = fact.getDesignator().obj.getAdr() - Code.pc;
+			Code.put(Code.call);
+			Code.put2(offset);
+		}
 	}
 	
 	
@@ -200,6 +212,12 @@ public class CodeGenerator extends VisitorAdaptor {
 			Code.put(1);
 		
 	}
+	
+	@Override
+	public void visit(FactorExpr fact) {
+		// Code.put(Code.dup);
+	}
+	
 	
 	@Override
 	public void visit(AddopExprTerm addop) {

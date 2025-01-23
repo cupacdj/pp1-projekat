@@ -296,6 +296,7 @@ ExprAddopTerm ::= (AddopExprTerm) ExprAddopTerm Addop Term
                   |
                   (TermAddopExprTerm) Term
                   ;
+    
                   
 
 Term ::= (Term) TermMulFactor;
@@ -304,12 +305,13 @@ TermMulFactor ::= (MulopTerm) TermMulFactor Mulop FactorList
                   |
                   (FactorMulopTerm) FactorList
                   ;
+                
+                
                   
 FactorList ::= (FactorListMinus) MINUS Factor
                |
                (NoFactorListMinus) Factor
                ;
-	
                   
 Factor ::= (FactorDesignator) Designator FactorActPars
            |
@@ -338,6 +340,8 @@ Designator ::= (DesignatorIdent) IDENT
                ;
 				  
 DesignatorArray ::= (DesignatorArray) IDENT;		  
+
+
 
 
 Assignop ::= (Assignop) ASSIGN;
