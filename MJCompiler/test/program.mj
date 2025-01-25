@@ -1,3 +1,4 @@
+// Test301
 
 program test301
 
@@ -5,15 +6,26 @@ program test301
 {
 	void main()	
 		int i;
-		int x;
-		int y;
-		int z;
+		int j;
 	{
-		if((y>0 && z>0 )|| x <0) {
-			return;
-		} 
+		i = 5;
+		do{
+			i--;
+			if(i == 1) break;
+			if(i == 3) continue;
+			
+			print(i);
+			j = 3;
+			do{
+				j--;
+				if(j == 0) break;
+				if(j == 2) continue;
+				print(j);
+			} while(j > 0);
+			print(eol);
+		}while( i > 0);
 		
-		
+
 	}
 }
 

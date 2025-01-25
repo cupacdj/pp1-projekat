@@ -82,14 +82,14 @@ public class Compiler {
 			
 			if(!p.errorDetected & sa.passed()){
 				// Generisanje koda
-//				File objFile = new File("test/program.obj");
-//				if(objFile.exists()) objFile.delete();
-//				
-//				CodeGenerator code = new CodeGenerator();
-//				prog.traverseBottomUp(code);
-//				Code.dataSize = sa.nVars;
-//				Code.mainPc = code.getmPc();
-//				Code.write(new FileOutputStream(objFile));
+				File objFile = new File("test/program.obj");
+				if(objFile.exists()) objFile.delete();
+				
+				CodeGenerator code = new CodeGenerator();
+				prog.traverseBottomUp(code);
+				Code.dataSize = sa.nVars;
+				Code.mainPc = code.getmPc();
+				Code.write(new FileOutputStream(objFile));
 				
 				log.info("Generisanje koda uspesno zavrseno!");
 			}else{

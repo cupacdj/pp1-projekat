@@ -569,30 +569,30 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		} else {
 			List<Struct> formalList = new ArrayList<>();
 			switch(desgObj.getName()){
-			case "ord":
-                formalList.add(Tab.charType);
-                break;
-            case "chr":
-            	formalList.add(Tab.intType);
-                break;
-            case "len":
-				formalList.add(new Struct(Struct.Array, Tab.noType));
-				break;
-			case "add":
-				formalList.add(setType);
-				formalList.add(Tab.intType);
-				break;
-			case "addAll":
-				formalList.add(setType);
-				formalList.add(new Struct(Struct.Array, Tab.intType));
-				break;
-			default:
-				for (Obj param : desgObj.getLocalSymbols()) {
-					if (param.getKind() == Obj.Var && param.getLevel() == 1 && param.getFpPos() == 1) {
-						formalList.add(param.getType());
+				case "ord":
+	                formalList.add(Tab.charType);
+	                break;
+	            case "chr":
+	            	formalList.add(Tab.intType);
+	                break;
+	            case "len":
+					formalList.add(new Struct(Struct.Array, Tab.noType));
+					break;
+				case "add":
+					formalList.add(setType);
+					formalList.add(Tab.intType);
+					break;
+				case "addAll":
+					formalList.add(setType);
+					formalList.add(new Struct(Struct.Array, Tab.intType));
+					break;
+				default:
+					for (Obj param : desgObj.getLocalSymbols()) {
+						if (param.getKind() == Obj.Var && param.getLevel() == 1 && param.getFpPos() == 1) {
+							formalList.add(param.getType());
+						}
 					}
-				}
-		}
+			}
 			ParamsCounter paramsCounter = new ParamsCounter();
 			desg.getActParsList().traverseBottomUp(paramsCounter);
 			List<Struct> actualList = paramsCounter.finalParams;

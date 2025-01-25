@@ -70,6 +70,7 @@ nonterminal DesignatorStatementList, DesignatorStatement, ConditionDesignator;
 nonterminal FactorActPars;
 nonterminal ActParsList, ActPars, ActPar, ActParsListBegin;
 nonterminal Assignop, Addop, Mulop, Relop, Setop;
+nonterminal Else, WhileVisit;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Struct FactorList, Factor, Type;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Term, TermMulFactor;
@@ -203,17 +204,21 @@ Statement ::= (SingleStatementDsg) DesignatorStatementList SEMI
 			  		|
 			  		(StatementPrint2) PRINT LPAREN ExprList COMMA NUM RPAREN SEMI
 			  		|
-			  		(StatementDo) DoVisit Statement WHILE LPAREN ConditionDesignator RPAREN SEMI
+			  		(StatementDo) DoVisit Statement WhileVisit LPAREN ConditionDesignator RPAREN SEMI
 					|
 					(StatementRepeat) LBRACE StatementList RBRACE 
 			  		;
 
 DoVisit ::= (DoVisit) DO;
 
-StatementElse ::= (ElseStmtYes) ELSE Statement
+WhileVisit ::= (WhileVisit) WHILE;
+
+StatementElse ::= (ElseStmtYes) Else Statement
 				  |
 				  (ElseStmtNo) /* epsilon */
 				  ;
+		
+Else ::= (Else) ELSE;
 
 ConditionDesignator ::= (CondDesignator) Condition
                         |

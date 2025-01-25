@@ -96,6 +96,8 @@ nonterminal Addop Addop;
 nonterminal Mulop Mulop;
 nonterminal Relop Relop;
 nonterminal Setop Setop;
+nonterminal Else Else;
+nonterminal WhileVisit WhileVisit;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Struct FactorList, Factor, Type;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Term, TermMulFactor;
@@ -229,17 +231,21 @@ Statement ::= (SingleStatementDsg) DesignatorStatementList:D1 SEMI {: RESULT=new
 			  		|
 			  		(StatementPrint2) PRINT LPAREN ExprList:E1 COMMA NUM:N2 RPAREN SEMI {: RESULT=new StatementPrint2(E1, N2); RESULT.setLine(E1left); :}
 			  		|
-			  		(StatementDo) DoVisit:D1 Statement:S2 WHILE LPAREN ConditionDesignator:C3 RPAREN SEMI {: RESULT=new StatementDo(D1, S2, C3); RESULT.setLine(D1left); :}
+			  		(StatementDo) DoVisit:D1 Statement:S2 WhileVisit:W3 LPAREN ConditionDesignator:C4 RPAREN SEMI {: RESULT=new StatementDo(D1, S2, W3, C4); RESULT.setLine(D1left); :}
 					|
 					(StatementRepeat) LBRACE StatementList:S1 RBRACE {: RESULT=new StatementRepeat(S1); RESULT.setLine(S1left); :} 
 			  		;
 
 DoVisit ::= (DoVisit) DO {: RESULT=new DoVisit(); :};
 
-StatementElse ::= (ElseStmtYes) ELSE Statement:S1 {: RESULT=new ElseStmtYes(S1); RESULT.setLine(S1left); :}
+WhileVisit ::= (WhileVisit) WHILE {: RESULT=new WhileVisit(); :};
+
+StatementElse ::= (ElseStmtYes) Else:E1 Statement:S2 {: RESULT=new ElseStmtYes(E1, S2); RESULT.setLine(E1left); :}
 				  |
 				  (ElseStmtNo) {: RESULT=new ElseStmtNo(); :} /* epsilon */
 				  ;
+		
+Else ::= (Else) ELSE {: RESULT=new Else(); :};
 
 ConditionDesignator ::= (CondDesignator) Condition:C1 {: RESULT=new CondDesignator(C1); RESULT.setLine(C1left); :}
                         |
