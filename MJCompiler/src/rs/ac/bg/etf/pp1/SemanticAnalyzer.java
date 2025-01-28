@@ -404,8 +404,12 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	@Override
 	public void visit(DesignatorExpr designatorExpr) {
-		Obj obj = designatorExpr.getDesignatorArray().obj;
-		if(obj == Tab.noObj) {
+		String arr = designatorExpr.getDesignatorArray().getI1();
+		Obj obj = Tab.find(arr);
+		if (obj.getType().getKind() != Struct.Array) {
+			report_error("GRESKA: Promenljiva - " + obj.getName() + " - nije niz", designatorExpr);
+			designatorExpr.obj = Tab.noObj;
+		} else if(obj == Tab.noObj) {
 			designatorExpr.obj = Tab.noObj;
 		} else if(designatorExpr.getExprList().struct.equals(Tab.intType)) {
 			designatorExpr.obj = new Obj(Obj.Elem, obj.getName() , obj.getType().getElemType());
@@ -536,7 +540,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			return;
 		}
 		else if(!expr.assignableTo(desgObj.getType())) {
-			report_error("GRESKA: Neadekvatna dodela vrednosti u promenjivu - " + desgObj.getName(), desg);
+			report_error("GRESKA: ParamsCounter - " + desgObj.getName(), desg);
 		}
 	}
 	

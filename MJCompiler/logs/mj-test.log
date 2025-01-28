@@ -1,107 +1,67 @@
-INFO  16:57:18,401 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
-INFO  16:57:18,472 - #6 program
-INFO  16:57:18,473 - #2 test301
-INFO  16:57:18,473 - #7 {
-INFO  16:57:18,475 - #15 void
-INFO  16:57:18,476 - #2 main
-INFO  16:57:18,476 - #16 (
-INFO  16:57:18,476 - #17 )
-INFO  16:57:18,477 - #2 int
-INFO  16:57:18,478 - #2 i
-INFO  16:57:18,479 - #10 ;
-INFO  16:57:18,480 - #2 int
-INFO  16:57:18,483 - #2 j
-INFO  16:57:18,484 - #10 ;
-INFO  16:57:18,484 - #7 {
-INFO  16:57:18,485 - #2 i
-INFO  16:57:18,485 - #11 =
-INFO  16:57:18,485 - #4 5
-INFO  16:57:18,486 - #10 ;
-INFO  16:57:18,488 - #27 do
-INFO  16:57:18,489 - #7 {
-INFO  16:57:18,489 - #2 i
-INFO  16:57:18,491 - #23 --
-INFO  16:57:18,508 - #10 ;
-INFO  16:57:18,509 - #24 if
-INFO  16:57:18,509 - #16 (
-INFO  16:57:18,509 - #2 i
-INFO  16:57:18,509 - #38 ==
-INFO  16:57:18,511 - #4 1
-INFO  16:57:18,512 - #17 )
-INFO  16:57:18,515 - #28 break
-INFO  16:57:18,515 - #10 ;
-INFO  16:57:18,515 - #24 if
-INFO  16:57:18,518 - #16 (
-INFO  16:57:18,518 - #2 i
-INFO  16:57:18,518 - #38 ==
-INFO  16:57:18,518 - #4 3
-INFO  16:57:18,519 - #17 )
-INFO  16:57:18,519 - #29 continue
-INFO  16:57:18,519 - #10 ;
-INFO  16:57:18,519 - #32 print
-INFO  16:57:18,520 - #16 (
-INFO  16:57:18,520 - #2 i
-INFO  16:57:18,520 - #17 )
-INFO  16:57:18,520 - #10 ;
-INFO  16:57:18,520 - #2 j
-INFO  16:57:18,521 - #11 =
-INFO  16:57:18,521 - #4 3
-INFO  16:57:18,521 - #10 ;
-INFO  16:57:18,521 - #27 do
-INFO  16:57:18,522 - #7 {
-INFO  16:57:18,522 - #2 j
-INFO  16:57:18,522 - #23 --
-INFO  16:57:18,522 - #10 ;
-INFO  16:57:18,522 - #24 if
-INFO  16:57:18,522 - #16 (
-INFO  16:57:18,522 - #2 j
-INFO  16:57:18,522 - #38 ==
-INFO  16:57:18,523 - #4 0
-INFO  16:57:18,523 - #17 )
-INFO  16:57:18,523 - #28 break
-INFO  16:57:18,523 - #10 ;
-INFO  16:57:18,524 - #24 if
-INFO  16:57:18,524 - #16 (
-INFO  16:57:18,525 - #2 j
-INFO  16:57:18,525 - #38 ==
-INFO  16:57:18,526 - #4 2
-INFO  16:57:18,527 - #17 )
-INFO  16:57:18,527 - #29 continue
-INFO  16:57:18,527 - #10 ;
-INFO  16:57:18,527 - #32 print
-INFO  16:57:18,527 - #16 (
-INFO  16:57:18,527 - #2 j
-INFO  16:57:18,527 - #17 )
-INFO  16:57:18,528 - #10 ;
-INFO  16:57:18,528 - #8 }
-INFO  16:57:18,528 - #26 while
-INFO  16:57:18,528 - #16 (
-INFO  16:57:18,529 - #2 j
-INFO  16:57:18,529 - #40 >
-INFO  16:57:18,530 - #4 0
-INFO  16:57:18,531 - #17 )
-INFO  16:57:18,531 - #10 ;
-INFO  16:57:18,531 - #32 print
-INFO  16:57:18,532 - #16 (
-INFO  16:57:18,532 - #2 eol
-INFO  16:57:18,532 - #17 )
-INFO  16:57:18,532 - #10 ;
-INFO  16:57:18,533 - #8 }
-INFO  16:57:18,533 - #26 while
-INFO  16:57:18,533 - #16 (
-INFO  16:57:18,533 - #2 i
-INFO  16:57:18,533 - #40 >
-INFO  16:57:18,534 - #4 0
-INFO  16:57:18,534 - #17 )
-INFO  16:57:18,535 - #10 ;
-INFO  16:57:18,535 - #8 }
-INFO  16:57:18,536 - #8 }
-INFO  16:57:18,539 - Program(
+INFO  16:06:46,718 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  16:06:46,789 - #6 program
+INFO  16:06:46,790 - #2 test301
+INFO  16:06:46,790 - #2 int
+INFO  16:06:46,792 - #2 niz
+INFO  16:06:46,793 - #13 [
+INFO  16:06:46,794 - #14 ]
+INFO  16:06:46,794 - #10 ;
+INFO  16:06:46,795 - #2 set
+INFO  16:06:46,796 - #2 s
+INFO  16:06:46,796 - #10 ;
+INFO  16:06:46,797 - #7 {
+INFO  16:06:46,797 - #15 void
+INFO  16:06:46,798 - #2 main
+INFO  16:06:46,798 - #16 (
+INFO  16:06:46,799 - #17 )
+INFO  16:06:46,800 - #7 {
+INFO  16:06:46,802 - #2 s
+INFO  16:06:46,803 - #11 =
+INFO  16:06:46,804 - #19 new
+INFO  16:06:46,805 - #2 set
+INFO  16:06:46,805 - #13 [
+INFO  16:06:46,805 - #4 5
+INFO  16:06:46,825 - #14 ]
+INFO  16:06:46,826 - #10 ;
+INFO  16:06:46,827 - #2 add
+INFO  16:06:46,828 - #16 (
+INFO  16:06:46,828 - #2 s
+INFO  16:06:46,829 - #12 ,
+INFO  16:06:46,831 - #4 1
+INFO  16:06:46,831 - #17 )
+INFO  16:06:46,832 - #10 ;
+INFO  16:06:46,833 - #8 }
+INFO  16:06:46,833 - #8 }
+INFO  16:06:46,836 - Program(
   ProgName(
    test301
   ) [ProgName]
-  NoConstVarDeclList(
-  ) [NoConstVarDeclList]
+  VConstVarDeclList(
+    VConstVarDeclList(
+      NoConstVarDeclList(
+      ) [NoConstVarDeclList]
+      VarDeclList(
+        Type(
+         int
+        ) [Type]
+        ArrayVarDecl(
+         niz
+        ) [ArrayVarDecl]
+        NoMoreVarDeclList(
+        ) [NoMoreVarDeclList]
+      ) [VarDeclList]
+    ) [VConstVarDeclList]
+    VarDeclList(
+      Type(
+       set
+      ) [Type]
+      IdentVarDecl(
+       s
+      ) [IdentVarDecl]
+      NoMoreVarDeclList(
+      ) [NoMoreVarDeclList]
+    ) [VarDeclList]
+  ) [VConstVarDeclList]
   ListMethodDecl(
     NoMethodDeclList(
     ) [NoMethodDeclList]
@@ -113,32 +73,8 @@ INFO  16:57:18,539 - Program(
         NoFormParsListZero(
         ) [NoFormParsListZero]
       ) [MethodSignatureList]
-      EmptyVarDecl(
-        EmptyVarDecl(
-          NoEmptyVarDecl(
-          ) [NoEmptyVarDecl]
-          VarDeclList(
-            Type(
-             int
-            ) [Type]
-            IdentVarDecl(
-             i
-            ) [IdentVarDecl]
-            NoMoreVarDeclList(
-            ) [NoMoreVarDeclList]
-          ) [VarDeclList]
-        ) [EmptyVarDecl]
-        VarDeclList(
-          Type(
-           int
-          ) [Type]
-          IdentVarDecl(
-           j
-          ) [IdentVarDecl]
-          NoMoreVarDeclList(
-          ) [NoMoreVarDeclList]
-        ) [VarDeclList]
-      ) [EmptyVarDecl]
+      NoEmptyVarDecl(
+      ) [NoEmptyVarDecl]
       ListStatement(
         ListStatement(
           NoStatementList(
@@ -147,7 +83,7 @@ INFO  16:57:18,539 - Program(
             ListDesignatorStatement(
               DesignatorAssignExpr(
                 DesignatorIdent(
-                 i
+                 s
                 ) [DesignatorIdent]
                 Assignop(
                 ) [Assignop]
@@ -156,9 +92,24 @@ INFO  16:57:18,539 - Program(
                     Term(
                       FactorMulopTerm(
                         NoFactorListMinus(
-                          FactorNum(
-                           5
-                          ) [FactorNum]
+                          FactorNew(
+                            Type(
+                             set
+                            ) [Type]
+                            ListExpr(
+                              TermAddopExprTerm(
+                                Term(
+                                  FactorMulopTerm(
+                                    NoFactorListMinus(
+                                      FactorNum(
+                                       5
+                                      ) [FactorNum]
+                                    ) [NoFactorListMinus]
+                                  ) [FactorMulopTerm]
+                                ) [Term]
+                              ) [TermAddopExprTerm]
+                            ) [ListExpr]
+                          ) [FactorNew]
                         ) [NoFactorListMinus]
                       ) [FactorMulopTerm]
                     ) [Term]
@@ -168,438 +119,69 @@ INFO  16:57:18,539 - Program(
             ) [ListDesignatorStatement]
           ) [SingleStatementDsg]
         ) [ListStatement]
-        StatementDo(
-          DoVisit(
-          ) [DoVisit]
-          StatementRepeat(
-            ListStatement(
-              ListStatement(
-                ListStatement(
-                  ListStatement(
-                    ListStatement(
-                      ListStatement(
-                        ListStatement(
-                          NoStatementList(
-                          ) [NoStatementList]
-                          SingleStatementDsg(
-                            ListDesignatorStatement(
-                              DesignatorDEC(
-                                DesignatorIdent(
-                                 i
-                                ) [DesignatorIdent]
-                              ) [DesignatorDEC]
-                            ) [ListDesignatorStatement]
-                          ) [SingleStatementDsg]
-                        ) [ListStatement]
-                        StatementIf(
-                          ConditionC(
-                            JustCondTermList(
-                              CondTerm(
-                                JustCondFactList(
-                                  CondFactExprRelop(
-                                    ListExpr(
-                                      TermAddopExprTerm(
-                                        Term(
-                                          FactorMulopTerm(
-                                            NoFactorListMinus(
-                                              FactorDesignator(
-                                                DesignatorIdent(
-                                                 i
-                                                ) [DesignatorIdent]
-                                                NoActParsFactor(
-                                                ) [NoActParsFactor]
-                                              ) [FactorDesignator]
-                                            ) [NoFactorListMinus]
-                                          ) [FactorMulopTerm]
-                                        ) [Term]
-                                      ) [TermAddopExprTerm]
-                                    ) [ListExpr]
-                                    RelopEq(
-                                    ) [RelopEq]
-                                    ListExpr(
-                                      TermAddopExprTerm(
-                                        Term(
-                                          FactorMulopTerm(
-                                            NoFactorListMinus(
-                                              FactorNum(
-                                               1
-                                              ) [FactorNum]
-                                            ) [NoFactorListMinus]
-                                          ) [FactorMulopTerm]
-                                        ) [Term]
-                                      ) [TermAddopExprTerm]
-                                    ) [ListExpr]
-                                  ) [CondFactExprRelop]
-                                ) [JustCondFactList]
-                              ) [CondTerm]
-                            ) [JustCondTermList]
-                          ) [ConditionC]
-                          StatementBreak(
-                          ) [StatementBreak]
-                          ElseStmtNo(
-                          ) [ElseStmtNo]
-                        ) [StatementIf]
-                      ) [ListStatement]
-                      StatementIf(
-                        ConditionC(
-                          JustCondTermList(
-                            CondTerm(
-                              JustCondFactList(
-                                CondFactExprRelop(
-                                  ListExpr(
-                                    TermAddopExprTerm(
-                                      Term(
-                                        FactorMulopTerm(
-                                          NoFactorListMinus(
-                                            FactorDesignator(
-                                              DesignatorIdent(
-                                               i
-                                              ) [DesignatorIdent]
-                                              NoActParsFactor(
-                                              ) [NoActParsFactor]
-                                            ) [FactorDesignator]
-                                          ) [NoFactorListMinus]
-                                        ) [FactorMulopTerm]
-                                      ) [Term]
-                                    ) [TermAddopExprTerm]
-                                  ) [ListExpr]
-                                  RelopEq(
-                                  ) [RelopEq]
-                                  ListExpr(
-                                    TermAddopExprTerm(
-                                      Term(
-                                        FactorMulopTerm(
-                                          NoFactorListMinus(
-                                            FactorNum(
-                                             3
-                                            ) [FactorNum]
-                                          ) [NoFactorListMinus]
-                                        ) [FactorMulopTerm]
-                                      ) [Term]
-                                    ) [TermAddopExprTerm]
-                                  ) [ListExpr]
-                                ) [CondFactExprRelop]
-                              ) [JustCondFactList]
-                            ) [CondTerm]
-                          ) [JustCondTermList]
-                        ) [ConditionC]
-                        StatementContinue(
-                        ) [StatementContinue]
-                        ElseStmtNo(
-                        ) [ElseStmtNo]
-                      ) [StatementIf]
-                    ) [ListStatement]
-                    StatementPrint1(
-                      ListExpr(
-                        TermAddopExprTerm(
-                          Term(
-                            FactorMulopTerm(
-                              NoFactorListMinus(
-                                FactorDesignator(
-                                  DesignatorIdent(
-                                   i
-                                  ) [DesignatorIdent]
-                                  NoActParsFactor(
-                                  ) [NoActParsFactor]
-                                ) [FactorDesignator]
-                              ) [NoFactorListMinus]
-                            ) [FactorMulopTerm]
-                          ) [Term]
-                        ) [TermAddopExprTerm]
-                      ) [ListExpr]
-                    ) [StatementPrint1]
-                  ) [ListStatement]
-                  SingleStatementDsg(
-                    ListDesignatorStatement(
-                      DesignatorAssignExpr(
-                        DesignatorIdent(
-                         j
-                        ) [DesignatorIdent]
-                        Assignop(
-                        ) [Assignop]
-                        ListExpr(
-                          TermAddopExprTerm(
-                            Term(
-                              FactorMulopTerm(
-                                NoFactorListMinus(
-                                  FactorNum(
-                                   3
-                                  ) [FactorNum]
-                                ) [NoFactorListMinus]
-                              ) [FactorMulopTerm]
-                            ) [Term]
-                          ) [TermAddopExprTerm]
-                        ) [ListExpr]
-                      ) [DesignatorAssignExpr]
-                    ) [ListDesignatorStatement]
-                  ) [SingleStatementDsg]
-                ) [ListStatement]
-                StatementDo(
-                  DoVisit(
-                  ) [DoVisit]
-                  StatementRepeat(
-                    ListStatement(
-                      ListStatement(
-                        ListStatement(
-                          ListStatement(
-                            NoStatementList(
-                            ) [NoStatementList]
-                            SingleStatementDsg(
-                              ListDesignatorStatement(
-                                DesignatorDEC(
-                                  DesignatorIdent(
-                                   j
-                                  ) [DesignatorIdent]
-                                ) [DesignatorDEC]
-                              ) [ListDesignatorStatement]
-                            ) [SingleStatementDsg]
-                          ) [ListStatement]
-                          StatementIf(
-                            ConditionC(
-                              JustCondTermList(
-                                CondTerm(
-                                  JustCondFactList(
-                                    CondFactExprRelop(
-                                      ListExpr(
-                                        TermAddopExprTerm(
-                                          Term(
-                                            FactorMulopTerm(
-                                              NoFactorListMinus(
-                                                FactorDesignator(
-                                                  DesignatorIdent(
-                                                   j
-                                                  ) [DesignatorIdent]
-                                                  NoActParsFactor(
-                                                  ) [NoActParsFactor]
-                                                ) [FactorDesignator]
-                                              ) [NoFactorListMinus]
-                                            ) [FactorMulopTerm]
-                                          ) [Term]
-                                        ) [TermAddopExprTerm]
-                                      ) [ListExpr]
-                                      RelopEq(
-                                      ) [RelopEq]
-                                      ListExpr(
-                                        TermAddopExprTerm(
-                                          Term(
-                                            FactorMulopTerm(
-                                              NoFactorListMinus(
-                                                FactorNum(
-                                                 0
-                                                ) [FactorNum]
-                                              ) [NoFactorListMinus]
-                                            ) [FactorMulopTerm]
-                                          ) [Term]
-                                        ) [TermAddopExprTerm]
-                                      ) [ListExpr]
-                                    ) [CondFactExprRelop]
-                                  ) [JustCondFactList]
-                                ) [CondTerm]
-                              ) [JustCondTermList]
-                            ) [ConditionC]
-                            StatementBreak(
-                            ) [StatementBreak]
-                            ElseStmtNo(
-                            ) [ElseStmtNo]
-                          ) [StatementIf]
-                        ) [ListStatement]
-                        StatementIf(
-                          ConditionC(
-                            JustCondTermList(
-                              CondTerm(
-                                JustCondFactList(
-                                  CondFactExprRelop(
-                                    ListExpr(
-                                      TermAddopExprTerm(
-                                        Term(
-                                          FactorMulopTerm(
-                                            NoFactorListMinus(
-                                              FactorDesignator(
-                                                DesignatorIdent(
-                                                 j
-                                                ) [DesignatorIdent]
-                                                NoActParsFactor(
-                                                ) [NoActParsFactor]
-                                              ) [FactorDesignator]
-                                            ) [NoFactorListMinus]
-                                          ) [FactorMulopTerm]
-                                        ) [Term]
-                                      ) [TermAddopExprTerm]
-                                    ) [ListExpr]
-                                    RelopEq(
-                                    ) [RelopEq]
-                                    ListExpr(
-                                      TermAddopExprTerm(
-                                        Term(
-                                          FactorMulopTerm(
-                                            NoFactorListMinus(
-                                              FactorNum(
-                                               2
-                                              ) [FactorNum]
-                                            ) [NoFactorListMinus]
-                                          ) [FactorMulopTerm]
-                                        ) [Term]
-                                      ) [TermAddopExprTerm]
-                                    ) [ListExpr]
-                                  ) [CondFactExprRelop]
-                                ) [JustCondFactList]
-                              ) [CondTerm]
-                            ) [JustCondTermList]
-                          ) [ConditionC]
-                          StatementContinue(
-                          ) [StatementContinue]
-                          ElseStmtNo(
-                          ) [ElseStmtNo]
-                        ) [StatementIf]
-                      ) [ListStatement]
-                      StatementPrint1(
-                        ListExpr(
-                          TermAddopExprTerm(
-                            Term(
-                              FactorMulopTerm(
-                                NoFactorListMinus(
-                                  FactorDesignator(
-                                    DesignatorIdent(
-                                     j
-                                    ) [DesignatorIdent]
-                                    NoActParsFactor(
-                                    ) [NoActParsFactor]
-                                  ) [FactorDesignator]
-                                ) [NoFactorListMinus]
-                              ) [FactorMulopTerm]
-                            ) [Term]
-                          ) [TermAddopExprTerm]
-                        ) [ListExpr]
-                      ) [StatementPrint1]
-                    ) [ListStatement]
-                  ) [StatementRepeat]
-                  WhileVisit(
-                  ) [WhileVisit]
-                  CondDesignator(
-                    ConditionC(
-                      JustCondTermList(
-                        CondTerm(
-                          JustCondFactList(
-                            CondFactExprRelop(
-                              ListExpr(
-                                TermAddopExprTerm(
-                                  Term(
-                                    FactorMulopTerm(
-                                      NoFactorListMinus(
-                                        FactorDesignator(
-                                          DesignatorIdent(
-                                           j
-                                          ) [DesignatorIdent]
-                                          NoActParsFactor(
-                                          ) [NoActParsFactor]
-                                        ) [FactorDesignator]
-                                      ) [NoFactorListMinus]
-                                    ) [FactorMulopTerm]
-                                  ) [Term]
-                                ) [TermAddopExprTerm]
-                              ) [ListExpr]
-                              RelopGt(
-                              ) [RelopGt]
-                              ListExpr(
-                                TermAddopExprTerm(
-                                  Term(
-                                    FactorMulopTerm(
-                                      NoFactorListMinus(
-                                        FactorNum(
-                                         0
-                                        ) [FactorNum]
-                                      ) [NoFactorListMinus]
-                                    ) [FactorMulopTerm]
-                                  ) [Term]
-                                ) [TermAddopExprTerm]
-                              ) [ListExpr]
-                            ) [CondFactExprRelop]
-                          ) [JustCondFactList]
-                        ) [CondTerm]
-                      ) [JustCondTermList]
-                    ) [ConditionC]
-                  ) [CondDesignator]
-                ) [StatementDo]
-              ) [ListStatement]
-              StatementPrint1(
-                ListExpr(
-                  TermAddopExprTerm(
-                    Term(
-                      FactorMulopTerm(
-                        NoFactorListMinus(
-                          FactorDesignator(
-                            DesignatorIdent(
-                             eol
-                            ) [DesignatorIdent]
-                            NoActParsFactor(
-                            ) [NoActParsFactor]
-                          ) [FactorDesignator]
-                        ) [NoFactorListMinus]
-                      ) [FactorMulopTerm]
-                    ) [Term]
-                  ) [TermAddopExprTerm]
-                ) [ListExpr]
-              ) [StatementPrint1]
-            ) [ListStatement]
-          ) [StatementRepeat]
-          WhileVisit(
-          ) [WhileVisit]
-          CondDesignator(
-            ConditionC(
-              JustCondTermList(
-                CondTerm(
-                  JustCondFactList(
-                    CondFactExprRelop(
-                      ListExpr(
-                        TermAddopExprTerm(
-                          Term(
-                            FactorMulopTerm(
-                              NoFactorListMinus(
-                                FactorDesignator(
-                                  DesignatorIdent(
-                                   i
-                                  ) [DesignatorIdent]
-                                  NoActParsFactor(
-                                  ) [NoActParsFactor]
-                                ) [FactorDesignator]
-                              ) [NoFactorListMinus]
-                            ) [FactorMulopTerm]
-                          ) [Term]
-                        ) [TermAddopExprTerm]
-                      ) [ListExpr]
-                      RelopGt(
-                      ) [RelopGt]
-                      ListExpr(
-                        TermAddopExprTerm(
-                          Term(
-                            FactorMulopTerm(
-                              NoFactorListMinus(
-                                FactorNum(
-                                 0
-                                ) [FactorNum]
-                              ) [NoFactorListMinus]
-                            ) [FactorMulopTerm]
-                          ) [Term]
-                        ) [TermAddopExprTerm]
-                      ) [ListExpr]
-                    ) [CondFactExprRelop]
-                  ) [JustCondFactList]
-                ) [CondTerm]
-              ) [JustCondTermList]
-            ) [ConditionC]
-          ) [CondDesignator]
-        ) [StatementDo]
+        SingleStatementDsg(
+          ListDesignatorStatement(
+            DesignatorActPars(
+              DesignatorIdent(
+               add
+              ) [DesignatorIdent]
+              ListActPars(
+                ActParsListBegin(
+                ) [ActParsListBegin]
+                ActPar(
+                  ListExpr(
+                    TermAddopExprTerm(
+                      Term(
+                        FactorMulopTerm(
+                          NoFactorListMinus(
+                            FactorDesignator(
+                              DesignatorIdent(
+                               s
+                              ) [DesignatorIdent]
+                              NoActParsFactor(
+                              ) [NoActParsFactor]
+                            ) [FactorDesignator]
+                          ) [NoFactorListMinus]
+                        ) [FactorMulopTerm]
+                      ) [Term]
+                    ) [TermAddopExprTerm]
+                  ) [ListExpr]
+                ) [ActPar]
+                ActParsRepeat(
+                  ActPar(
+                    ListExpr(
+                      TermAddopExprTerm(
+                        Term(
+                          FactorMulopTerm(
+                            NoFactorListMinus(
+                              FactorNum(
+                               1
+                              ) [FactorNum]
+                            ) [NoFactorListMinus]
+                          ) [FactorMulopTerm]
+                        ) [Term]
+                      ) [TermAddopExprTerm]
+                    ) [ListExpr]
+                  ) [ActPar]
+                  NoActPars(
+                  ) [NoActPars]
+                ) [ActParsRepeat]
+              ) [ListActPars]
+            ) [DesignatorActPars]
+          ) [ListDesignatorStatement]
+        ) [SingleStatementDsg]
       ) [ListStatement]
     ) [MethodDecl]
   ) [ListMethodDecl]
 ) [Program]
-INFO  16:57:18,580 - =====================================================================
-INFO  16:57:18,598 - Num: 5 na liniji 11
-INFO  16:57:18,598 - Num: 1 na liniji 14
-INFO  16:57:18,599 - Num: 3 na liniji 15
-INFO  16:57:18,599 - Num: 3 na liniji 18
-INFO  16:57:18,599 - Num: 0 na liniji 21
-INFO  16:57:18,599 - Num: 2 na liniji 22
-INFO  16:57:18,599 - Num: 0 na liniji 24
-INFO  16:57:18,601 - Num: 0 na liniji 26
-INFO  16:57:18,601 - Generisanje koda uspesno zavrseno!
+INFO  16:06:46,856 - =====================================================================
+INFO  16:06:46,871 - Num: 5 na liniji 15
+INFO  16:06:46,871 - New set  na liniji 15
+INFO  16:06:46,872 - Name - s value - 5 na liniji 15
+INFO  16:06:46,872 - DesignatorAssignExpr na liniji 15
+INFO  16:06:46,872 - Designator: s na liniji 16
+INFO  16:06:46,872 - Num: 1 na liniji 16
+INFO  16:06:46,872 - DesignatorActPars na liniji 16
+INFO  16:06:46,873 - Actual list: 4 na liniji 16
+INFO  16:06:46,874 - Actual list: 1 na liniji 16
+INFO  16:06:46,875 - Generisanje koda uspesno zavrseno!

@@ -3,29 +3,17 @@
 program test301
 
 	
+int niz[];
+set s;
+
 {
 	void main()	
-		int i;
-		int j;
-	{
-		i = 5;
-		do{
-			i--;
-			if(i == 1) break;
-			if(i == 3) continue;
-			
-			print(i);
-			j = 3;
-			do{
-				j--;
-				if(j == 0) break;
-				if(j == 2) continue;
-				print(j);
-			} while(j > 0);
-			print(eol);
-		}while( i > 0);
-		
 
+	{
+		//niz = new int[10];
+		//niz[3] = 5;
+		s = new set[5];
+		add(s, 1);
 	}
 }
 
