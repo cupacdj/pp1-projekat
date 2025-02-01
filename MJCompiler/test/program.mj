@@ -1,19 +1,28 @@
-// Test301
+// TestSET
 
 program test301
 
-	
-int niz[];
 set s;
 
 {
-	void main()	
-
+	
+	void printSet(set s) 
+		int i;
 	{
-		//niz = new int[10];
-		//niz[3] = 5;
+		
+    	print(getElement(s, 0));
+
+    	
+	}
+
+	void main()	
+		int i;
+	{
+
 		s = new set[5];
 		add(s, 1);
+		
+		printSet(s);
 	}
 }
 

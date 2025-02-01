@@ -1,56 +1,68 @@
-INFO  16:06:46,718 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
-INFO  16:06:46,789 - #6 program
-INFO  16:06:46,790 - #2 test301
-INFO  16:06:46,790 - #2 int
-INFO  16:06:46,792 - #2 niz
-INFO  16:06:46,793 - #13 [
-INFO  16:06:46,794 - #14 ]
-INFO  16:06:46,794 - #10 ;
-INFO  16:06:46,795 - #2 set
-INFO  16:06:46,796 - #2 s
-INFO  16:06:46,796 - #10 ;
-INFO  16:06:46,797 - #7 {
-INFO  16:06:46,797 - #15 void
-INFO  16:06:46,798 - #2 main
-INFO  16:06:46,798 - #16 (
-INFO  16:06:46,799 - #17 )
-INFO  16:06:46,800 - #7 {
-INFO  16:06:46,802 - #2 s
-INFO  16:06:46,803 - #11 =
-INFO  16:06:46,804 - #19 new
-INFO  16:06:46,805 - #2 set
-INFO  16:06:46,805 - #13 [
-INFO  16:06:46,805 - #4 5
-INFO  16:06:46,825 - #14 ]
-INFO  16:06:46,826 - #10 ;
-INFO  16:06:46,827 - #2 add
-INFO  16:06:46,828 - #16 (
-INFO  16:06:46,828 - #2 s
-INFO  16:06:46,829 - #12 ,
-INFO  16:06:46,831 - #4 1
-INFO  16:06:46,831 - #17 )
-INFO  16:06:46,832 - #10 ;
-INFO  16:06:46,833 - #8 }
-INFO  16:06:46,833 - #8 }
-INFO  16:06:46,836 - Program(
+INFO  18:42:59,880 - Compiling source file: C:\Users\Djole\git\repository\MJCompiler\test\program.mj
+INFO  18:42:59,958 - #6 program
+INFO  18:42:59,958 - #2 test301
+INFO  18:42:59,959 - #2 set
+INFO  18:42:59,960 - #2 s
+INFO  18:42:59,961 - #10 ;
+INFO  18:42:59,962 - #7 {
+INFO  18:42:59,964 - #15 void
+INFO  18:42:59,965 - #2 printSet
+INFO  18:42:59,965 - #16 (
+INFO  18:42:59,965 - #2 set
+INFO  18:42:59,966 - #2 s
+INFO  18:42:59,966 - #17 )
+INFO  18:42:59,973 - #2 int
+INFO  18:42:59,977 - #2 i
+INFO  18:42:59,977 - #10 ;
+INFO  18:42:59,977 - #7 {
+INFO  18:42:59,977 - #32 print
+INFO  18:42:59,978 - #16 (
+INFO  18:42:59,979 - #2 getElement
+INFO  18:42:59,979 - #16 (
+INFO  18:42:59,980 - #2 s
+INFO  18:42:59,981 - #12 ,
+INFO  18:43:00,003 - #4 0
+INFO  18:43:00,003 - #17 )
+INFO  18:43:00,005 - #17 )
+INFO  18:43:00,005 - #10 ;
+INFO  18:43:00,005 - #8 }
+INFO  18:43:00,007 - #15 void
+INFO  18:43:00,009 - #2 main
+INFO  18:43:00,009 - #16 (
+INFO  18:43:00,010 - #17 )
+INFO  18:43:00,011 - #2 int
+INFO  18:43:00,012 - #2 i
+INFO  18:43:00,012 - #10 ;
+INFO  18:43:00,012 - #7 {
+INFO  18:43:00,012 - #2 s
+INFO  18:43:00,012 - #11 =
+INFO  18:43:00,012 - #19 new
+INFO  18:43:00,014 - #2 set
+INFO  18:43:00,014 - #13 [
+INFO  18:43:00,014 - #4 5
+INFO  18:43:00,014 - #14 ]
+INFO  18:43:00,015 - #10 ;
+INFO  18:43:00,016 - #2 add
+INFO  18:43:00,016 - #16 (
+INFO  18:43:00,016 - #2 s
+INFO  18:43:00,017 - #12 ,
+INFO  18:43:00,017 - #4 1
+INFO  18:43:00,018 - #17 )
+INFO  18:43:00,018 - #10 ;
+INFO  18:43:00,019 - #2 printSet
+INFO  18:43:00,019 - #16 (
+INFO  18:43:00,019 - #2 s
+INFO  18:43:00,019 - #17 )
+INFO  18:43:00,020 - #10 ;
+INFO  18:43:00,020 - #8 }
+INFO  18:43:00,020 - #8 }
+INFO  18:43:00,023 - Program(
   ProgName(
    test301
   ) [ProgName]
   VConstVarDeclList(
-    VConstVarDeclList(
-      NoConstVarDeclList(
-      ) [NoConstVarDeclList]
-      VarDeclList(
-        Type(
-         int
-        ) [Type]
-        ArrayVarDecl(
-         niz
-        ) [ArrayVarDecl]
-        NoMoreVarDeclList(
-        ) [NoMoreVarDeclList]
-      ) [VarDeclList]
-    ) [VConstVarDeclList]
+    NoConstVarDeclList(
+    ) [NoConstVarDeclList]
     VarDeclList(
       Type(
        set
@@ -63,8 +75,108 @@ INFO  16:06:46,836 - Program(
     ) [VarDeclList]
   ) [VConstVarDeclList]
   ListMethodDecl(
-    NoMethodDeclList(
-    ) [NoMethodDeclList]
+    ListMethodDecl(
+      NoMethodDeclList(
+      ) [NoMethodDeclList]
+      MethodDecl(
+        MethodSignatureList(
+          VoidSignature(
+           printSet
+          ) [VoidSignature]
+          ZeroFormParsList(
+            FormParsList(
+              FormParVar(
+                Type(
+                 set
+                ) [Type]
+               s
+              ) [FormParVar]
+              NoMoreFormParsList(
+              ) [NoMoreFormParsList]
+            ) [FormParsList]
+          ) [ZeroFormParsList]
+        ) [MethodSignatureList]
+        EmptyVarDecl(
+          NoEmptyVarDecl(
+          ) [NoEmptyVarDecl]
+          VarDeclList(
+            Type(
+             int
+            ) [Type]
+            IdentVarDecl(
+             i
+            ) [IdentVarDecl]
+            NoMoreVarDeclList(
+            ) [NoMoreVarDeclList]
+          ) [VarDeclList]
+        ) [EmptyVarDecl]
+        ListStatement(
+          NoStatementList(
+          ) [NoStatementList]
+          StatementPrint1(
+            ListExpr(
+              TermAddopExprTerm(
+                Term(
+                  FactorMulopTerm(
+                    NoFactorListMinus(
+                      FactorDesignator(
+                        DesignatorIdent(
+                         getElement
+                        ) [DesignatorIdent]
+                        ActParsFactor(
+                          ListActPars(
+                            ActParsListBegin(
+                            ) [ActParsListBegin]
+                            ActPar(
+                              ListExpr(
+                                TermAddopExprTerm(
+                                  Term(
+                                    FactorMulopTerm(
+                                      NoFactorListMinus(
+                                        FactorDesignator(
+                                          DesignatorIdent(
+                                           s
+                                          ) [DesignatorIdent]
+                                          NoActParsFactor(
+                                          ) [NoActParsFactor]
+                                        ) [FactorDesignator]
+                                      ) [NoFactorListMinus]
+                                    ) [FactorMulopTerm]
+                                  ) [Term]
+                                ) [TermAddopExprTerm]
+                              ) [ListExpr]
+                            ) [ActPar]
+                            ActParsRepeat(
+                              ActPar(
+                                ListExpr(
+                                  TermAddopExprTerm(
+                                    Term(
+                                      FactorMulopTerm(
+                                        NoFactorListMinus(
+                                          FactorNum(
+                                           0
+                                          ) [FactorNum]
+                                        ) [NoFactorListMinus]
+                                      ) [FactorMulopTerm]
+                                    ) [Term]
+                                  ) [TermAddopExprTerm]
+                                ) [ListExpr]
+                              ) [ActPar]
+                              NoActPars(
+                              ) [NoActPars]
+                            ) [ActParsRepeat]
+                          ) [ListActPars]
+                        ) [ActParsFactor]
+                      ) [FactorDesignator]
+                    ) [NoFactorListMinus]
+                  ) [FactorMulopTerm]
+                ) [Term]
+              ) [TermAddopExprTerm]
+            ) [ListExpr]
+          ) [StatementPrint1]
+        ) [ListStatement]
+      ) [MethodDecl]
+    ) [ListMethodDecl]
     MethodDecl(
       MethodSignatureList(
         VoidSignature(
@@ -73,49 +185,114 @@ INFO  16:06:46,836 - Program(
         NoFormParsListZero(
         ) [NoFormParsListZero]
       ) [MethodSignatureList]
-      NoEmptyVarDecl(
-      ) [NoEmptyVarDecl]
+      EmptyVarDecl(
+        NoEmptyVarDecl(
+        ) [NoEmptyVarDecl]
+        VarDeclList(
+          Type(
+           int
+          ) [Type]
+          IdentVarDecl(
+           i
+          ) [IdentVarDecl]
+          NoMoreVarDeclList(
+          ) [NoMoreVarDeclList]
+        ) [VarDeclList]
+      ) [EmptyVarDecl]
       ListStatement(
         ListStatement(
-          NoStatementList(
-          ) [NoStatementList]
+          ListStatement(
+            NoStatementList(
+            ) [NoStatementList]
+            SingleStatementDsg(
+              ListDesignatorStatement(
+                DesignatorAssignExpr(
+                  DesignatorIdent(
+                   s
+                  ) [DesignatorIdent]
+                  Assignop(
+                  ) [Assignop]
+                  ListExpr(
+                    TermAddopExprTerm(
+                      Term(
+                        FactorMulopTerm(
+                          NoFactorListMinus(
+                            FactorNew(
+                              Type(
+                               set
+                              ) [Type]
+                              ListExpr(
+                                TermAddopExprTerm(
+                                  Term(
+                                    FactorMulopTerm(
+                                      NoFactorListMinus(
+                                        FactorNum(
+                                         5
+                                        ) [FactorNum]
+                                      ) [NoFactorListMinus]
+                                    ) [FactorMulopTerm]
+                                  ) [Term]
+                                ) [TermAddopExprTerm]
+                              ) [ListExpr]
+                            ) [FactorNew]
+                          ) [NoFactorListMinus]
+                        ) [FactorMulopTerm]
+                      ) [Term]
+                    ) [TermAddopExprTerm]
+                  ) [ListExpr]
+                ) [DesignatorAssignExpr]
+              ) [ListDesignatorStatement]
+            ) [SingleStatementDsg]
+          ) [ListStatement]
           SingleStatementDsg(
             ListDesignatorStatement(
-              DesignatorAssignExpr(
+              DesignatorActPars(
                 DesignatorIdent(
-                 s
+                 add
                 ) [DesignatorIdent]
-                Assignop(
-                ) [Assignop]
-                ListExpr(
-                  TermAddopExprTerm(
-                    Term(
-                      FactorMulopTerm(
-                        NoFactorListMinus(
-                          FactorNew(
-                            Type(
-                             set
-                            ) [Type]
-                            ListExpr(
-                              TermAddopExprTerm(
-                                Term(
-                                  FactorMulopTerm(
-                                    NoFactorListMinus(
-                                      FactorNum(
-                                       5
-                                      ) [FactorNum]
-                                    ) [NoFactorListMinus]
-                                  ) [FactorMulopTerm]
-                                ) [Term]
-                              ) [TermAddopExprTerm]
-                            ) [ListExpr]
-                          ) [FactorNew]
-                        ) [NoFactorListMinus]
-                      ) [FactorMulopTerm]
-                    ) [Term]
-                  ) [TermAddopExprTerm]
-                ) [ListExpr]
-              ) [DesignatorAssignExpr]
+                ListActPars(
+                  ActParsListBegin(
+                  ) [ActParsListBegin]
+                  ActPar(
+                    ListExpr(
+                      TermAddopExprTerm(
+                        Term(
+                          FactorMulopTerm(
+                            NoFactorListMinus(
+                              FactorDesignator(
+                                DesignatorIdent(
+                                 s
+                                ) [DesignatorIdent]
+                                NoActParsFactor(
+                                ) [NoActParsFactor]
+                              ) [FactorDesignator]
+                            ) [NoFactorListMinus]
+                          ) [FactorMulopTerm]
+                        ) [Term]
+                      ) [TermAddopExprTerm]
+                    ) [ListExpr]
+                  ) [ActPar]
+                  ActParsRepeat(
+                    ActPar(
+                      ListExpr(
+                        TermAddopExprTerm(
+                          Term(
+                            FactorMulopTerm(
+                              NoFactorListMinus(
+                                FactorNum(
+                                 1
+                                ) [FactorNum]
+                              ) [NoFactorListMinus]
+                            ) [FactorMulopTerm]
+                          ) [Term]
+                        ) [TermAddopExprTerm]
+                      ) [ListExpr]
+                    ) [ActPar]
+                    NoActPars(
+                    ) [NoActPars]
+                  ) [ActParsRepeat]
+                ) [ListActPars]
+              ) [DesignatorActPars]
             ) [ListDesignatorStatement]
           ) [SingleStatementDsg]
         ) [ListStatement]
@@ -123,7 +300,7 @@ INFO  16:06:46,836 - Program(
           ListDesignatorStatement(
             DesignatorActPars(
               DesignatorIdent(
-               add
+               printSet
               ) [DesignatorIdent]
               ListActPars(
                 ActParsListBegin(
@@ -147,25 +324,8 @@ INFO  16:06:46,836 - Program(
                     ) [TermAddopExprTerm]
                   ) [ListExpr]
                 ) [ActPar]
-                ActParsRepeat(
-                  ActPar(
-                    ListExpr(
-                      TermAddopExprTerm(
-                        Term(
-                          FactorMulopTerm(
-                            NoFactorListMinus(
-                              FactorNum(
-                               1
-                              ) [FactorNum]
-                            ) [NoFactorListMinus]
-                          ) [FactorMulopTerm]
-                        ) [Term]
-                      ) [TermAddopExprTerm]
-                    ) [ListExpr]
-                  ) [ActPar]
-                  NoActPars(
-                  ) [NoActPars]
-                ) [ActParsRepeat]
+                NoActPars(
+                ) [NoActPars]
               ) [ListActPars]
             ) [DesignatorActPars]
           ) [ListDesignatorStatement]
@@ -174,14 +334,25 @@ INFO  16:06:46,836 - Program(
     ) [MethodDecl]
   ) [ListMethodDecl]
 ) [Program]
-INFO  16:06:46,856 - =====================================================================
-INFO  16:06:46,871 - Num: 5 na liniji 15
-INFO  16:06:46,871 - New set  na liniji 15
-INFO  16:06:46,872 - Name - s value - 5 na liniji 15
-INFO  16:06:46,872 - DesignatorAssignExpr na liniji 15
-INFO  16:06:46,872 - Designator: s na liniji 16
-INFO  16:06:46,872 - Num: 1 na liniji 16
-INFO  16:06:46,872 - DesignatorActPars na liniji 16
-INFO  16:06:46,873 - Actual list: 4 na liniji 16
-INFO  16:06:46,874 - Actual list: 1 na liniji 16
-INFO  16:06:46,875 - Generisanje koda uspesno zavrseno!
+INFO  18:43:00,053 - =====================================================================
+INFO  18:43:00,076 - DesignatorIdent - getElement na liniji 13
+INFO  18:43:00,076 - DesignatorIdent - s na liniji 13
+INFO  18:43:00,076 - Designator: s na liniji 13
+INFO  18:43:00,077 - Num: 0 na liniji 13
+INFO  18:43:00,077 - Designator: getElement na liniji 13
+INFO  18:43:00,078 - print1 na liniji 13
+INFO  18:43:00,078 - DesignatorIdent - s na liniji 22
+INFO  18:43:00,078 - Num: 5 na liniji 22
+INFO  18:43:00,078 - New set + s na liniji 22
+INFO  18:43:00,078 - Name - s value - 5 na liniji 22
+INFO  18:43:00,078 - DesignatorAssignExpr na liniji 22
+INFO  18:43:00,078 - DesignatorIdent - add na liniji 23
+INFO  18:43:00,078 - DesignatorIdent - s na liniji 23
+INFO  18:43:00,079 - Designator: s na liniji 23
+INFO  18:43:00,079 - Num: 1 na liniji 23
+INFO  18:43:00,080 - DesignatorActPars na liniji 23
+INFO  18:43:00,081 - DesignatorIdent - printSet na liniji 25
+INFO  18:43:00,081 - DesignatorIdent - s na liniji 25
+INFO  18:43:00,081 - Designator: s na liniji 25
+INFO  18:43:00,083 - DesignatorActPars na liniji 25
+INFO  18:43:00,085 - Generisanje koda uspesno zavrseno!

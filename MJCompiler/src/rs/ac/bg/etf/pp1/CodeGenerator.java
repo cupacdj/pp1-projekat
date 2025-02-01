@@ -2,8 +2,8 @@ package rs.ac.bg.etf.pp1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.Stack;
 
 import org.apache.log4j.Logger;
@@ -21,9 +21,11 @@ public class CodeGenerator extends VisitorAdaptor {
 	private int mPC;
 	private Struct setType = Tab.find("set").getType();
 	private int currNum = 0;
+	private String currSet = "";
 	private boolean isSet = false;
 	private HashMap<String, Integer> setMapCap = new HashMap<>();
-	private HashMap<String, Set<Integer>> setValues = new HashMap<>();
+	private HashMap<String, HashSet<Integer>> setValues = new HashMap<>();
+	private Obj zero = new Obj(Obj.Con, "zero", Tab.intType, 0, 0);
 	
 	
 	public void report_error(String message, SyntaxNode info) {
@@ -47,58 +49,151 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	
-	private void initializePredeclaredMethods() {
-        // 'ord' and 'chr' are the same code.
-        Obj ordMethod = Tab.find("ord");
-        Obj chrMethod = Tab.find("chr");
-        ordMethod.setAdr(Code.pc);
-        chrMethod.setAdr(Code.pc);
-        // skinula se vrednost sa steka
+	private void ordChrMethod() {
+		Obj ordMethod = Tab.find("ord");
+		Obj chrMethod = Tab.find("chr");
+		ordMethod.setAdr(Code.pc);
+		chrMethod.setAdr(Code.pc);
+		// skinula se vrednost sa steka
         Code.put(Code.enter);
         // jedan formalni parametar
         Code.put(1);
         // zbir formalnih i lokalnih promenljivih
         Code.put(1);
         // stavlja vrednost na stek
-        Code.put(Code.load_n);
-        Code.put(Code.exit);
-        Code.put(Code.return_);
- 
-        Obj lenMethod = Tab.find("len");
-        lenMethod.setAdr(Code.pc);
-        Code.put(Code.enter);
-        Code.put(1);
-        Code.put(1);
-        Code.put(Code.load_n);
-        // ostavlja len niza na exprstek
-        Code.put(Code.arraylength);
-        Code.put(Code.exit);
-        Code.put(Code.return_);
-        
-        Obj addMethod = Tab.find("add");
-        addMethod.setAdr(Code.pc);
-        Code.put(Code.enter);
-        Code.put(1);
-        Code.put(1);
-        Code.put(Code.load_n);
-        // implementacija add metode
-        //add – standardna metoda; add(a, b) dodaje celobrojni izraz b u skup a
-       
-        
-        
-        Obj addAllMethod = Tab.find("addAll");
+		Code.put(Code.load_n);
+		Code.put(Code.exit);
+		Code.put(Code.return_);
+	}
+	
+	private void lenMethod() {
+		Obj lenMethod = Tab.find("len");
+		lenMethod.setAdr(Code.pc);
+		Code.put(Code.enter);
+		Code.put(1);
+		Code.put(1);
+		Code.put(Code.load_n);
+		// ostavlja len niza na exprstek
+		Code.put(Code.arraylength);
+		Code.put(Code.exit);
+		Code.put(Code.return_);
+	}
+	
+	private void addMethod() {
+		Obj addMethod = Tab.find("add");
+	    addMethod.setAdr(Code.pc);
+	    
+	    Code.put(Code.enter);
+	    Code.put(2);  // Two parameters (set 's', integer 'b')
+	    Code.put(4);  // No local variables
+
+	    // Load set reference (s) and get array length
+	    Code.put(Code.load_n);  
+	    Code.put(Code.arraylength);  
+
+	    // Initialize index = 0
+	    Code.put(Code.const_);
+	    Code.put4(0);
+	    Code.put(Code.store_n + 1); // Store index in local variable
+
+	    // Start of loop
+	    int loopStart = Code.pc;
+
+	    // Load s[index] (s[i])
+	    Code.put(Code.load_n);  // Load set reference
+	    Code.put(Code.load_n + 1); // Load index
+	    Code.put(Code.dup2); // Duplicate set and index before `aload`
+	    Code.put(Code.aload);   // Get s[i] (element at index)
+
+	    // Compare s[i] with b (check if already exists)
+	    Code.put(Code.load_n + 2); // Load 'b'
+	    Code.put(Code.jcc + Code.eq); // If s[i] == b, return (duplicate found)
+	    int returnIfFound = Code.pc;
+	    Code.put2(0); // Placeholder (must be patched)
+
+	    // Check if empty slot (s[i] == 0)
+	    Code.put(Code.dup2); // Duplicate before checking if s[i] == 0
+	    Code.put(Code.aload);   // Get s[i] again
+
+	    Code.put(Code.const_);
+	    Code.put4(0);
+	    Code.put(Code.jcc + Code.eq); // If s[i] == 0, jump to insert
+	    int insertIndex = Code.pc;
+	    Code.put2(0);  // Placeholder
+
+	    // Increment index
+	    Code.put(Code.load_n + 1);
+	    Code.put(Code.const_);
+	    Code.put4(1);
+	    Code.put(Code.add);
+	    Code.put(Code.store_n + 1);
+
+	    // Loop back
+	    Code.put(Code.jmp);
+	    Code.put2(loopStart - Code.pc + 2);  // Jump back to loop start
+
+	    // Return if duplicate found
+	    Code.fixup(returnIfFound);
+	    Code.put(Code.pop); // Clear leftover values
+	    Code.put(Code.pop);
+	    Code.put(Code.pop);
+	    Code.put(Code.exit);
+	    Code.put(Code.return_);
+
+	    // Insert 'b' into empty slot
+	    Code.fixup(insertIndex);
+	    Code.put(Code.load_n);  // Load set reference
+	    Code.put(Code.load_n + 1); // Load index
+	    Code.put(Code.load_n + 2); // Load 'b'
+	    Code.put(Code.astore);  // Store 'b' into s[i]
+
+	    Code.put(Code.pop); // Clear leftover values
+	    Code.put(Code.pop);
+	    Code.put(Code.pop);
+	    Code.put(Code.exit);
+	    Code.put(Code.return_);
+	}
+	
+	private void addAllMethod() {
+		Obj addAllMethod = Tab.find("addAll");
         addAllMethod.setAdr(Code.pc);
         Code.put(Code.enter);
-        Code.put(1);
-        Code.put(1);
+        Code.put(2);
+        Code.put(2);
         Code.put(Code.load_n);
         // implementacija addAll metode
+        //standardna metoda; addAll(a, b) dodaje sve elemente celobrojnog niza b u skup a
+        Code.put(Code.exit);
+        Code.put(Code.return_);
+	}
+	
+	private void initializePredeclaredMethods() {
+		
+		ordChrMethod();
+		
+		lenMethod();
         
- 
+        addMethod();
+           
+        addAllMethod();
+        
+        Obj getElementMethod = Tab.find("getElement");
+        getElementMethod.setAdr(Code.pc);
+        Code.put(Code.enter);
+        Code.put(2);  // Two parameters: set reference (array), index
+        Code.put(2);  // No local variables
+
+        Code.put(Code.load_n);   // Load set reference
+        Code.put(Code.load_n + 1); // Load index
+        Code.put(Code.aload);   // Fetch s[index]
+
+        Code.put(Code.exit);
+        Code.put(Code.return_);
+        
     }
 	
 	CodeGenerator() {
-		//this.initializePredeclaredMethods();
+		this.initializePredeclaredMethods();
 	}
 	
 	//METHODS
@@ -213,6 +308,7 @@ public class CodeGenerator extends VisitorAdaptor {
 			setMapCap.put(desg.getDesignator().obj.getName(), currNum);
 			isSet = false;
 			report_info("Name - " + desg.getDesignator().obj.getName() + " value - " + currNum, desg);
+			//currSet =  desg.getDesignator().obj.getName();
 		}
 		report_info("DesignatorAssignExpr", desg);
 		Code.store(desg.getDesignator().obj);
@@ -225,11 +321,13 @@ public class CodeGenerator extends VisitorAdaptor {
 		if (name.equals("add")) {
 			ParamsCounter paramsCounter = new ParamsCounter();
 			desg.getActParsList().traverseBottomUp(paramsCounter);
-			List<Struct> actualList = paramsCounter.finalParams;
-			
-			Struct set = actualList.get(0);
-			Struct value = actualList.get(1);
-			
+			if (setMapCap.get(currSet) > setValues.get(currSet).size())
+				setValues.get(currSet).add(currNum);
+			// print set
+			System.out.println("Set " + currSet + " : ");
+			for (Integer i : setValues.get(currSet)) {
+				System.out.println(" " + i);		
+			}
 			
 		} else if (name.equals("addAll")) {
 			
@@ -258,6 +356,24 @@ public class CodeGenerator extends VisitorAdaptor {
 	public void visit(DesignatorExpr desg) {
 		report_info("DesignatorExpr " + " currNUm " + currNum  , desg);
 	
+	}
+	
+	@Override
+	public void visit(DesignatorIdent desg) {
+		report_info("DesignatorIdent - " + desg.obj.getName(), desg);
+		currSet = desg.obj.getName();
+	}
+	
+	
+	// MAP
+	
+	@Override
+	public void visit(ExprMap m) {
+		Obj desg1 = m.getDesignator().obj;
+		Obj desg2 = m.getDesignator1().obj;
+		Code.put(Code.call);
+		Code.put(desg1.getAdr());
+		
 	}
 	
 	
@@ -316,8 +432,11 @@ public class CodeGenerator extends VisitorAdaptor {
 			report_info("New int arr", fact);
 			Code.put(1);
 		} else {
-			report_info("New set ", fact);
+			report_info("New set + " + currSet, fact);
 			isSet = true;
+			// new set of integers
+			HashSet<Integer> s = new HashSet<Integer>();
+			setValues.put(currSet, s);
 			Code.put(1);
 		}
 			
@@ -455,11 +574,19 @@ public class CodeGenerator extends VisitorAdaptor {
 	public void visit(StatementDo dw) {
 		report_info("StatementDo", dw);
 		Code.putJump(doBegin.pop());
-		Code.fixup(skipThen.pop());
+		if (dw.getConditionDesignator() instanceof CondDesignator || dw.getConditionDesignator() instanceof CondDesignatorList) 
+			Code.fixup(skipThen.pop());
 		while (!breakStack.peek().isEmpty())
 			Code.fixup(breakStack.peek().remove(0));
 		breakStack.pop();
 	}
+	
+//	@Override
+//	public void visit(CondDesignatorList cond) {
+//		 report_info("CondDesignatorList", cond);
+//        Code.putFalseJump(Code.ne, 0);
+//        skipThen.push(Code.pc - 2);
+//	}
 
 	
 	// BRAKE & CONTINUE

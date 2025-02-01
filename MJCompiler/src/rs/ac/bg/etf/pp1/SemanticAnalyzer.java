@@ -294,6 +294,10 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 						formalList.add(setType);
 						formalList.add(new Struct(Struct.Array, Tab.intType));
 						break;
+					case "getElement":
+						formalList.add(setType);
+						formalList.add(Tab.intType);
+						break;
 					default:
 						for (Obj param : desgObj.getLocalSymbols()) {
 							if (param.getKind() == Obj.Var && param.getLevel() == 1 && param.getFpPos() == 1) {

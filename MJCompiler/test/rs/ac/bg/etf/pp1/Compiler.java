@@ -59,7 +59,7 @@ public class Compiler {
 			boolObj.setAdr(-1);
 			boolObj.setLevel(-1);
 			
-			Struct setType = new Struct(Struct.Class);
+			Struct setType = new Struct(Struct.Array, Tab.intType);
 			Obj setObj = Tab.insert(Obj.Type, "set", setType);
 			setObj.setAdr(-1);
 			setObj.setLevel(-1);
@@ -71,6 +71,10 @@ public class Compiler {
 			Obj addAllObj = Tab.insert(Obj.Meth, "addAll", Tab.noType);
 			addAllObj.setAdr(0);
 			addAllObj.setLevel(2);
+			
+			Obj getElem = Tab.insert(Obj.Meth, "getElement", Tab.intType);
+			getElem.setAdr(0);
+			getElem.setLevel(2);
 			
 			// Semanticka analiza 
 			SemanticAnalyzer sa = new SemanticAnalyzer();
