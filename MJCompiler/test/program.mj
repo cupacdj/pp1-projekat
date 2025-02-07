@@ -2,27 +2,33 @@
 
 program test301
 
+//int niz[];
 set s;
-
 {
 	
-	void printSet(set s) 
-		int i;
-	{
-		
-    	print(getElement(s, 0));
-
-    	
+	int f1(int arg){
+		//print(arg); print(eol);
+		return arg * 2;
 	}
 
 	void main()	
 		int i;
 	{
-
-		s = new set[5];
-		add(s, 1);
+		//niz = new int[3];
+		//niz[0] = 1; niz[1] = 2; niz[2] = 3;
+		//i = f1 map niz;
+		//print(i);
 		
-		printSet(s);
+		
+		s = new set[5];
+		add(s,6);
+		add(s,2);
+		add(s,3);
+		add(s,0);
+		add(s,4);
+		add(s,5);
+		print(s);
+
 	}
 }
 

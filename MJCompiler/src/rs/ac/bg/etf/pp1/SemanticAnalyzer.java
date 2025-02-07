@@ -294,9 +294,8 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 						formalList.add(setType);
 						formalList.add(new Struct(Struct.Array, Tab.intType));
 						break;
-					case "getElement":
+					case "printSet":
 						formalList.add(setType);
-						formalList.add(Tab.intType);
 						break;
 					default:
 						for (Obj param : desgObj.getLocalSymbols()) {
@@ -593,6 +592,9 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 				case "addAll":
 					formalList.add(setType);
 					formalList.add(new Struct(Struct.Array, Tab.intType));
+					break;
+				case "printSet":
+					formalList.add(setType);
 					break;
 				default:
 					for (Obj param : desgObj.getLocalSymbols()) {

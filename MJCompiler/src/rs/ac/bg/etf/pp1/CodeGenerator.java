@@ -79,80 +79,92 @@ public class CodeGenerator extends VisitorAdaptor {
 		Code.put(Code.return_);
 	}
 	
+	
 	private void addMethod() {
-		Obj addMethod = Tab.find("add");
+	    Obj addMethod = Tab.find("add");
 	    addMethod.setAdr(Code.pc);
 	    
 	    Code.put(Code.enter);
-	    Code.put(2);  // Two parameters (set 's', integer 'b')
-	    Code.put(4);  // No local variables
+	    Code.put(2);  // formal params (s, b)
+	    Code.put(4);  // Total params and locals (s, b, len, i)
+	    
 
-	    // Load set reference (s) and get array length
 	    Code.put(Code.load_n);  
-	    Code.put(Code.arraylength);  
+	    Code.put(Code.arraylength);
+	    Code.put(Code.store_2);  // Store len
 
-	    // Initialize index = 0
-	    Code.put(Code.const_);
-	    Code.put4(0);
-	    Code.put(Code.store_n + 1); // Store index in local variable
 
-	    // Start of loop
-	    int loopStart = Code.pc;
+	
+	    Code.loadConst(1);
+	    Code.put(Code.store_3); // i = 1
 
-	    // Load s[index] (s[i])
-	    Code.put(Code.load_n);  // Load set reference
-	    Code.put(Code.load_n + 1); // Load index
-	    Code.put(Code.dup2); // Duplicate set and index before `aload`
-	    Code.put(Code.aload);   // Get s[i] (element at index)
+	    int check = Code.pc;  
+	   
+	    Code.put(Code.load_3);  // Load i
+	    Code.put(Code.load_n);
+	    Code.loadConst(0);
+	    Code.put(Code.aload); // s[0]
+	    Code.put(Code.jcc + Code.ge); // if (i >= s[0]) exit
+	    
+	    int exit = Code.pc;
+	    Code.put2(0); 
 
-	    // Compare s[i] with b (check if already exists)
-	    Code.put(Code.load_n + 2); // Load 'b'
-	    Code.put(Code.jcc + Code.eq); // If s[i] == b, return (duplicate found)
-	    int returnIfFound = Code.pc;
-	    Code.put2(0); // Placeholder (must be patched)
+	    Code.put(Code.load_n); 
+	    Code.put(Code.load_3); 
+	    Code.put(Code.aload);  // Load s[i]
 
-	    // Check if empty slot (s[i] == 0)
-	    Code.put(Code.dup2); // Duplicate before checking if s[i] == 0
-	    Code.put(Code.aload);   // Get s[i] again
+	    Code.put(Code.load_1); 
+	    Code.put(Code.jcc + Code.eq); // if s[i] == b, return
+	    int found = Code.pc;
+	    Code.put2(0);
 
-	    Code.put(Code.const_);
-	    Code.put4(0);
-	    Code.put(Code.jcc + Code.eq); // If s[i] == 0, jump to insert
-	    int insertIndex = Code.pc;
-	    Code.put2(0);  // Placeholder
 
-	    // Increment index
-	    Code.put(Code.load_n + 1);
-	    Code.put(Code.const_);
-	    Code.put4(1);
+	    Code.put(Code.load_3);
+	    Code.loadConst(1);
 	    Code.put(Code.add);
-	    Code.put(Code.store_n + 1);
+	    Code.put(Code.store_3); // i++
 
-	    // Loop back
 	    Code.put(Code.jmp);
-	    Code.put2(loopStart - Code.pc + 2);  // Jump back to loop start
+	    Code.put2(check - Code.pc + 1);
 
-	    // Return if duplicate found
-	    Code.fixup(returnIfFound);
-	    Code.put(Code.pop); // Clear leftover values
-	    Code.put(Code.pop);
-	    Code.put(Code.pop);
-	    Code.put(Code.exit);
-	    Code.put(Code.return_);
+	    Code.fixup(exit);
 
-	    // Insert 'b' into empty slot
-	    Code.fixup(insertIndex);
-	    Code.put(Code.load_n);  // Load set reference
-	    Code.put(Code.load_n + 1); // Load index
-	    Code.put(Code.load_n + 2); // Load 'b'
-	    Code.put(Code.astore);  // Store 'b' into s[i]
+	    
+	    Code.put(Code.load_n);  
+	    Code.loadConst(0);
+	    Code.put(Code.aload);  
+	    Code.put(Code.store_3); // i = s[0] (size of set)
 
-	    Code.put(Code.pop); // Clear leftover values
-	    Code.put(Code.pop);
-	    Code.put(Code.pop);
+	    Code.put(Code.load_3); 
+	    Code.put(Code.load_2); 
+	    Code.put(Code.jcc + Code.ge);
+	    
+	    int full = Code.pc;
+	    Code.put2(0);
+  
+	    Code.put(Code.load_n);  
+	    Code.put(Code.load_3); 
+	    Code.put(Code.load_1); 
+	    Code.put(Code.astore); // s[s[0]] = b
+
+	    
+	    Code.put(Code.load_n);  
+	    Code.loadConst(0);
+	    Code.put(Code.load_3); 
+	    Code.loadConst(1);
+	    Code.put(Code.add);
+	    Code.put(Code.astore); // s[0]++
+
+    
+	    Code.fixup(found);
+	    Code.fixup(full);
+
 	    Code.put(Code.exit);
 	    Code.put(Code.return_);
 	}
+
+
+
 	
 	private void addAllMethod() {
 		Obj addAllMethod = Tab.find("addAll");
@@ -176,19 +188,6 @@ public class CodeGenerator extends VisitorAdaptor {
         addMethod();
            
         addAllMethod();
-        
-        Obj getElementMethod = Tab.find("getElement");
-        getElementMethod.setAdr(Code.pc);
-        Code.put(Code.enter);
-        Code.put(2);  // Two parameters: set reference (array), index
-        Code.put(2);  // No local variables
-
-        Code.put(Code.load_n);   // Load set reference
-        Code.put(Code.load_n + 1); // Load index
-        Code.put(Code.aload);   // Fetch s[index]
-
-        Code.put(Code.exit);
-        Code.put(Code.return_);
         
     }
 	
@@ -230,6 +229,64 @@ public class CodeGenerator extends VisitorAdaptor {
 	@Override
 	public void visit(StatementPrint1 print1) {
 		report_info("print1", print1);
+		if(print1.getExprList().struct.equals(setType)) {
+
+	        Code.put(Code.dup);          
+	        Code.put(Code.dup); 
+	        Code.loadConst(0);
+	        Code.put(Code.aload);     
+	        
+
+	        //  i = 1	       
+	        Code.loadConst(1);           
+
+
+	        int loopStart = Code.pc;
+	        
+	        Code.put(Code.dup_x1);  
+	        Code.put(Code.dup_x1);
+	        Code.put(Code.pop);
+	        Code.put(Code.dup_x1);
+	        
+	        Code.put(Code.jcc + Code.ge);// if (i >= s[0]) exit loop
+	        int loopExit = Code.pc;
+	        Code.put2(0); 
+
+
+	        Code.put(Code.dup_x2);       
+	        Code.put(Code.pop);
+	        Code.put(Code.dup_x1);
+	        Code.put(Code.aload);        
+
+	        Code.loadConst(0);
+	        Code.put(Code.print);        // Print element
+	        
+	        Code.loadConst(32);
+	        Code.loadConst(0);
+	        Code.put(Code.bprint);       // Print space
+
+	        Code.loadConst(1);
+	        Code.put(Code.add);          // i = i + 1
+
+	        Code.put(Code.dup_x2);
+	        Code.put(Code.pop);
+	        Code.put(Code.dup_x2);
+	        Code.put(Code.pop);
+	        Code.put(Code.dup_x2);
+	        Code.put(Code.dup_x2);
+	        Code.put(Code.pop);
+	        
+	        Code.put(Code.jmp);
+	        Code.put2(loopStart - Code.pc + 1);
+
+	        Code.fixup(loopExit);
+
+	        Code.put(Code.pop);          
+	        Code.put(Code.pop);          
+	        Code.put(Code.pop);         
+
+	        return;
+		}
 		Code.loadConst(0);
 		if(print1.getExprList().struct.equals(Tab.charType))
             Code.put(Code.bprint);
@@ -304,14 +361,17 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	@Override
 	public void visit(DesignatorAssignExpr desg) {
+		report_info("DesignatorAssignExpr", desg);
+		Code.store(desg.getDesignator().obj);
 		if(isSet) {
 			setMapCap.put(desg.getDesignator().obj.getName(), currNum);
 			isSet = false;
-			report_info("Name - " + desg.getDesignator().obj.getName() + " value - " + currNum, desg);
-			//currSet =  desg.getDesignator().obj.getName();
+			Code.load(desg.getDesignator().obj);
+			Code.loadConst(0);
+			Code.loadConst(1);
+			Code.put(Code.astore);
+			
 		}
-		report_info("DesignatorAssignExpr", desg);
-		Code.store(desg.getDesignator().obj);
 	}
 	
 	@Override
@@ -367,14 +427,147 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	// MAP
 	
-	@Override
-	public void visit(ExprMap m) {
-		Obj desg1 = m.getDesignator().obj;
-		Obj desg2 = m.getDesignator1().obj;
-		Code.put(Code.call);
-		Code.put(desg1.getAdr());
-		
+	private Obj temp = Tab.find("tempppppp");
+	private Obj i = Tab.find("iiiii");
+	
+//	@Override
+//	public void visit(ExprMap exprMap) {
+//	    Obj desgMeth = exprMap.getDesignator().obj;
+//	    Obj desgArr = exprMap.getDesignator1().obj;
+//	   
+//	    Code.loadConst(0);
+//	    //Code.put(Code.store_2);
+//	    Code.store(temp);
+//
+//	    Code.load(desgArr);
+//	    Code.put(Code.arraylength);
+//	    //Code.put(Code.store_2);
+//	    Code.store(i);
+//	    
+//	    int loopExit = 0;
+//	    int loopStart = Code.pc; 
+//	    Code.load(i);
+//	    //Code.put(Code.load_2);
+//	    Code.loadConst(0);
+//	    Code.putFalseJump(Code.gt, loopExit);
+//	    
+//	    Code.load(i);
+//	    //Code.put(Code.load_2);
+//	    Code.loadConst(1);
+//	    Code.put(Code.sub);
+//	    //Code.put(Code.store_2);
+//	    Code.store(i);
+//	    
+//
+//	    
+//	    Code.load(desgArr);
+//	    Code.load(i);
+//	    //Code.put(Code.load_2);
+//	    Code.put(Code.aload); 
+//
+//	    
+//	    Code.put(Code.call);
+//	    Code.put2(desgMeth.getAdr() - Code.pc + 1);
+//
+//	    
+//	    Code.load(temp);
+//	    //Code.put(Code.load_2);
+//	    Code.put(Code.add);
+//	   // Code.put(Code.store_2);
+//	    Code.store(temp);
+//
+//	    
+//	    Code.putJump(loopStart);
+//
+//	    Code.fixup(loopExit);
+//
+//	    Code.load(temp);
+//	}
+
+	
+	public void visit(ExprMap exprMap) {
+	    // 'func' (the function) is the first designator
+	    Obj func = exprMap.getDesignator().obj;
+	    // 'arr' (the array) is the second designator
+	    Obj arr = exprMap.getDesignator1().obj;
+
+	    // We will generate a loop that:
+	    //  - Goes through 'arr' in reverse (or forward if you prefer)
+	    //  - Calls 'func(arr[i])'
+	    //  - Accumulates in 'sum'
+	    //  - Leaves final 'sum' on the stack.
+
+	    //-----------------------------------------
+	    // 1) Reserve local variables if necessary
+	    //    Typically, the surrounding method already has
+	    //    'enter <paramCount>, <localCount>' done, 
+	    //    but ensure you have enough slots (e.g., 4).
+	    //    local0 -> (possibly another param?), 
+	    //    local1 -> ...
+	    // We'll assume 'func' and 'arr' were method parameters, 
+	    // or we can simply load them as global if needed.
+	    //-----------------------------------------
+
+	    // For demonstration, let's do everything inline here:
+
+	    // sum = 0  (store in local variable #2)
+	    Code.put(Code.const_);  
+	    Code.put4(0);
+	    Code.put(Code.store_n + 2);  // sum in local2
+
+	    // i = arr.length (store in local #3)
+	    Code.load(arr);              // push 'arr'
+	    Code.put(Code.arraylength);  
+	    Code.put(Code.store_n + 3);  // i in local3
+
+	    // loopStart:
+	    int loopStart = Code.pc;
+
+	    // if i == 0 => jump loopExit
+	    Code.put(Code.load_n + 3);   // load i
+	    Code.loadConst(0);           // load 0
+	    Code.put(Code.jcc + Code.eq);
+	    int loopExit = Code.pc;
+	    Code.put2(0);  // placeholder for jump address
+
+	    // i--  (decrement i to process arr in reverse)
+	    Code.put(Code.load_n + 3);
+	    Code.put(Code.const_);
+	    Code.put4(1);
+	    Code.put(Code.sub);
+	    Code.put(Code.store_n + 3);
+
+	    // T = arr[i]
+	    Code.load(arr);              // push arr
+	    Code.put(Code.load_n + 3);   // push i
+	    Code.load(func);             // push 'func'
+	    
+	    Code.put(Code.aload);        // arr[i] on top
+
+	  
+	    // call func
+	    Code.put(Code.call);
+	    // The 'func.getAdr()' is the function address. 
+	    // MicroJava typically uses 'funcAdr - (Code.pc - 1)' or something similar:
+	    Code.put2(func.getAdr() - (Code.pc - 1));
+
+	    // The result is on top of the stack.
+	    // sum += result
+	    Code.put(Code.load_n + 2);  // load sum
+	    Code.put(Code.add);
+	    Code.put(Code.store_n + 2); // store back into sum
+
+	    // jump loopStart
+	    Code.put(Code.jmp);
+	    Code.put2(loopStart - Code.pc + 2);
+
+	    // loopExit:
+	    Code.fixup(loopExit);
+
+	    // Finally, push sum on stack => final result
+	    Code.put(Code.load_n + 2);  // load sum => top of stack
 	}
+
 	
 	
 	
@@ -423,8 +616,13 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	@Override
 	public void visit(FactorNew fact) {	
-		Code.put(Code.newarray);
 		Struct factStruct = fact.getType().struct;
+		if(factStruct.equals(setType)) {
+			Code.loadConst(1);
+			Code.put(Code.add);
+		}
+		Code.put(Code.newarray);
+		
 		if(factStruct.equals(Tab.charType)) {
 			report_info("New char arr", fact);
 			Code.put(0);
@@ -432,7 +630,6 @@ public class CodeGenerator extends VisitorAdaptor {
 			report_info("New int arr", fact);
 			Code.put(1);
 		} else {
-			report_info("New set + " + currSet, fact);
 			isSet = true;
 			// new set of integers
 			HashSet<Integer> s = new HashSet<Integer>();

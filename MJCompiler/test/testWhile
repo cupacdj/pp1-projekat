@@ -1,0 +1,28 @@
+// Test301
+
+program test301
+
+
+{
+	
+	void main()	
+	int i;
+	int j;
+	{
+		i = 0;
+		do{
+			i++;
+			j = 0;
+			print(1);
+			if(i == 5) break;
+			do{
+				j++;
+				print(2);
+				if(j ==2) break;
+				
+			}while(j < 1);
+		}while();
+	}
+}
+
+

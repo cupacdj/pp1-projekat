@@ -54,6 +54,15 @@ public class Compiler {
 			// inicijalizacija tabele simbola 
 			Tab.init();
 			
+	        Obj i = Tab.insert(Obj.Var, "iiiii", Tab.intType);
+	        i.setAdr(Code.dataSize++);
+	        i.setLevel(Code.dataSize++);
+	        
+	        
+	        Obj t = Tab.insert(Obj.Var, "tempppppp", Tab.intType);
+	        t.setAdr(Code.dataSize++);
+			t.setLevel(Code.dataSize++);
+	        
 			Struct boolType = new Struct(Struct.Bool);
 			Obj boolObj = Tab.insert(Obj.Type, "bool", boolType);
 			boolObj.setAdr(-1);
@@ -72,9 +81,9 @@ public class Compiler {
 			addAllObj.setAdr(0);
 			addAllObj.setLevel(2);
 			
-			Obj getElem = Tab.insert(Obj.Meth, "getElement", Tab.intType);
+			Obj getElem = Tab.insert(Obj.Meth, "printSet", Tab.noType);
 			getElem.setAdr(0);
-			getElem.setLevel(2);
+			getElem.setLevel(1);
 			
 			// Semanticka analiza 
 			SemanticAnalyzer sa = new SemanticAnalyzer();
