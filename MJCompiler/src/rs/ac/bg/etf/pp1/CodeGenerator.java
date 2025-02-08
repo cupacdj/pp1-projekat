@@ -435,33 +435,36 @@ public class CodeGenerator extends VisitorAdaptor {
 //	    Obj desgMeth = exprMap.getDesignator().obj;
 //	    Obj desgArr = exprMap.getDesignator1().obj;
 //	   
+//	    	
+//	    // sum = 0
 //	    Code.loadConst(0);
 //	    //Code.put(Code.store_2);
-//	    Code.store(temp);
-//
+//	    //Code.store(temp);
+//	    
+//	    // len = arr.length
 //	    Code.load(desgArr);
 //	    Code.put(Code.arraylength);
 //	    //Code.put(Code.store_2);
-//	    Code.store(i);
+//	    //Code.store(i);
 //	    
 //	    int loopExit = 0;
 //	    int loopStart = Code.pc; 
-//	    Code.load(i);
+//	    //Code.load(i);
 //	    //Code.put(Code.load_2);
-//	    Code.loadConst(0);
+//	    Code.loadConst(0); 
 //	    Code.putFalseJump(Code.gt, loopExit);
 //	    
-//	    Code.load(i);
+//	    //Code.load(i);
 //	    //Code.put(Code.load_2);
 //	    Code.loadConst(1);
 //	    Code.put(Code.sub);
 //	    //Code.put(Code.store_2);
-//	    Code.store(i);
+//	    //Code.store(i);
 //	    
 //
 //	    
 //	    Code.load(desgArr);
-//	    Code.load(i);
+//	    //Code.load(i);
 //	    //Code.put(Code.load_2);
 //	    Code.put(Code.aload); 
 //
@@ -470,105 +473,70 @@ public class CodeGenerator extends VisitorAdaptor {
 //	    Code.put2(desgMeth.getAdr() - Code.pc + 1);
 //
 //	    
-//	    Code.load(temp);
+//	    //Code.load(temp);
 //	    //Code.put(Code.load_2);
 //	    Code.put(Code.add);
-//	   // Code.put(Code.store_2);
-//	    Code.store(temp);
+//	    //Code.put(Code.store_2);
+//	    //Code.store(temp);
 //
 //	    
 //	    Code.putJump(loopStart);
 //
 //	    Code.fixup(loopExit);
 //
-//	    Code.load(temp);
+//	    //Code.load(temp);
 //	}
 
-	
+	@Override
 	public void visit(ExprMap exprMap) {
-	    // 'func' (the function) is the first designator
 	    Obj func = exprMap.getDesignator().obj;
-	    // 'arr' (the array) is the second designator
 	    Obj arr = exprMap.getDesignator1().obj;
-
-	    // We will generate a loop that:
-	    //  - Goes through 'arr' in reverse (or forward if you prefer)
-	    //  - Calls 'func(arr[i])'
-	    //  - Accumulates in 'sum'
-	    //  - Leaves final 'sum' on the stack.
-
-	    //-----------------------------------------
-	    // 1) Reserve local variables if necessary
-	    //    Typically, the surrounding method already has
-	    //    'enter <paramCount>, <localCount>' done, 
-	    //    but ensure you have enough slots (e.g., 4).
-	    //    local0 -> (possibly another param?), 
-	    //    local1 -> ...
-	    // We'll assume 'func' and 'arr' were method parameters, 
-	    // or we can simply load them as global if needed.
-	    //-----------------------------------------
-
-	    // For demonstration, let's do everything inline here:
-
-	    // sum = 0  (store in local variable #2)
-	    Code.put(Code.const_);  
-	    Code.put4(0);
-	    Code.put(Code.store_n + 2);  // sum in local2
-
-	    // i = arr.length (store in local #3)
-	    Code.load(arr);              // push 'arr'
-	    Code.put(Code.arraylength);  
-	    Code.put(Code.store_n + 3);  // i in local3
-
-	    // loopStart:
-	    int loopStart = Code.pc;
-
-	    // if i == 0 => jump loopExit
-	    Code.put(Code.load_n + 3);   // load i
-	    Code.loadConst(0);           // load 0
-	    Code.put(Code.jcc + Code.eq);
-	    int loopExit = Code.pc;
-	    Code.put2(0);  // placeholder for jump address
-
-	    // i--  (decrement i to process arr in reverse)
-	    Code.put(Code.load_n + 3);
-	    Code.put(Code.const_);
-	    Code.put4(1);
-	    Code.put(Code.sub);
-	    Code.put(Code.store_n + 3);
-
-	    // T = arr[i]
-	    Code.load(arr);              // push arr
-	    Code.put(Code.load_n + 3);   // push i
-	    Code.load(func);             // push 'func'
+	   
+	    // sum = 0
+	    Code.loadConst(0);
 	    
-	    Code.put(Code.aload);        // arr[i] on top
-
-	  
-	    // call func
+	    // len = arr.length
+	    Code.load(arr);
+	    Code.put(Code.arraylength);
+	    int start = Code.pc;
+	    Code.put(Code.dup);
+	    
+	    // if (len < 0) exit
+	    Code.loadConst(0);
+	    Code.put(Code.jcc + Code.le);     
+	    int exit = Code.pc;
+	    Code.put2(0); 
+	    
+	    // len = len - 1
+	    Code.loadConst(1);
+	    Code.put(Code.sub);
+	    Code.put(Code.dup);
+	    
+	    // arr[len]
+	    Code.load(arr);
+	    Code.put(Code.dup_x1);
+	    Code.put(Code.pop);
+	    Code.put(Code.aload);
+	    
+	    // func(arr[len])
 	    Code.put(Code.call);
-	    // The 'func.getAdr()' is the function address. 
-	    // MicroJava typically uses 'funcAdr - (Code.pc - 1)' or something similar:
-	    Code.put2(func.getAdr() - (Code.pc - 1));
-
-	    // The result is on top of the stack.
-	    // sum += result
-	    Code.put(Code.load_n + 2);  // load sum
+	    Code.put2(func.getAdr() - Code.pc + 1);
+	    
+	    // sum = sum + func(arr[len])
+	    Code.put(Code.dup_x1);
+	    Code.put(Code.pop);
+	    Code.put(Code.dup_x2);
+	    Code.put(Code.pop);
 	    Code.put(Code.add);
-	    Code.put(Code.store_n + 2); // store back into sum
-
-	    // jump loopStart
-	    Code.put(Code.jmp);
-	    Code.put2(loopStart - Code.pc + 2);
-
-	    // loopExit:
-	    Code.fixup(loopExit);
-
-	    // Finally, push sum on stack => final result
-	    Code.put(Code.load_n + 2);  // load sum => top of stack
+	    
+	    Code.put(Code.dup_x1);
+	    Code.put(Code.pop);
+	    
+	    Code.putJump(start);
+	    
+	    Code.fixup(exit);
+	    Code.put(Code.pop);
 	}
-
-	
 	
 	
 	// FACTORS

@@ -5,25 +5,19 @@ program test301
 set s;
 
 {
-	
-	void printSet(set s) 
-		int i;
-	{
-		i = 0;
-    	do{
-    		i++;
-    		print(getElement(s, i));  // Calls getElement() to fetch the value
-    	} while( i < 4);
-	}
 
 	void main()	
 		int i;
 	{
 
 		s = new set[5];
-		add(s, 1);
-		
-		printSet(s);
+		add(s,6);
+		add(s,2);
+		add(s,3);
+		add(s,0);
+		add(s,4);
+		add(s,5);
+		print(s);
 	}
 }
 

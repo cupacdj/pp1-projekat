@@ -2,8 +2,8 @@
 
 program test301
 
-//int niz[];
-set s;
+int niz[];
+
 {
 	
 	int f1(int arg){
@@ -14,20 +14,10 @@ set s;
 	void main()	
 		int i;
 	{
-		//niz = new int[3];
-		//niz[0] = 1; niz[1] = 2; niz[2] = 3;
-		//i = f1 map niz;
-		//print(i);
-		
-		
-		s = new set[5];
-		add(s,6);
-		add(s,2);
-		add(s,3);
-		add(s,0);
-		add(s,4);
-		add(s,5);
-		print(s);
+		niz = new int[3];
+		niz[0] = 1; niz[1] = 2; niz[2] = 3;
+		i = f1(f1 map niz);
+		print(i);
 
 	}
 }
