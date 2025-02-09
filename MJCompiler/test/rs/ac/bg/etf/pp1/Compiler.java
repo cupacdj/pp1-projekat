@@ -53,15 +53,6 @@ public class Compiler {
 			
 			// inicijalizacija tabele simbola 
 			Tab.init();
-			
-	        Obj i = Tab.insert(Obj.Var, "iiiii", Tab.intType);
-	        i.setAdr(Code.dataSize++);
-	        i.setLevel(Code.dataSize++);
-	        
-	        
-	        Obj t = Tab.insert(Obj.Var, "tempppppp", Tab.intType);
-	        t.setAdr(Code.dataSize++);
-			t.setLevel(Code.dataSize++);
 	        
 			Struct boolType = new Struct(Struct.Bool);
 			Obj boolObj = Tab.insert(Obj.Type, "bool", boolType);

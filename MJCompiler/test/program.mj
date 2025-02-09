@@ -3,7 +3,7 @@
 program test301
 
 int niz[];
-
+set s;
 {
 	
 	int f1(int arg){
@@ -14,10 +14,17 @@ int niz[];
 	void main()	
 		int i;
 	{
-		niz = new int[3];
+		i = 5;
+		niz = new int[6];
 		niz[0] = 1; niz[1] = 2; niz[2] = 3;
-		i = f1(f1 map niz);
+		niz[3] = 1; niz[4] = 5; niz[5] = 6;
+		s = new set[6];
+		//i = f1(f1 map niz); // 24
+		addAll(s, niz);
+		
+		print(s);
 		print(i);
+		
 
 	}
 }

@@ -158,9 +158,12 @@ public class CodeGenerator extends VisitorAdaptor {
     
 	    Code.fixup(found);
 	    Code.fixup(full);
+	    
+	    
 
 	    Code.put(Code.exit);
 	    Code.put(Code.return_);
+	    
 	}
 
 
@@ -168,13 +171,50 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	private void addAllMethod() {
 		Obj addAllMethod = Tab.find("addAll");
+		Obj addMethod = Tab.find("add");
         addAllMethod.setAdr(Code.pc);
         Code.put(Code.enter);
         Code.put(2);
         Code.put(2);
-        Code.put(Code.load_n);
-        // implementacija addAll metode
-        //standardna metoda; addAll(a, b) dodaje sve elemente celobrojnog niza b u skup a
+        
+        // i = 0
+        Code.loadConst(0);
+        
+        int start = Code.pc;
+        Code.put(Code.dup);
+        
+        // if (i >= arr.length) exit loop
+        Code.put(Code.load_1);
+        Code.put(Code.arraylength);
+        Code.put(Code.jcc + Code.ge); 
+	    int exit = Code.pc;
+	    Code.put2(0); 
+        
+        
+        Code.put(Code.load_n); // s
+        Code.put(Code.load_1); // arr
+        
+        Code.put(Code.dup_x2);
+        Code.put(Code.pop);
+        Code.put(Code.dup_x2);
+        Code.put(Code.pop);
+        Code.put(Code.dup_x2);
+        Code.put(Code.aload); // arr[i]
+        
+        // call add(s, arr[i])       
+        Code.put(Code.call);
+	    Code.put2(addMethod.getAdr() - Code.pc + 1);
+	    
+	    // i++
+	    Code.loadConst(1);
+	    Code.put(Code.add);
+        
+	    Code.putJump(start);
+	    
+	    Code.fixup(exit);
+	    
+	    Code.put(Code.pop);
+	    
         Code.put(Code.exit);
         Code.put(Code.return_);
 	}
@@ -283,7 +323,8 @@ public class CodeGenerator extends VisitorAdaptor {
 
 	        Code.put(Code.pop);          
 	        Code.put(Code.pop);          
-	        Code.put(Code.pop);         
+	        Code.put(Code.pop);    
+	        Code.put(Code.pop);
 
 	        return;
 		}
@@ -403,6 +444,18 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	
+	// UNION
+	
+	@Override
+	public void visit(DesignatorAssignopSetop uni) {
+		Obj set1 = uni.getDesignator().obj;
+		Obj set2 = uni.getDesignator1().obj;
+		Obj set3 = uni.getDesignator2().obj;
+		
+		
+		
+	}
+	
 	// DESIGNATOR
 	
 	@Override
@@ -426,66 +479,6 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	
 	// MAP
-	
-	private Obj temp = Tab.find("tempppppp");
-	private Obj i = Tab.find("iiiii");
-	
-//	@Override
-//	public void visit(ExprMap exprMap) {
-//	    Obj desgMeth = exprMap.getDesignator().obj;
-//	    Obj desgArr = exprMap.getDesignator1().obj;
-//	   
-//	    	
-//	    // sum = 0
-//	    Code.loadConst(0);
-//	    //Code.put(Code.store_2);
-//	    //Code.store(temp);
-//	    
-//	    // len = arr.length
-//	    Code.load(desgArr);
-//	    Code.put(Code.arraylength);
-//	    //Code.put(Code.store_2);
-//	    //Code.store(i);
-//	    
-//	    int loopExit = 0;
-//	    int loopStart = Code.pc; 
-//	    //Code.load(i);
-//	    //Code.put(Code.load_2);
-//	    Code.loadConst(0); 
-//	    Code.putFalseJump(Code.gt, loopExit);
-//	    
-//	    //Code.load(i);
-//	    //Code.put(Code.load_2);
-//	    Code.loadConst(1);
-//	    Code.put(Code.sub);
-//	    //Code.put(Code.store_2);
-//	    //Code.store(i);
-//	    
-//
-//	    
-//	    Code.load(desgArr);
-//	    //Code.load(i);
-//	    //Code.put(Code.load_2);
-//	    Code.put(Code.aload); 
-//
-//	    
-//	    Code.put(Code.call);
-//	    Code.put2(desgMeth.getAdr() - Code.pc + 1);
-//
-//	    
-//	    //Code.load(temp);
-//	    //Code.put(Code.load_2);
-//	    Code.put(Code.add);
-//	    //Code.put(Code.store_2);
-//	    //Code.store(temp);
-//
-//	    
-//	    Code.putJump(loopStart);
-//
-//	    Code.fixup(loopExit);
-//
-//	    //Code.load(temp);
-//	}
 
 	@Override
 	public void visit(ExprMap exprMap) {
@@ -531,7 +524,7 @@ public class CodeGenerator extends VisitorAdaptor {
 	    
 	    Code.put(Code.dup_x1);
 	    Code.put(Code.pop);
-	    
+	    	
 	    Code.putJump(start);
 	    
 	    Code.fixup(exit);
