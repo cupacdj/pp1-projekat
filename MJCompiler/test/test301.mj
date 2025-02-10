@@ -26,9 +26,10 @@ set s1, s2, s3;
 		print(bodovi); //9
 		print(eol);
 		
-		niz = new int[3];
+		niz = new int[4];
 		niz[nula] = 2;
 		niz[jedan] = 3;
+		niz[3] = 3;
 		niz[niz[nula]] = niz[niz[1]] * 4;
 		bodovi = niz[2]/niz[0];
 		print(bodovi); //6

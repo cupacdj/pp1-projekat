@@ -294,9 +294,6 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 						formalList.add(setType);
 						formalList.add(new Struct(Struct.Array, Tab.intType));
 						break;
-					case "printSet":
-						formalList.add(setType);
-						break;
 					default:
 						for (Obj param : desgObj.getLocalSymbols()) {
 							if (param.getKind() == Obj.Var && param.getLevel() == 1 && param.getFpPos() == 1) {
@@ -304,6 +301,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 							}
 						}
 				}
+				
 								
 				ParamsCounter paramsCounter = new ParamsCounter();
 				factorDesignator.getFactorActPars().traverseBottomUp(paramsCounter);

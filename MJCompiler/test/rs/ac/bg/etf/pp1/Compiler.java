@@ -72,9 +72,21 @@ public class Compiler {
 			addAllObj.setAdr(0);
 			addAllObj.setLevel(2);
 			
-			Obj getElem = Tab.insert(Obj.Meth, "printSet", Tab.noType);
-			getElem.setAdr(0);
-			getElem.setLevel(1);
+			for (Obj fp : Tab.find("chr").getLocalSymbols()) {
+				fp.setAdr(1);
+			}
+			for (Obj fp : Tab.find("ord").getLocalSymbols()) {
+				fp.setAdr(1);
+			}
+			for (Obj fp : Tab.find("len").getLocalSymbols()) {
+				fp.setAdr(1);
+			}
+			for (Obj fp : Tab.find("add").getLocalSymbols()) {
+				fp.setAdr(1);
+			}
+			for (Obj fp : Tab.find("addAll").getLocalSymbols()) {
+				fp.setAdr(1);
+			}
 			
 			// Semanticka analiza 
 			SemanticAnalyzer sa = new SemanticAnalyzer();

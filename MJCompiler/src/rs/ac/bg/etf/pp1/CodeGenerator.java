@@ -25,8 +25,6 @@ public class CodeGenerator extends VisitorAdaptor {
 	private boolean isSet = false;
 	private HashMap<String, Integer> setMapCap = new HashMap<>();
 	private HashMap<String, HashSet<Integer>> setValues = new HashMap<>();
-	private Obj zero = new Obj(Obj.Con, "zero", Tab.intType, 0, 0);
-	
 	
 	public void report_error(String message, SyntaxNode info) {
 		StringBuilder msg = new StringBuilder(message);
@@ -93,7 +91,6 @@ public class CodeGenerator extends VisitorAdaptor {
 	    Code.put(Code.arraylength);
 	    Code.put(Code.store_2);  // Store len
 
-
 	
 	    Code.loadConst(1);
 	    Code.put(Code.store_3); // i = 1
@@ -104,8 +101,7 @@ public class CodeGenerator extends VisitorAdaptor {
 	    Code.put(Code.load_n);
 	    Code.loadConst(0);
 	    Code.put(Code.aload); // s[0]
-	    Code.put(Code.jcc + Code.ge); // if (i >= s[0]) exit
-	    
+	    Code.put(Code.jcc + Code.ge); // if (i >= s[0]) exit	    
 	    int exit = Code.pc;
 	    Code.put2(0); 
 
@@ -124,8 +120,7 @@ public class CodeGenerator extends VisitorAdaptor {
 	    Code.put(Code.add);
 	    Code.put(Code.store_3); // i++
 
-	    Code.put(Code.jmp);
-	    Code.put2(check - Code.pc + 1);
+	    Code.putJump(check);
 
 	    Code.fixup(exit);
 
@@ -137,7 +132,7 @@ public class CodeGenerator extends VisitorAdaptor {
 
 	    Code.put(Code.load_3); 
 	    Code.put(Code.load_2); 
-	    Code.put(Code.jcc + Code.ge);
+	    Code.put(Code.jcc + Code.ge); // if i >= len, full
 	    
 	    int full = Code.pc;
 	    Code.put2(0);
@@ -188,7 +183,7 @@ public class CodeGenerator extends VisitorAdaptor {
         Code.put(Code.arraylength);
         Code.put(Code.jcc + Code.ge); 
 	    int exit = Code.pc;
-	    Code.put2(0); 
+	    Code.put2(0); //Placeholder
         
         
         Code.put(Code.load_n); // s
@@ -405,7 +400,7 @@ public class CodeGenerator extends VisitorAdaptor {
 		report_info("DesignatorAssignExpr", desg);
 		Code.store(desg.getDesignator().obj);
 		if(isSet) {
-			setMapCap.put(desg.getDesignator().obj.getName(), currNum);
+			//setMapCap.put(desg.getDesignator().obj.getName(), currNum);
 			isSet = false;
 			Code.load(desg.getDesignator().obj);
 			Code.loadConst(0);
@@ -419,21 +414,21 @@ public class CodeGenerator extends VisitorAdaptor {
 	public void visit(DesignatorActPars desg) {
 		report_info("DesignatorActPars", desg);
 		String name = desg.getDesignator().obj.getName();
-		if (name.equals("add")) {
-			ParamsCounter paramsCounter = new ParamsCounter();
-			desg.getActParsList().traverseBottomUp(paramsCounter);
-			if (setMapCap.get(currSet) > setValues.get(currSet).size())
-				setValues.get(currSet).add(currNum);
-			// print set
-			System.out.println("Set " + currSet + " : ");
-			for (Integer i : setValues.get(currSet)) {
-				System.out.println(" " + i);		
-			}
-			
-		} else if (name.equals("addAll")) {
-			
-			
-		}
+//		if (name.equals("add")) {
+//			ParamsCounter paramsCounter = new ParamsCounter();
+//			desg.getActParsList().traverseBottomUp(paramsCounter);
+//			if (setMapCap.get(currSet) > setValues.get(currSet).size())
+//				setValues.get(currSet).add(currNum);
+//			// print set
+//			System.out.println("Set " + currSet + " : ");
+//			for (Integer i : setValues.get(currSet)) {
+//				System.out.println(" " + i);		
+//			}
+//			
+//		} else if (name.equals("addAll")) {
+//			
+//			
+//		}
 		int offset = desg.getDesignator().obj.getAdr() - Code.pc;
 		Code.put(Code.call);
 		Code.put2(offset);
@@ -451,8 +446,98 @@ public class CodeGenerator extends VisitorAdaptor {
 		Obj set1 = uni.getDesignator().obj;
 		Obj set2 = uni.getDesignator1().obj;
 		Obj set3 = uni.getDesignator2().obj;
+		Obj add = Tab.find("add");
 		
+		// if set1 full exitFull
+		Code.load(set1);
+		Code.loadConst(0);
+		Code.put(Code.aload);
+		Code.load(set1);
+		Code.put(Code.arraylength);
+		Code.put(Code.jcc + Code.ge);
+		int exitFull = Code.pc;
+		Code.put2(0);
 		
+		// i = 1
+		Code.loadConst(1);
+		
+		int first = Code.pc;
+		Code.put(Code.dup);
+		
+		Code.load(set2);
+		Code.loadConst(0);
+		Code.put(Code.aload);
+		
+		// if (i >= set2[0]) second
+		Code.put(Code.jcc + Code.ge);
+		int firstExit = Code.pc;
+		Code.put2(0);
+		
+		Code.put(Code.dup);
+		
+		// set2[i]
+		Code.load(set2);
+		Code.put(Code.dup_x1);
+		Code.put(Code.pop);
+		Code.put(Code.aload);
+		
+		// call add(set1, set2[i])
+		Code.load(set1);
+		Code.put(Code.dup_x1);
+		Code.put(Code.pop);
+		Code.put(Code.call);	
+		Code.put2(add.getAdr() - Code.pc + 1);
+		
+		// i++
+		Code.loadConst(1);
+		Code.put(Code.add);
+		
+		Code.putJump(first);
+		
+		Code.fixup(firstExit);
+		
+		// i = 1
+		Code.loadConst(1);
+		
+		int second = Code.pc;
+		Code.put(Code.dup);
+	
+		Code.load(set3);
+		Code.loadConst(0);
+		Code.put(Code.aload);
+		
+		// if (i >= set3[0]) end
+		Code.put(Code.jcc + Code.ge);
+		int secondExit = Code.pc;
+		Code.put2(0);
+		
+		Code.put(Code.dup);
+		
+		// set3[i]
+		Code.load(set3);
+		Code.put(Code.dup_x1);
+		Code.put(Code.pop);
+		Code.put(Code.aload);
+		
+		// call add(set1, set3[i])
+		Code.load(set1);
+		Code.put(Code.dup_x1);
+		Code.put(Code.pop);
+		Code.put(Code.call);
+		Code.put2(add.getAdr() - Code.pc + 1);
+		
+		// i++
+		Code.loadConst(1);
+		Code.put(Code.add);
+		
+		Code.putJump(second);
+		
+		Code.fixup(secondExit);
+		
+		Code.put(Code.pop);
+		Code.put(Code.pop);
+		
+		Code.fixup(exitFull);
 		
 	}
 	
@@ -593,8 +678,8 @@ public class CodeGenerator extends VisitorAdaptor {
 		} else {
 			isSet = true;
 			// new set of integers
-			HashSet<Integer> s = new HashSet<Integer>();
-			setValues.put(currSet, s);
+			//HashSet<Integer> s = new HashSet<Integer>();
+			//setValues.put(currSet, s);
 			Code.put(1);
 		}
 			
@@ -738,13 +823,6 @@ public class CodeGenerator extends VisitorAdaptor {
 			Code.fixup(breakStack.peek().remove(0));
 		breakStack.pop();
 	}
-	
-//	@Override
-//	public void visit(CondDesignatorList cond) {
-//		 report_info("CondDesignatorList", cond);
-//        Code.putFalseJump(Code.ne, 0);
-//        skipThen.push(Code.pc - 2);
-//	}
 
 	
 	// BRAKE & CONTINUE
